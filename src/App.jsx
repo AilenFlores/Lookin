@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Inicio from './Paginas/Inicio/Inicio'
 import './App.css'
 
