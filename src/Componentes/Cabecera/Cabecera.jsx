@@ -1,38 +1,39 @@
 import React from 'react';
 import { FaBookmark, FaSearch } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom'; //
-import { ROUTES } from '../../const/routes'; // 
+import { useNavigate } from 'react-router-dom'; 
+import { ROUTES } from '../../const/routes'; 
 
 import Boton from '../Boton/Boton'; 
 
 const Cabecera = () => {
-  const navigate = useNavigate(); // 
+  const navigate = useNavigate(); 
 
-  // const clickPeliculas = () => {
-  //   navigate(ROUTES.peliculas);
-  // };
   function handleClick(ruta) {
     return navigate(ruta);
   }
-  
+
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-6 border shadow bg-white">
       <div className="flex items-center space-x-4">
+
         {/* Logo que podría ser un componente */}
         <div
           className="text-red-600 text-2xl font-bold tracking-wider cursor-pointer"
           style={{ transform: "scaleX(1.1)" }}
           onClick={() => navigate(ROUTES.inicio)}
-        >
-  NERDFLIX
-</div>
-
-
-        <nav className="flex space-x-6 text-gray-700 text-md font-medium">
-          {/* <Boton texto="Peliculas" onClick={clickPeliculas}/> */}
-          <Boton texto="Películas" onClick={() => handleClick(ROUTES.peliculas)} />
-          <Boton texto="Series" onClick={() => handleClick(ROUTES.series)} />
+        >NERDFLIX</div>
+        
+        {/*el menu de navegacion deberia ser un componente */}	
+        <nav className="flex space-x-6 text-gray-700 text-md font-medium ml-10">
+          <span className="cursor-pointer hover:text-black"
+          onClick={() => handleClick(ROUTES.peliculas)}
+          > Películas </span>
+          <span className="cursor-pointer hover:text-black"
+          onClick={() => handleClick(ROUTES.series)}
+          > Series </span>
         </nav>
+
       </div>
 
       {/* Derecha: iconos */}

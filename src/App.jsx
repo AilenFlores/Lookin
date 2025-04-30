@@ -2,9 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './const/routes';
 
 import Inicio from './Paginas/Inicio/Inicio';
-
-import Peliculas from './Paginas/Peliculas/Peliculas'; 
-
+import ContenidoLista from './Paginas/ContenidoLista/ContenidoLista';
 import DetallePeliculaSerie from './Paginas/DetallePeliculaSerie/DetallePeliculaSerie'; 
 import './App.css';
 
@@ -16,7 +14,9 @@ function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/detalle/:id/:tipo" element={<DetallePeliculaSerie />} />
 
-          <Route path={ROUTES.peliculas} element={<Peliculas />} />
+          <Route path="/peliculas" element={<ContenidoLista tipo="movie" />} />
+          <Route path="/series" element={<ContenidoLista tipo="tv" />} />
+
           
         </Routes>
       </div>
