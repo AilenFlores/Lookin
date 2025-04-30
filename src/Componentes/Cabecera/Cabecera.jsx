@@ -1,20 +1,27 @@
 import React from 'react';
 import { FaBookmark, FaSearch } from "react-icons/fa";
-import { Link } from 'react-router-dom'; // nose si esto esta bien
+import { useNavigate } from 'react-router-dom'; //
+import { ROUTES } from '../../const/Routes'; // 
+
+import Boton from '../Boton/Boton'; 
 
 const Cabecera = () => {
+  const navigate = useNavigate(); // 
+
+  const clickPeliculas = () => {
+    navigate(ROUTES.peliculas);
+  };
+
   return (
     <header className="flex items-center justify-between px-4 py-6 border shadow bg-white">
       <div className="flex items-center space-x-4">
-        {/* Logo que podria ser un componente*/}
+        {/* Logo que podría ser un componente */}
         <div className="text-red-600 text-2xl font-bold tracking-wider" style={{ transform: "scaleX(1.1)" }}>
           NERDFLIX
         </div>
 
         <nav className="flex space-x-6 text-gray-700 text-md font-medium">
-          {/* nose si es asi */}
-          <Link to="/peliculas" className="hover:text-red-500 transition duration-200">Películas</Link>
-          <Link to="/series" className="hover:text-red-500 transition duration-200">Series</Link>
+          <Boton texto="Peliculas" onClick={clickPeliculas}/>
         </nav>
       </div>
 
@@ -29,6 +36,3 @@ const Cabecera = () => {
 };
 
 export default Cabecera;
-
-
-

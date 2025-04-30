@@ -1,6 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ROUTES } from './const/Routes';
+
 import Inicio from './Paginas/Inicio/Inicio';
-import DetallePeliculaSerie from './Paginas/DetallePeliculaSerie/DetallePeliculaSerie'; // o el nombre real del archivo
+
+import Peliculas from './Paginas/Peliculas/Peliculas'; 
+
+import DetallePeliculaSerie from './Paginas/DetallePeliculaSerie/DetallePeliculaSerie'; 
 import './App.css';
 
 function App() {
@@ -10,6 +15,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/detalle/:id/:tipo" element={<DetallePeliculaSerie />} />
+
+          <Route path={ROUTES.peliculas} element={<Peliculas />} />
+          
         </Routes>
       </div>
     </BrowserRouter>
