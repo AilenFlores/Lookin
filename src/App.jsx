@@ -17,3 +17,10 @@ function App() {
 }
 
 export default App;
+<BrowserRouter>
+<Routes>
+  <Route element={<Home />} path={ROUTES.home} />
+  <Route element={<Details />} path={ROUTES.pokemon} />
+  <Route element={<Juegos />} path={ROUTES.juegos} />
+</Routes>
+</BrowserRouter>
