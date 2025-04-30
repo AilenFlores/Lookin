@@ -1,7 +1,7 @@
 import React from 'react';
 import Titulo from '../Titulo/Titulo';
 import Subtitulo from '../Subtitulo/Subtitulo';
-import BotonFav from '../BotonFav/BotonFav';
+import GuardarFavorito from '../GuardarFavorito/GuardarFavorito';
 
 const TarjetaPelicula = ({ pelicula, onClick }) => {
     return (
@@ -9,7 +9,7 @@ const TarjetaPelicula = ({ pelicula, onClick }) => {
             onClick={() => onClick(pelicula)}
         >
             <div className="absolute top-2 right-2 z-10">
-                <BotonFav pelicula={pelicula} />
+                <GuardarFavorito pelicula={pelicula} />
             </div>
             
             <img

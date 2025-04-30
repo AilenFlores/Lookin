@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa';  // Importamos iconos de react-icons
 
-const BotonFav = ({ pelicula }) => {
+const GuardarFavorito = ({ pelicula }) => {
   const [favorito, setFavorito] = useState(false);
 
   useEffect(() => {
@@ -26,4 +26,4 @@ const BotonFav = ({ pelicula }) => {
   );
 };
 
-export default BotonFav;
+export default GuardarFavorito;
