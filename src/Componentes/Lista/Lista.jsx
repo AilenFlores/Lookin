@@ -3,7 +3,7 @@ import TarjetaPelicula from "../TarjetaPelicula/TarjetaPelicula";
 import Boton from "../Boton/Boton";
 import Titulo from "../Titulo/Titulo";
 
-const Lista = ({ peliculas, cargarMas }) => {
+const Lista = ({ peliculas, cargarMas, texto }) => {
 
     const handleClick = (pelicula) => {
         console.log(pelicula.id);  
@@ -11,15 +11,17 @@ const Lista = ({ peliculas, cargarMas }) => {
 
     return (
         <div className="bg-neutral-100 p-3"> 
-            <Titulo texto="Películas y Series" className="text-2xl mb-5 mt-5 text-black" />
+            <Titulo texto={texto} className="text-2xl mb-5 mt-5 text-black" />
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 justify-items-center">
                 {peliculas.map((pelicula) => (
                     <ul>
+                        <li>
                     <TarjetaPelicula
                         key={pelicula.id}
                         pelicula={pelicula}
                         onClick={handleClick}  
                     />
+                        </li>
                     </ul>
                 ))}
             </div>

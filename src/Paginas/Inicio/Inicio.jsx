@@ -9,22 +9,25 @@ const Inicio = () => {
   const [peliculas, setPeliculas] = useState([]);
   const [pagina, setPagina] = useState(1);
 
-  const cargarPeliculas = () => {
-    const url = `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}&page=${pagina}`;
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        setPeliculas(prevPeliculas => {
-     // (carga inicial)
-          if (pagina === 1) {
-            return data.results;
-          } else {
-            return [...prevPeliculas, ...data.results];
-          }
-        });
-      })
-      .catch(err => console.error(err))
+  const cargarPeliculas = async () => {
+    try {
+      const url = `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}&page=${pagina}`;
+      const res = await fetch(url); // Espera la respuesta de la API
+      const data = await res.json(); // Espera la conversión de la respuesta en JSON
+  
+      setPeliculas(prevPeliculas => {
+        // (carga inicial)
+        if (pagina === 1) {
+          return data.results;
+        } else {
+          return [...prevPeliculas, ...data.results];
+        }
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
+  
 
   useEffect(() => {
     cargarPeliculas();
@@ -37,7 +40,7 @@ const Inicio = () => {
   return (
     <div className="inicio">
       <Cabecera />
-      <Lista peliculas={peliculas} cargarMas={cargarMas} />
+      <Lista  texto="Peliculas y series Populares" peliculas={peliculas} cargarMas={cargarMas} />
       <Pie />
     </div>
   );
