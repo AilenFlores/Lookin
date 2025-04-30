@@ -1,5 +1,5 @@
 export const ROUTES = {
-    inicio: "/inicio",
+    inicio: "/",
     favoritos: "favoritos",
     peliculas: "/peliculas",
     series: "/series",
