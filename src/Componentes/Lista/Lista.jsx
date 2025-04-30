@@ -14,15 +14,11 @@ const Lista = ({ peliculas, cargarMas, texto }) => {
             <Titulo texto={texto} className="text-2xl mb-5 mt-5 text-black" />
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 justify-items-center">
                 {peliculas.map((pelicula) => (
-                    <ul>
-                        <li>
                     <TarjetaPelicula
                         key={pelicula.id}
                         pelicula={pelicula}
                         onClick={handleClick}  
                     />
-                        </li>
-                    </ul>
                 ))}
             </div>
             <Boton texto="Cargar más" onClick={cargarMas} />

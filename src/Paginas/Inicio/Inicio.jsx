@@ -9,7 +9,7 @@ const Inicio = () => {
   const [peliculas, setPeliculas] = useState([]);
   const [pagina, setPagina] = useState(1);
 
-  const cargarPeliculas = async () => {
+  const getPeliculas = async () => {
     try {
       const url = `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}&page=${pagina}`;
       const res = await fetch(url); // Espera la respuesta de la API
@@ -30,7 +30,7 @@ const Inicio = () => {
   
 
   useEffect(() => {
-    cargarPeliculas();
+    getPeliculas();
   }, [pagina]); 
 
   const cargarMas = () => {
