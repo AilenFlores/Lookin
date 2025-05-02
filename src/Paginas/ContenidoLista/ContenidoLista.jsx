@@ -10,8 +10,10 @@ const ContenidoLista = ({ tipo }) => {
 
   const getContenido = async () => {
     try {
-      const url = `https://api.themoviedb.org/3/discover/${tipo}?api_key=${API_KEY}&language=es&region=AR&sort_by=popularity.desc&page=${pagina}`;
-
+      const filtrosExtra = tipo === "tv"
+      ? "&sort_by=popularity.desc&vote_average.gte=7&vote_count.gte=100" // Popularidad + mínimo rating y votos
+      : "&sort_by=popularity.desc"; 
+      const url = `https://api.themoviedb.org/3/discover/${tipo}?api_key=${API_KEY}&language=es&region=AR&sort_by=popularity.desc&page=${pagina}${filtrosExtra}`;
       const res = await fetch(url);
       const data = await res.json();
 

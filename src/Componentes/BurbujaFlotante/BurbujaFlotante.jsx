@@ -10,6 +10,11 @@ function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }
   const navigate = useNavigate();
 
   useEffect(() => {
+    setInfo(null); // Limpiar cuando cambia la película o el tipo
+  }, [pelicula.id, mediaType]);
+
+
+  useEffect(() => {
     if (isHovered && !info) {
       fetch(`https://api.themoviedb.org/3/${mediaType}/${pelicula.id}?api_key=${API_KEY}&language=es`)
         .then(res => res.json())
