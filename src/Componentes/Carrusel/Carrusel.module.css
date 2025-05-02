@@ -1,0 +1,7 @@
+
+.scrollOculta {
+  scrollbar-width: none;         
+}
+.scrollOculta::-webkit-scrollbar {
+  display: none;                 
+}

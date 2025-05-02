@@ -8,14 +8,21 @@ const ContenidoLista = ({ tipo }) => {
   const [contenido, setContenido] = useState([]);
   const [pagina, setPagina] = useState(1);
 
-
   const getContenido = async () => {
     try {
-      const url = `https://api.themoviedb.org/3/discover/${tipo}?api_key=${API_KEY}&page=${pagina}`;
+      const url = `https://api.themoviedb.org/3/discover/${tipo}?api_key=${API_KEY}&language=es&region=AR&sort_by=popularity.desc&page=${pagina}`;
+
       const res = await fetch(url);
       const data = await res.json();
+
+      // Agregar media_type manualmente porque la API no lo devuelve
+      const contenidoConTipo = data.results.map(item => ({
+        ...item,
+        media_type: tipo
+      }));
+
       setContenido(prevContenido => {
-        return pagina === 1 ? data.results : [...prevContenido, ...data.results];
+        return pagina === 1 ? contenidoConTipo : [...prevContenido, ...contenidoConTipo];
       });
     } catch (err) {
       console.error(err);
@@ -24,7 +31,7 @@ const ContenidoLista = ({ tipo }) => {
 
   useEffect(() => {
     getContenido();
-  }, [pagina, tipo]); 
+  }, [pagina, tipo]);
 
   const cargarMas = () => {
     setPagina(prev => prev + 1);
@@ -32,11 +39,10 @@ const ContenidoLista = ({ tipo }) => {
 
   const titulo = tipo === 'movie' ? 'Películas Populares' : 'Series Populares';
 
-  
   return (
     <div className="inicio">
       <Cabecera />
-      <Lista texto={titulo} peliculas={contenido} cargarMas={cargarMas} tipo={tipo} />
+      <Lista texto={titulo} peliculas={contenido} cargarMas={cargarMas} />
       <Pie />
     </div>
   );
