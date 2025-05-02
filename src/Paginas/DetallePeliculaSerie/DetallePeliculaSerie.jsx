@@ -4,6 +4,9 @@ import Carrusel from '../../Componentes/Carrusel/Carrusel';
 import Subtitulo from '../../Componentes/Subtitulo/Subtitulo';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import AcordeonTemporadas from '../../Componentes/AcordeonTemporadas/AcordeonTemporadas';
+import GuardarFavorito from '../../Componentes/GuardarFavorito/GuardarFavorito';
+import Pie from '../../Componentes/Pie/Pie';
+
 
 const DetallePeliculaSerie = () => {
   const { id, tipo } = useParams();
@@ -74,6 +77,12 @@ const DetallePeliculaSerie = () => {
               ];
               return allImages.length > 0;
             }
+            if (section === 'reparto') {
+              return (data.credits?.cast || []).length > 0;
+            }
+            if (section === 'similares') {
+              return (data.similar?.results || []).length > 0;
+            }
             return true;
           })
           .map(section => {
@@ -95,7 +104,7 @@ const DetallePeliculaSerie = () => {
                   activeSection === section ? 'text-purple-600 underline' : ''
                 }`}
               >
-                {labels[section] || section}
+                {labels[section]}
               </a>
             );
           })}
@@ -108,41 +117,53 @@ const DetallePeliculaSerie = () => {
           
         <div className="pt-[50px] px-8 md:px-35 bg-white-100 text-black space-y-8">
           {/* Sinopsis */}
-          <div className="flex flex-col md:flex-row gap-6 p-6 bg-purple-100 rounded-lg shadow" id="sinopsis" >
+          <div
+            className="flex flex-col md:flex-row gap-6 p-6 bg-purple-100 rounded-lg shadow"
+            id="sinopsis"
+          >
+            {/* Columna de la imagen con su propio contenedor relativo */}
             <div className="w-full md:w-1/4 flex-shrink-0">
-              <img
-                src={`https://image.tmdb.org/t/p/w300${data.poster_path}`}
-                alt="Poster"
-                className="rounded-lg w-full object-cover"
-              />
+              <div className="relative rounded-lg overflow-hidden">
+                <img
+                  src={`https://image.tmdb.org/t/p/w300${data.poster_path}`}
+                  alt="Poster"
+                  className="w-full object-cover"
+                />
+                {/* Botón de favorito posicionado encima de la imagen */}
+                <div className="absolute top-2 right-2 z-10">
+                  <GuardarFavorito pelicula={data} />
+                </div>
+              </div>
             </div>
+
+            {/* La parte de texto (título, rating, sinopsis, etc.) */}
             <div className="flex-1 space-y-4">
               <Subtitulo
                 texto={data.title || data.name}
-                className="font-bold text-left text-4xl pb-1 p-10"
+                className="font-bold text-left text-4xl pb-1"
               />
-              <div className="flex items-center gap-6 text-sm font-medium text-gray-800 p-10 py-0">
+              <div className="flex items-center gap-6 text-sm font-medium text-gray-800">
                 {/* Rating */}
-                <span className="w-9 h-9 rounded-full border-2 border-yellow-500 text-yellow-500 flex items-center justify-center ">
+                <span className="w-9 h-9 rounded-full border-2 border-yellow-500 text-yellow-500 flex items-center justify-center">
                   {Math.round(data.vote_average * 10)}%
                 </span>
-
                 {/* Duración con separador */}
                 <span className="border-l border-gray-300 pl-4">
                   {data.runtime ? `${data.runtime} min` : 'Duración no disponible'}
                 </span>
-
                 {/* Año con separador */}
                 <span className="border-l border-gray-300 pl-4">
-                  {data.release_date?.slice(0, 4) || data.first_air_date?.slice(0, 4) || 'Año N/A'}
+                  {data.release_date?.slice(0, 4) ||
+                  data.first_air_date?.slice(0, 4) ||
+                  'Año N/A'}
                 </span>
               </div>
-
-              <p className="text-lg leading-relaxed text-gray-800 text-left p-10 py-0">
+              <p className="text-lg leading-relaxed text-gray-800 text-left">
                 {data.overview || 'Sin sinopsis disponible.'}
               </p>
             </div>
           </div>
+
 
           {/* Información */}
           <div className="space-y-4 text-left" id="info">
@@ -253,15 +274,17 @@ const DetallePeliculaSerie = () => {
             </div>
           )}
 
-          {/* Reparto */}
-          <div id="reparto">
-            <Subtitulo texto="Reparto" className="font-semibold text-left text-4xl mb-2" />
-            <Carrusel
-              contenido={data.credits?.cast?.slice(0, 10) || []}
-              tipo="pequeno"
-              mediaType="person"   // <<-- aquí forzamos 'person'
-            />
-          </div>
+          {/* Reparto (solo si hay cast) */}
+          {(data.credits?.cast || []).length > 0 && (
+            <div id="reparto">
+              <Subtitulo texto="Reparto" className="font-semibold text-left text-4xl mb-2" />
+              <Carrusel
+                contenido={data.credits.cast.slice(0, 10)}
+                tipo="pequeno"
+                mediaType="person"
+              />
+            </div>
+          )}
 
 
           {/* Trailer (solo si hay al menos un video) */}
@@ -318,17 +341,20 @@ const DetallePeliculaSerie = () => {
             </div>
           )}
 
-          {/* Similares */}
-          <div id="similares">
-            <Subtitulo texto="Títulos similares" className="font-semibold text-left text-4xl mb-2" />
-            <Carrusel
-            contenido={data.similar?.results || []}
-            tipo="grande"
-            mediaType={tipo}   // aquí
-            />
-          </div>
+          {/* Similares (sigue igual) */}
+          {(data.similar?.results || []).length > 0 && (
+            <div id="similares">
+              <Subtitulo texto="Títulos similares" className="font-semibold text-left text-4xl mb-2" />
+              <Carrusel
+                contenido={data.similar.results}
+                tipo="grande"
+                mediaType={tipo}
+              />
+            </div>
+          )}
         </div>
       </div>
+      <Pie/>
     </>
     
   );
