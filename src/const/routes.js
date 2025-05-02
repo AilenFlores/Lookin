@@ -1,6 +1,6 @@
 export const ROUTES = {
     inicio: "/",
-    favoritos: "favoritos",
+    favoritos: "/favoritos",
     peliculas: "/peliculas",
     series: "/series",
 };

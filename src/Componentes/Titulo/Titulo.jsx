@@ -1,8 +1,9 @@
 import React from 'react';
 
-const Titulo = ({ texto, className = "" }) => {
+const Titulo = ({ onClick, texto, className = "" }) => {
     return (
-        <h1 className={`text-2xl font-bold text-center mb-1 ${className}`}>
+        
+        <h1 onClick={onClick} className={`text-2xl font-bold text-center mb-1 ${className}`}>
             {texto}
         </h1>
     );

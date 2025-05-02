@@ -2,49 +2,51 @@ import React from 'react';
 import { FaBookmark, FaSearch } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom'; //
 import { ROUTES } from '../../const/routes'; // 
-
+import Titulo from '../Titulo/Titulo';
 import Boton from '../Boton/Boton'; 
 
 const Cabecera = () => {
   const navigate = useNavigate(); // 
 
-  // const clickPeliculas = () => {
-  //   navigate(ROUTES.peliculas);
-  // };
   function handleClick(ruta) {
     return navigate(ruta);
   }
-  
   return (
-    <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-6 border shadow bg-white">
-      <div className="flex items-center space-x-4">
-        {/* Logo que podría ser un componente */}
-        <div
-          className="text-red-600 text-2xl font-bold tracking-wider cursor-pointer"
-          style={{ transform: "scaleX(1.1)" }}
-          onClick={() => navigate(ROUTES.inicio)}
-        >
-  NERDFLIX
-</div>
+<header className="sticky top-0 z-[9999] bg-white shadow px-4 py-4 w-full">
+  <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+    
+    {/* Izquierda: logo y navegación */}
+    <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6">
+      <Titulo
+        onClick={() => navigate(ROUTES.inicio)}
+        texto="NERDFLIX"
+        className="text-red-600 text-2xl font-extrabold tracking-wider cursor-pointer"
+      />
+      <nav className="flex space-x-4 text-gray-700 text-md font-medium">
+        <Boton texto="Películas" onClick={() => handleClick(ROUTES.peliculas)} />
+        <Boton texto="Series" onClick={() => handleClick(ROUTES.series)} />
+      </nav>
+    </div>
 
-
-        <nav className="flex space-x-6 text-gray-700 text-md font-medium">
-          {/* <Boton texto="Peliculas" onClick={clickPeliculas}/> */}
-          <Boton texto="Películas" onClick={() => handleClick(ROUTES.peliculas)} />
-          <Boton texto="Series" onClick={() => handleClick(ROUTES.series)} />
-        </nav>
-      </div>
-
-      {/* Derecha: iconos */}
-      <div className="flex items-center space-x-4">
-        <FaBookmark 
-          className="text-2xl cursor-pointer"
-          onClick={() => navigate(ROUTES.favoritos)}
-        />
-        <button className="px-2 py-1 border rounded text-sm">EN</button>
-        <FaSearch className="text-2xl cursor-pointer" />
-      </div>
-    </header>
+    {/* Derecha: íconos */}
+    <div className="flex items-center space-x-4">
+      <FaBookmark 
+        className="text-2xl cursor-pointer"
+        onClick={() => navigate(ROUTES.favoritos)}
+      />
+      <Boton
+        texto="EN"
+        className="!bg-white !text-black !border !border-black hover:!bg-gray-100 !px-3 !py-2 text-sm"
+        onClick={() => {}}
+      />
+      <FaSearch 
+        className="text-2xl cursor-pointer"
+        onClick={() =>{}}
+ 
+      />
+    </div>
+  </div>
+</header>
   );
 };
 
