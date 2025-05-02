@@ -1,9 +1,10 @@
+// Carrusel.jsx
 import React, { useRef, useState, useEffect } from 'react';
 import Style from './Carrusel.module.css'; 
 import Flechas from '../Flechas/Flechas';
 import Tarjeta from '../Tarjeta/Tarjeta';
 
-const Carrusel = ({ contenido, tipo }) => {
+const Carrusel = ({ contenido, tipo, mediaType }) => {
   const carruselRef = useRef(null);
   const [mostrarBotones, setMostrarBotones] = useState(false);
   const size = tipo === 'grande' ? 20 : 10;
@@ -33,8 +34,9 @@ const Carrusel = ({ contenido, tipo }) => {
           className={`flex overflow-x-auto space-x-5 p-4 scroll-smooth snap-x snap-mandatory bg-gray-300 m-2 rounded-lg ${Style.scrollOculta}`}
         >
           {contenido.map((item) => (
-            <div key={`${item.id}`}>
-              <Tarjeta contenido={item} tipo={tipo} />
+            <div key={item.id}>
+              {/* le pasamos mediaType hacia Tarjeta */}
+              <Tarjeta contenido={item} tipo={tipo} mediaType={mediaType} />
             </div>
           ))}
         </div>

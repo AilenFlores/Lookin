@@ -3,4 +3,5 @@ export const ROUTES = {
     favoritos: "favoritos",
     peliculas: "/peliculas",
     series: "/series",
+    detalle: "/detalles/:id/:tipo",
 };

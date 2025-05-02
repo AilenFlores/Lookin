@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Boton from '../Boton/Boton';
 import { useNavigate } from 'react-router-dom';
 
-function BurbujaFlotante({ pelicula, mediaType, children }) {
+function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }) {
   const [isHovered, setIsHovered] = useState(false);
   const [info, setInfo] = useState(null);
 
