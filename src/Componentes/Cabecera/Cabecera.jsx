@@ -23,8 +23,8 @@ const Cabecera = () => {
         className="text-red-600 text-2xl font-extrabold tracking-wider cursor-pointer"
       />
       <nav className="flex space-x-4 text-gray-700 text-md font-medium">
-        <Boton texto="Películas" onClick={() => handleClick(ROUTES.peliculas)} />
-        <Boton texto="Series" onClick={() => handleClick(ROUTES.series)} />
+        <Boton texto="Películas" onClick={() => handleClick(ROUTES.peliculas) } className="bg-black hover:bg-red-600"/>
+        <Boton texto="Series" onClick={() => handleClick(ROUTES.series)} className="bg-black hover:bg-red-600"/>
       </nav>
     </div>
 

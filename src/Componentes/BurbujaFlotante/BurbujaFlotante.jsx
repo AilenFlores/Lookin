@@ -52,7 +52,7 @@ function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }
           <p className="mt-2"><strong>Sinopsis:</strong> {info.sinopsis || 'No disponible'}</p>
 
           <div className="flex justify-center mt-3">
-            <Boton texto="+ Info" onClick={() => navigate(`/detalle/${pelicula.id}/${mediaType}`)} />
+            <Boton texto="+ Info" onClick={() => navigate(`/detalle/${pelicula.id}/${mediaType}`)} className="bg-black hover:bg-red-600" />
           </div>
         </div>
       )}
