@@ -1,0 +1,98 @@
+import React, { useState } from 'react';
+import Subtitulo from '../Subtitulo/Subtitulo';
+import { FaStar } from 'react-icons/fa';
+
+const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [episodes, setEpisodes] = useState(null);
+  const [seasonRating, setSeasonRating] = useState(null);
+  const [expanded, setExpanded] = useState({});
+  const API_KEY = 'f0bbdd09a3268c4fe8d469dc1db26b5c';
+
+  const toggleOpen = async () => {
+    if (!isOpen && !episodes) {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}&language=es`
+      );
+      const json = await res.json();
+      setEpisodes(json.episodes);
+
+      const sum = json.episodes.reduce((acc, ep) => acc + (ep.vote_average || 0), 0);
+      const avg = json.episodes.length ? (sum / json.episodes.length).toFixed(1) : null;
+      setSeasonRating(avg);
+    }
+    setIsOpen(open => !open);
+  };
+
+  const toggleEpisode = id => {
+    setExpanded(e => ({ ...e, [id]: !e[id] }));
+  };
+
+  return (
+    <div className="w-full bg-white rounded-md shadow overflow-hidden mb-4">
+      <button
+        onClick={toggleOpen}
+        className="w-full flex justify-between items-center p-2 hover:bg-gray-100"
+      >
+        <div className="flex items-center gap-3">
+          <img
+            src={`https://image.tmdb.org/t/p/w185${posterPath}`}
+            alt={name}
+            className="w-16 h-20 object-cover rounded"
+          />
+          <div>
+            <h3 className="font-semibold">{name}</h3>
+            <p className="text-sm text-gray-600">
+              {episodes ? `${episodes.length} Episodios` : 'Ver episodios'}
+            </p>
+          </div>
+        </div>
+        {seasonRating && (
+          <span className="flex items-center text-yellow-500 font-bold">
+            <FaStar className="mr-1" /> {seasonRating}
+          </span>
+        )}
+      </button>
+
+      {isOpen && episodes && (
+        <div className="p-4 space-y-4 bg-gray-50">
+          <Subtitulo
+            texto={`Episodios Temporada ${seasonNumber}`}
+            className="text-xl mb-2"
+          />
+          {episodes.map(ep => (
+            <div key={ep.id} className="border-b pb-2">
+              <div className="flex justify-between items-center">
+                <span className="font-medium">
+                  E{ep.episode_number} – {ep.name}
+                </span>
+                <div className="flex items-center gap-4">
+                  {ep.vote_average != null && (
+                    <span className="flex items-center text-yellow-500 font-semibold">
+                      <FaStar className="mr-1" />{ep.vote_average.toFixed(1)}
+                    </span>
+                  )}
+                  {ep.overview && (
+                    <button
+                      onClick={() => toggleEpisode(ep.id)}
+                      className="text-gray-500 hover:text-gray-700"
+                    >
+                      {expanded[ep.id] ? '▲' : '▼'}
+                    </button>
+                  )}
+                </div>
+              </div>
+              {expanded[ep.id] && ep.overview && (
+                <p className="mt-1 text-sm text-gray-700 text-left">
+                  {ep.overview}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AcordeonTemporadas;

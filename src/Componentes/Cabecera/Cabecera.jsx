@@ -6,7 +6,7 @@ import Titulo from '../Titulo/Titulo';
 import Boton from '../Boton/Boton'; 
 
 const Cabecera = () => {
-  const navigate = useNavigate(); // 
+  const navigate = useNavigate(); 
 
   function handleClick(ruta) {
     return navigate(ruta);

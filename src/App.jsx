@@ -2,8 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './const/routes';
 
 import Inicio from './Paginas/Inicio/Inicio';
-
-import Peliculas from './Paginas/Peliculas/Peliculas'; 
+import ContenidoLista from './Paginas/ContenidoLista/ContenidoLista';
 import Favoritos from './Paginas/Favoritos/Favoritos';
 
 import DetallePeliculaSerie from './Paginas/DetallePeliculaSerie/DetallePeliculaSerie'; 
@@ -18,7 +17,9 @@ function App() {
           <Route path="/detalle/:id/:tipo" element={<DetallePeliculaSerie />} />
           <Route path={ROUTES.favoritos} element={<Favoritos />} />
 
-          <Route path={ROUTES.peliculas} element={<Peliculas />} />
+          <Route path="/peliculas" element={<ContenidoLista tipo="movie" />} />
+          <Route path="/series" element={<ContenidoLista tipo="tv" />} />
+
           
         </Routes>
       </div>
