@@ -1,3 +1,4 @@
+// Tarjeta.jsx
 import React from 'react';
 import Titulo from '../Titulo/Titulo';
 import Subtitulo from '../Subtitulo/Subtitulo';
@@ -5,10 +6,13 @@ import GuardarFavorito from '../GuardarFavorito/GuardarFavorito';
 import BurbujaFlotante from '../BurbujaFlotante/BurbujaFlotante';
 
 const Tarjeta = ({ contenido, tipo, mediaType }) => {
-  // Si es un actor, mostramos su foto y nombre, sin burbuja ni navegación
-  if (mediaType === 'person') {
+  // determina el tipo real (prop o fallback al contenido)
+  const media = mediaType || contenido.media_type;
+
+  // si es person...
+  if (media === 'person') {
     return (
-      <div className={`rounded-md shadow flex flex-col overflow-hidden w-24 text-center`}>
+      <div className="rounded-md shadow flex flex-col overflow-hidden w-24 text-center">
         <img
           src={`https://image.tmdb.org/t/p/w185${contenido.profile_path}`}
           alt={contenido.name}
@@ -19,12 +23,12 @@ const Tarjeta = ({ contenido, tipo, mediaType }) => {
     );
   }
 
-  // Si no es person, seguimos con tu lógica original:
-  let tamanioImg = tipo === "grande" ? "w500" : "w185";
-  let tamanioCard = tipo === "grande" ? "w-55 h-[350px]" : "w-32 h-48"; 
+  // resto de la card...
+  const tamanioImg  = tipo === "grande" ? "w500" : "w185";
+  const tamanioCard = tipo === "grande" ? "w-55 h-[350px]" : "w-32 h-48";
 
   return (
-    <BurbujaFlotante pelicula={contenido} mediaType={mediaType}>
+    <BurbujaFlotante pelicula={contenido} mediaType={media}>
       <div className={`rounded-md hover:shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out flex flex-col overflow-hidden ${tamanioCard}`}>
         {tipo === "grande" && (
           <div className="absolute top-1 right-1 z-10">
@@ -45,7 +49,7 @@ const Tarjeta = ({ contenido, tipo, mediaType }) => {
           />
           {tipo === "grande" && (
             <Subtitulo
-              texto={mediaType === 'movie' ? 'Película' : 'Serie'}
+              texto={media === 'movie' ? 'Película' : 'Serie'}
               className={`text-center mt-0.5 text-gray-400 ${tipo === "grande" ? "text-sm" : "text-xs"}`}
             />
           )}

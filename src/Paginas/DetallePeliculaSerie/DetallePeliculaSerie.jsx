@@ -58,7 +58,7 @@ const DetallePeliculaSerie = () => {
       <Cabecera />
 
       {/* Menú fijo debajo de la cabecera */}
-      <div className="sticky top-[80px] left-0 w-full bg-gray-100 z-40 flex justify-around py-2 border-b border-gray-300">
+      <div className="sticky top-[112px] left-0 w-full bg-gray-100 z-40 flex justify-around py-2 border-b border-gray-300">
         {sections
           .filter(section => {
             if (section === 'ver') {
