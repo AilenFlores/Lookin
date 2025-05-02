@@ -59,7 +59,7 @@ const Inicio = () => {
       className="text-2xl text-red-600 font-bold text-black absolute top-4 left-4 tracking-wider cursor-pointer"
       />
       </div>
-        <Carrusel contenido={populares} tipo={"chico"} />
+        <Carrusel contenido={populares} tipo={"grande"} />
       
       <Pie />
     </div>
