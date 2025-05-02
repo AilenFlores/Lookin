@@ -2,39 +2,34 @@ import React, { useState, useEffect } from 'react';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
 import Lista from '../../Componentes/Lista/Lista';
+import { getContenido } from '../../Servicios/apiTMDB';
 
 const ContenidoLista = ({ tipo }) => {
-  const API_KEY = 'f0bbdd09a3268c4fe8d469dc1db26b5c';
+
   const [contenido, setContenido] = useState([]);
   const [pagina, setPagina] = useState(1);
 
-  const getContenido = async () => {
-    try {
-      const filtrosExtra = tipo === "tv"
-      ? "&sort_by=popularity.desc&vote_average.gte=7&vote_count.gte=100" // Popularidad + mínimo rating y votos
-      : "&sort_by=popularity.desc"; 
-      const url = `https://api.themoviedb.org/3/discover/${tipo}?api_key=${API_KEY}&language=es&region=AR&sort_by=popularity.desc&page=${pagina}${filtrosExtra}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      // Agregar media_type manualmente porque la API no lo devuelve
-      const contenidoConTipo = data.results.map(item => ({
-        ...item,
-        media_type: tipo
-      }));
-
-      setContenido(prevContenido => {
-        return pagina === 1 ? contenidoConTipo : [...prevContenido, ...contenidoConTipo];
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  useEffect(() => {
+    setContenido([]);     
+    setPagina(1);      
+  }, [tipo]);
 
   useEffect(() => {
-    getContenido();
+    const fetchData = async () => {
+      try {
+        const datosContenido = await getContenido(tipo, pagina);
+        setContenido(prev =>
+          pagina === 1 ? datosContenido : [...prev, ...datosContenido]
+        );
+      } catch (err) {
+        console.error('Error al cargar los datos:', err);
+      }
+    };
+  
+    fetchData();
   }, [pagina, tipo]);
-
+  
+  
   const cargarMas = () => {
     setPagina(prev => prev + 1);
   };
