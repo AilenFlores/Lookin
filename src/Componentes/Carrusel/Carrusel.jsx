@@ -20,15 +20,21 @@ const Carrusel = ({ contenido, tipo, mediaType }) => {
   };
 
   useEffect(() => {
-    const carrusel = carruselRef.current;
-    if (carrusel && carrusel.scrollWidth > carrusel.clientWidth) {
-      setMostrarBotones(true);
-    }
+    const manejarRedimensionamiento = () => {
+      if (carruselRef.current) {
+        setMostrarBotones(carruselRef.current.scrollWidth > carruselRef.current.clientWidth); // Mostrar botones solo si el contenido es más ancho que el contenedor
+      }
+    };
+    window.addEventListener('resize', manejarRedimensionamiento);
+    // Ejecutar también al cargar
+    manejarRedimensionamiento();
+  
+    return () => window.removeEventListener('resize', manejarRedimensionamiento);
   }, [contenido]);
 
   return (
-    <div className="relative w-full flex justify-center p-5">
-      <div className="w-full overflow-hidden border-2 border-gray-300 rounded-lg shadow-lg">
+    <div className="relative w-full flex justify-left p-5">
+      <div className="w-fit overflow-hidden border-2 border-gray-300 rounded-lg shadow-lg">
         <div
           ref={carruselRef}
           className={`flex overflow-x-auto space-x-5 p-4 scroll-smooth snap-x snap-mandatory bg-gray-300 m-2 rounded-lg ${Style.scrollOculta}`}
