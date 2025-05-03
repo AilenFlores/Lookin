@@ -1,28 +1,23 @@
 import React, { useState } from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import { FaStar } from 'react-icons/fa';
+import { getTemporada } from '../../Servicios/apiTMDB';
 
 const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [episodes, setEpisodes] = useState(null);
   const [seasonRating, setSeasonRating] = useState(null);
   const [expanded, setExpanded] = useState({});
-  const API_KEY = 'f0bbdd09a3268c4fe8d469dc1db26b5c';
 
   const toggleOpen = async () => {
     if (!isOpen && !episodes) {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}&language=es`
-      );
-      const json = await res.json();
-      setEpisodes(json.episodes);
-
-      const sum = json.episodes.reduce((acc, ep) => acc + (ep.vote_average || 0), 0);
-      const avg = json.episodes.length ? (sum / json.episodes.length).toFixed(1) : null;
-      setSeasonRating(avg);
+      const { episodes: episodios, rating } = await getTemporada(tvId, seasonNumber);
+      setEpisodes(episodios);
+      setSeasonRating(rating);
     }
     setIsOpen(open => !open);
   };
+  
 
   const toggleEpisode = id => {
     setExpanded(e => ({ ...e, [id]: !e[id] }));

@@ -6,6 +6,8 @@ import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import AcordeonTemporadas from '../../Componentes/AcordeonTemporadas/AcordeonTemporadas';
 import GuardarFavorito from '../../Componentes/GuardarFavorito/GuardarFavorito';
 import Pie from '../../Componentes/Pie/Pie';
+import { getDetallePorId } from '../../Servicios/apiTMDB';
+import Cargando from '../../Componentes/Cargando/Cargando';
 
 
 const DetallePeliculaSerie = () => {
@@ -13,23 +15,16 @@ const DetallePeliculaSerie = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   const [activeSection, setActiveSection] = useState('sinopsis');
-
-  const API_KEY = 'f0bbdd09a3268c4fe8d469dc1db26b5c';
   const sections = ['sinopsis', 'info', 'galeria', 'reparto', 'trailer', 'ver', 'similares'];
   if (tipo === 'tv') sections.splice(6, 0, 'temporadas');
 
   useEffect(() => {
     const obtenerDatos = async () => {
-      try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/${tipo}/${id}?api_key=${API_KEY}&language=es&append_to_response=credits,videos,watch/providers,similar,images`
-        );
-        if (!res.ok) throw new Error('Error al obtener los datos');
-        const json = await res.json();
-        setData(json);
+      const resultado = await getDetallePorId(id, tipo);
+      if (resultado) {
+        setData(resultado);
         setError(false);
-      } catch (error) {
-        console.error('Error al obtener los datos:', error);
+      } else {
         setError(true);
       }
     };
@@ -37,88 +32,96 @@ const DetallePeliculaSerie = () => {
   }, [id, tipo]);
 
   useEffect(() => {
+    const headerHeight = 185;
     const handleScroll = () => {
       for (const section of sections) {
         const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
-          }
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= headerHeight && rect.bottom >= headerHeight) {
+          setActiveSection(section);
+          break;
         }
       }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
+  
 
   if (error) return <div className="text-white p-5">Error al cargar los datos.</div>;
-  if (!data) return <div className="text-white p-5">Cargando...</div>;
+  if (!data) return <Cargando />;
 
   return (
     <>
       <Cabecera />
 
       {/* Menú fijo debajo de la cabecera */}
-      <div className="sticky top-[112px] left-0 w-full bg-gray-100 z-40 flex justify-around py-2 border-b border-gray-300">
-        {sections
-          .filter(section => {
-            if (section === 'ver') {
-              return (data['watch/providers']?.results?.AR?.flatrate || []).length > 0;
-            }
-            if (section === 'trailer') {
-              return (data.videos?.results || []).length > 0;
-            }
-            if (section === 'galeria') {
-              const allImages = [
-                ...(data.images?.posters || []),
-                ...(data.images?.backdrops || [])
-              ];
-              return allImages.length > 0;
-            }
-            if (section === 'reparto') {
-              return (data.credits?.cast || []).length > 0;
-            }
-            if (section === 'similares') {
-              return (data.similar?.results || []).length > 0;
-            }
-            return true;
-          })
-          .map(section => {
-            const labels = {
-              sinopsis: 'Sinopsis',
-              info: 'Información',
-              galeria: 'Galería',
-              reparto: 'Reparto',
-              trailer: 'Trailer',
-              ver: '¿Dónde verla?',
-              temporadas: 'Temporadas',
-              similares: 'Similares'
-            };
-            return (
-              <a
-                key={section}
-                href={`#${section}`}
-                className={`text-sm font-semibold hover:underline ${
-                  activeSection === section ? 'text-purple-600 underline' : ''
-                }`}
-              >
-                {labels[section]}
-              </a>
-            );
-          })}
+      <div className="sticky top-[112px] left-0 w-full z-40 bg-white bg-opacity-80 backdrop-blur-sm shadow-sm overflow-x-auto border-b border-gray-200">
+        <div className="grid grid-flow-col auto-cols-fr gap-3 px-4 py-2">
+          {sections
+            .filter(section => {
+              if (section === 'ver') {
+                return (data['watch/providers']?.results?.AR?.flatrate || []).length > 0;
+              }
+              if (section === 'trailer') {
+                return (data.videos?.results || []).length > 0;
+              }
+              if (section === 'galeria') {
+                const allImages = [
+                  ...(data.images?.posters || []),
+                  ...(data.images?.backdrops || [])
+                ];
+                return allImages.length > 0;
+              }
+              if (section === 'reparto') {
+                return (data.credits?.cast || []).length > 0;
+              }
+              if (section === 'similares') {
+                return (data.similar?.results || []).length > 0;
+              }
+              return true;
+            })
+            .map(section => {
+              const labels = {
+                sinopsis: 'Sinopsis',
+                info: 'Información',
+                galeria: 'Galería',
+                reparto: 'Reparto',
+                trailer: 'Trailer',
+                ver: '¿Dónde verla?',
+                temporadas: 'Temporadas',
+                similares: 'Similares'
+              };
+              const isActive = activeSection === section;
+              return (
+                <a
+                  key={section}
+                  href={`#${section}`}
+                  className={`
+                    text-center
+                    text-sm font-semibold
+                    px-6 py-2
+                    transition
+                    ${isActive
+                      ? 'bg-purple-600 text-white'
+                      : 'text-gray-700 hover:text-purple-600 hover:bg-purple-100'}
+                    rounded-full
+                  `}
+                >
+                  {labels[section]}
+                </a>
+              );
+            })}
+        </div>
       </div>
 
-
-
       <div className="bg-neutral-100 m-5 rounded-lg border-2 border-gray-300 shadow-lg"> 
-
           
         <div className="pt-[50px] px-8 md:px-35 bg-white-100 text-black space-y-8">
           {/* Sinopsis */}
           <div
-            className="flex flex-col md:flex-row gap-6 p-6 bg-purple-100 rounded-lg shadow"
+            className="scroll-mt-[180px] flex flex-col md:flex-row gap-6 p-6 bg-purple-100 rounded-lg shadow"
             id="sinopsis"
           >
             {/* Columna de la imagen con su propio contenedor relativo */}
@@ -166,8 +169,7 @@ const DetallePeliculaSerie = () => {
 
 
           {/* Información */}
-          <div className="space-y-4 text-left" id="info">
-            <Subtitulo texto="Información" className="font-semibold text-left text-4xl" />
+          <div id="info" className="scroll-mt-[180px] space-y-4 text-left">            <Subtitulo texto="Información" className="font-semibold text-left text-4xl" />
             <div className="space-y-3">
               <div>
                 <strong>Director:</strong>{' '}
@@ -233,12 +235,34 @@ const DetallePeliculaSerie = () => {
                   {data.revenue ? `$${data.revenue.toLocaleString()}` : 'No disponible'}
                 </span>
               </div>
-              <div>
-                <strong>Popularidad:</strong>{' '}
-                <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">
-                  {data.popularity?.toFixed(1) || 'No disponible'}
-                </span>
+              <div className="flex items-center gap-2 relative group">
+                <strong>Popularidad:</strong>
+                <div className="flex items-center gap-1 relative">
+                  {/* Valor de popularidad */}
+                  <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">
+                    🔥 {data.popularity?.toFixed(1) || 'No disponible'}
+                  </span>
+
+                  {/* Ícono de ayuda */}
+                  <span
+                    className="text-gray-600 text-xs cursor-pointer select-none relative"
+                    tabIndex={0}
+                  >
+                    ℹ️
+
+                    {/* Tooltip */}
+                    <div
+                      className="absolute left-1/2 -translate-x-1/2 top-[150%] md:left-full md:top-1/2 md:-translate-y-1/2 md:ml-2 
+                                w-[220px] bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100
+                                group-focus-within:opacity-100 group-hover:pointer-events-auto group-focus-within:pointer-events-auto 
+                                transition-opacity z-50 text-center shadow-lg"
+                    >
+                      Nivel de interés según visualizaciones y actividad reciente.
+                    </div>
+                  </span>
+                </div>
               </div>
+
             </div>
           </div>
 
@@ -249,7 +273,7 @@ const DetallePeliculaSerie = () => {
               ...(data.images.backdrops || []).map(img => ({ ...img, type: 'backdrop' }))
             ].length > 0
           ) && (
-            <div id="galeria" className="py-8">
+            <div id="galeria" className="py-8 scroll-mt-[150px]">
               <Subtitulo texto="Galería" className="text-4xl font-semibold mb-4 text-left" />
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 {[
@@ -276,7 +300,10 @@ const DetallePeliculaSerie = () => {
 
           {/* Reparto (solo si hay cast) */}
           {(data.credits?.cast || []).length > 0 && (
-            <div id="reparto">
+            <div
+              id="reparto"
+              className="scroll-mt-[180px]"
+            >
               <Subtitulo texto="Reparto" className="font-semibold text-left text-4xl mb-2" />
               <Carrusel
                 contenido={data.credits.cast.slice(0, 10)}
@@ -287,9 +314,10 @@ const DetallePeliculaSerie = () => {
           )}
 
 
+
           {/* Trailer (solo si hay al menos un video) */}
           {data.videos?.results?.length > 0 && (
-            <div id="trailer">
+            <div id="trailer" className="scroll-mt-[180px]" >
               <Subtitulo texto="Trailer" className="font-semibold text-left text-4xl mb-2" />
               <div className="mx-auto w-full md:w-3/4 lg:w-5/2 max-w-4xl">
                 <div className="aspect-video rounded-lg overflow-hidden shadow">
@@ -307,25 +335,31 @@ const DetallePeliculaSerie = () => {
 
 
           {/* ¿Dónde verla? (solo si hay ofertas) */}
-          {(data["watch/providers"]?.results?.AR?.flatrate || []).length > 0 && (
-            <div id="ver">
-              <Subtitulo texto="¿Dónde puedo verla?" className="font-semibold text-left text-4xl mb-2" />
-              <div className="flex gap-2">
-                {data["watch/providers"].results.AR.flatrate.map(p => (
-                  <img
-                    key={p.provider_id}
-                    src={`https://image.tmdb.org/t/p/w45${p.logo_path}`}
-                    alt={p.provider_name}
-                    className="h-10"
-                  />
-                ))}
-              </div>
-            </div>
-          )}
+{(data["watch/providers"]?.results?.AR?.flatrate || []).length > 0 && (
+  <div id="ver" className="scroll-mt-[180px]">
+    <Subtitulo texto="¿Dónde puedo verla?" className="font-semibold text-left text-4xl mb-5" />
+    <div className="flex gap-4 flex-wrap">
+      {data["watch/providers"].results.AR.flatrate.map(p => (
+        <div
+          key={p.provider_id}
+          className="flex flex-col items-center w-24 hover:scale-105 transition-transform duration-300"
+        >
+          <img
+            src={`https://image.tmdb.org/t/p/w92${p.logo_path}`}
+            alt={p.provider_name}
+            className="h-20 object-contain drop-shadow-md"
+          />
+          <span className="text-sm text-gray-700 mt-1 text-center">{p.provider_name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
 
 
           {tipo === 'tv' && (
-            <div id="temporadas">
+            <div id="temporadas" className="scroll-mt-[180px]" >
               <Subtitulo texto="Temporadas" className="font-semibold text-left text-4xl mb-4" />
               <div className="flex flex-wrap gap-4">
                 {data.seasons?.map(season => (
@@ -343,7 +377,7 @@ const DetallePeliculaSerie = () => {
 
           {/* Similares (sigue igual) */}
           {(data.similar?.results || []).length > 0 && (
-            <div id="similares">
+            <div id="similares" className="scroll-mt-[180px]" >
               <Subtitulo texto="Títulos similares" className="font-semibold text-left text-4xl mb-2" />
               <Carrusel
                 contenido={data.similar.results}

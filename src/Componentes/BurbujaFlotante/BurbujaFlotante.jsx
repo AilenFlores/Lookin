@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Boton from '../Boton/Boton';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import { useNavigate } from 'react-router-dom';
+import { getDetallePorId } from '../../Servicios/apiTMDB'; // ajustá la ruta según tu estructura
+
 
 function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }) {
   const [isHovered, setIsHovered] = useState(false);
   const [info, setInfo] = useState(null);
 
-  const API_KEY = 'f0bbdd09a3268c4fe8d469dc1db26b5c';
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,16 +18,15 @@ function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }
 
   useEffect(() => {
     if (isHovered && !info) {
-      fetch(`https://api.themoviedb.org/3/${mediaType}/${pelicula.id}?api_key=${API_KEY}&language=es`)
-        .then(res => res.json())
-        .then(data => {
-          setInfo({
-            sinopsis: data.overview,
-            genero: data.genres?.map(g => g.name).join(', '),
-          });
+      getDetallePorId(pelicula.id, mediaType).then(data => {
+        setInfo({
+          sinopsis: data.overview,
+          genero: data.genres?.map(g => g.name).join(', '),
         });
+      });
     }
   }, [isHovered, info, pelicula.id, mediaType]);
+  
 
   return (
     <div

@@ -4,7 +4,7 @@ import { ROUTES } from './const/routes';
 import Inicio from './Paginas/Inicio/Inicio';
 import ContenidoLista from './Paginas/ContenidoLista/ContenidoLista';
 import Favoritos from './Paginas/Favoritos/Favoritos';
-
+import Pagina404 from './Paginas/Pagina404/Pagina404';
 import DetallePeliculaSerie from './Paginas/DetallePeliculaSerie/DetallePeliculaSerie'; 
 import './App.css';
 
@@ -13,14 +13,14 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Inicio />} />
-          <Route path="/detalle/:id/:tipo" element={<DetallePeliculaSerie />} />
+          <Route path={ROUTES.inicio} element={<Inicio />} />
+          <Route path={ROUTES.detalle} element={<DetallePeliculaSerie />} />
           <Route path={ROUTES.favoritos} element={<Favoritos />} />
+          <Route path={ROUTES.peliculas} element={<ContenidoLista tipo="movie" />} />
+          <Route path={ROUTES.series} element={<ContenidoLista tipo="tv" />} />
 
-          <Route path="/peliculas" element={<ContenidoLista tipo="movie" />} />
-          <Route path="/series" element={<ContenidoLista tipo="tv" />} />
-
-          
+          {/* Ruta comodín al final para cualquier ruta inválida */}
+          <Route path="*" element={<Pagina404 />} />
         </Routes>
       </div>
     </BrowserRouter>

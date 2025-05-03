@@ -49,3 +49,40 @@ export const getContenido = async (tipo, pagina) => {
     throw err;
   }
 };
+
+/**Pide a la api el contenido, ya sea peliculas o series */
+export const getDetallePorId = async (id, tipo) => {
+  try {
+    const url = `https://api.themoviedb.org/3/${tipo}/${id}?api_key=${API_KEY}&language=es&append_to_response=credits,videos,watch/providers,similar,images`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('No se pudo obtener el detalle');
+    return await res.json();
+  } catch (err) {
+    console.error('Error al obtener detalle:', err);
+    return null;
+  }
+};
+
+/**Pide a la api los episodios de una temporada de una serie */
+export const getTemporada = async (tvId, seasonNumber) => {
+  try {
+    const url = `https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}&language=es`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const episodes = data.episodes || [];
+    const sum = episodes.reduce((acc, ep) => acc + (ep.vote_average || 0), 0);
+    const rating = episodes.length ? (sum / episodes.length).toFixed(1) : null;
+
+    return {
+      episodes,
+      rating
+    };
+  } catch (err) {
+    console.error('Error al obtener temporada:', err);
+    return {
+      episodes: [],
+      rating: null
+    };
+  }
+};
