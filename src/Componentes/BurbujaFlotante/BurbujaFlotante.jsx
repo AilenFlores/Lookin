@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Boton from '../Boton/Boton';
+import Subtitulo from '../Subtitulo/Subtitulo';
 import { useNavigate } from 'react-router-dom';
 
 function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }) {
@@ -37,24 +38,31 @@ function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }
 
       {isHovered && info && (
         <div
-          className={`
-            absolute z-50
-            md:top-1/2 md:left-full md:-translate-y-1/2 md:ml-2
-            top-full left-1/2 -translate-x-1/2 mt-3
-            w-72 bg-white text-black shadow-2xl rounded-lg p-3 text-sm transition-all duration-300 pointer-events-auto
-          `}
-        >
-          {/* Flechitas */}
-          <div className="hidden md:block absolute top-1/2 -left-2 -translate-y-1/2 w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-white shadow-sm" />
-          <div className="block md:hidden absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-transparent border-b-white shadow-sm" />
+        className={`
+          absolute z-50
+          bottom-0 left-1/2 -translate-x-1/2
+          w-56 max-w-[90vw] bg-white text-black shadow-lg rounded-md p-2 text-xs
+          transition-all duration-200 pointer-events-auto`}>
+            <Subtitulo texto={
+              <>
+              <span className="font-bold text-xs">Género: </span>
+              <span className="text-xs">{info.genero || "No disponible"}</span>
+              </>}
+              className="text-center"
+            />
+            <Subtitulo texto={
+              <>
+              <span className="font-bold text-xs">Sinopsis: </span>
+              <span className="text-xs">{info.sinopsis ? info.sinopsis.length > 150 ? info.sinopsis.slice(0, 150) + '...': info.sinopsis: 'No disponible'}</span>
+              </>}
+              className="text-center mt-2"
+            />
 
-          <p><strong>Género:</strong> {info.genero || 'No disponible'}</p>
-          <p className="mt-2"><strong>Sinopsis:</strong> {info.sinopsis || 'No disponible'}</p>
-
-          <div className="flex justify-center mt-3">
-            <Boton texto="+ Info" onClick={() => navigate(`/detalle/${pelicula.id}/${mediaType}`)} className="bg-black hover:bg-red-600" />
-          </div>
+        <div className="flex justify-center">
+          <Boton texto="+ Info" onClick={() => navigate(`/detalle/${pelicula.id}/${mediaType}`)} className="bg-black hover:bg-red-600" />
         </div>
+      </div>
+      
       )}
     </div>
   );
