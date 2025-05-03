@@ -11,12 +11,12 @@ const SeccionSinopsis = ({ data }) => {
     >
       {/* Imagen y botón de favorito */}
       <div className="w-full md:w-1/4 flex-shrink-0">
-        <div className="relative rounded-lg overflow-hidden">
-          <img
-            src={`https://image.tmdb.org/t/p/w300${data.poster_path}`}
-            alt="Poster"
-            className="w-full object-cover"
-          />
+      <div className="relative rounded-lg shadow-lg">
+        <img
+          src={`https://image.tmdb.org/t/p/w300${data.poster_path}`}
+          alt="Poster"
+          className="w-full object-cover rounded-lg outline-6 outline-white"
+        />
           <div className="absolute top-2 right-2 z-10">
             <GuardarFavorito pelicula={data} />
           </div>

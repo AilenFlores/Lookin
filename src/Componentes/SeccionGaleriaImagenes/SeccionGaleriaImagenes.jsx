@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
+import ModalImagen from '../ModalImagen/ModalImagen';
 
 const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
   const imagenes = [
     ...posters.map(img => ({ ...img, type: 'poster' })),
     ...backdrops.map(img => ({ ...img, type: 'backdrop' }))
   ];
+
+  const [modalImg, setModalImg] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (modalImg) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+  }, [modalImg]);
+
+  const cerrarModal = () => {
+    setModalImg(null);
+    setIsLoading(false);
+  };
 
   if (imagenes.length === 0) return null;
 
@@ -15,20 +32,28 @@ const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {imagenes.map((img, idx) => (
           <div key={idx} className="overflow-hidden rounded-lg">
-            <a
-              href={`https://image.tmdb.org/t/p/original${img.file_path}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={`https://image.tmdb.org/t/p/w300${img.file_path}`}
-                alt={`${img.type} ${idx + 1}`}
-                className="w-full h-32 object-cover rounded-lg transition-transform duration-300 hover:scale-125 cursor-zoom-in"
-              />
-            </a>
+            <img
+              src={`https://image.tmdb.org/t/p/w300${img.file_path}`}
+              alt={`${img.type} ${idx + 1}`}
+              className="w-full h-32 object-cover rounded-lg transition-transform duration-300 hover:scale-125 cursor-zoom-in"
+              onClick={() => {
+                setModalImg(img.file_path);
+                setIsLoading(true);
+              }}
+            />
           </div>
         ))}
       </div>
+
+      {/* Modal con imagen ampliada */}
+      {modalImg && (
+        <ModalImagen
+          src={modalImg}
+          onClose={cerrarModal}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
+      )}
     </div>
   );
 };
