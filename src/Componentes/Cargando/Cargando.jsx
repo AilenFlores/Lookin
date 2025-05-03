@@ -2,13 +2,15 @@ import React from 'react';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Titulo from '../Titulo/Titulo'; 
 
-const Cargando = () => {
+// Cargando.jsx
+const Cargando = ({ fullScreen = true }) => {
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen text-center space-y-4">
+      <div className={`flex flex-col justify-center items-center text-center space-y-4 ${fullScreen ? 'min-h-screen' : 'h-full w-full'}`}>
         <AiOutlineLoading3Quarters className="animate-spin text-4xl text-red-600" />
         <Titulo texto="Cargando..." className="text-xl font-semibold" />
-        </div>
+      </div>
     );
-    }
+  };
+  
 
 export default Cargando;

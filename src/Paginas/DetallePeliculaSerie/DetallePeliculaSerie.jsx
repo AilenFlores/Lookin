@@ -25,6 +25,13 @@ const DetallePeliculaSerie = () => {
   if (tipo === 'tv') sections.splice(6, 0, 'temporadas');
 
   useEffect(() => {
+    // Volver arriba del todo
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  
+    // Mostrar spinner
+    setData(null);
+    setActiveSection('sinopsis'); // Forzar que empiece desde sinopsis
+  
     const obtenerDatos = async () => {
       const resultado = await getDetallePorId(id, tipo);
       if (resultado) {
@@ -36,7 +43,7 @@ const DetallePeliculaSerie = () => {
     };
     obtenerDatos();
   }, [id, tipo]);
-
+  
   useEffect(() => {
     const headerHeight = 185;
     const handleScroll = () => {
@@ -53,6 +60,26 @@ const DetallePeliculaSerie = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [sections]);
+
+  useEffect(() => {
+    if (!data) return;
+  
+    // Esperamos brevemente para que todo se haya renderizado
+    const timeout = setTimeout(() => {
+      const headerHeight = 185;
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= headerHeight && rect.bottom >= headerHeight) {
+          setActiveSection(section);
+          break;
+        }
+      }
+    }, 100); // Pequeño delay para asegurarnos que el DOM esté actualizado
+  
+    return () => clearTimeout(timeout);
+  }, [data]);
   
   if (error) return <div className="text-white p-5">Error al cargar los datos.</div>;
   if (!data) return <Cargando />;
