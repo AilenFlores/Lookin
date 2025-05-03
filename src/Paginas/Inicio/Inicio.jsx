@@ -4,10 +4,13 @@ import Pie from '../../Componentes/Pie/Pie';
 import Carrusel from '../../Componentes/Carrusel/Carrusel';
 import Titulo from '../../Componentes/Titulo/Titulo';
 import { getTendencias, getEstrenosEnCines } from '../../Servicios/apiTMDB';
+import Cargando from '../../Componentes/Cargando/Cargando';
+
 
 const Inicio = () => {
   const [tendencias, setTendencias] = useState([]);
   const [populares, setPopulares] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,13 +19,25 @@ const Inicio = () => {
         const datosEstrenos = await getEstrenosEnCines();
         setTendencias(datosTendencias);
         setPopulares(datosEstrenos);
+        setIsLoading(false); 
+
       } catch (err) {
         console.error('Error al cargar los datos:', err);
+        setIsLoading(false); 
+
       }
     };
 
     fetchData();
   }, []);
+
+
+  
+if (isLoading) {
+  return (
+    <Cargando />
+  );
+}
 
   return (
     <div className="inicio">
