@@ -6,10 +6,14 @@ import PlataformaFiltro from '../PlataformaFiltro/PlataformaFiltro';
 
 const Filtros = ({ onFiltrar, tipo }) => {
   const [plataformas, setPlataforma] = useState([]);
-  const [filtros, setFiltros] = useState({
-    orden: 'popularity.desc',
-    plataforma: null,
+  const [filtros, setFiltros] = useState(() => {
+    const plataformaGuardada = localStorage.getItem('plataforma_filtrada');
+    return {
+      orden: 'popularity.desc',
+      plataforma: plataformaGuardada ? Number(plataformaGuardada) : null,
+    };
   });
+  
 
   const ordenes = [
     { label: "Popularidad descendente", value: "popularity.desc" },

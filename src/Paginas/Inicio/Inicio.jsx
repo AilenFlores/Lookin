@@ -45,14 +45,14 @@ if (isLoading) {
       <div className="relative mb-10">
         <Titulo 
           texto="TENDENCIAS: LO MÁS VISTO" 
-          className="text-base text-red-600 sm:text-base md:text-2xl font-bold  absolute top-4 left-4 tracking-wider cursor-pointer"
+          className="text-base text-black sm:text-base md:text-2xl font-bold absolute top-4 left-4 "
         />
       </div>
       <Carrusel contenido={tendencias} tipo={"grande"} />
       <div className="relative mb-10">
         <Titulo 
           texto="ESTRENOS EN CINES: LO MÁS NUEVO" 
-          className="text-base text-red-600 sm:text-base md:text-2xl font-bold  absolute top-4 left-4 tracking-wider cursor-pointer"
+          className="text-base text-black sm:text-base md:text-2xl font-bold  absolute top-4 left-4"
         />
       </div>
       <Carrusel contenido={populares} tipo={"grande"} />

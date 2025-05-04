@@ -50,7 +50,7 @@ const ContenidoLista = ({ tipo }) => {
   };
 
   const cargarMas = () => setPagina(prev => prev + 1);
-  const titulo = tipo === 'movie' ? 'Películas Populares' : 'Series Populares';
+  const titulo = tipo === 'movie' ? 'CATÁLOGO COMPLETO DE PELICULAS' : 'CATÁLOGO COMPLETO DE SERIES';
 
   if (isLoading && contenido.length === 0) return <Cargando />;
 

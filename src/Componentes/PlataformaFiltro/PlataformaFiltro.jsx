@@ -22,7 +22,7 @@ const PlataformasFiltro = ({ plataformas, seleccionada, onSeleccionar }) => {
           <button
             key={opcion.provider_id}
             onClick={() => onSeleccionar(opcion.provider_id)}
-            className={`rounded-lg border-2 transition-all flex items-center justify-center ${
+            className={`rounded-lg border-4 transition-all flex items-center justify-center ${
               seleccionada === opcion.provider_id
                 ? 'border-purple-600'
                 : 'border-transparent hover:border-gray-300'
