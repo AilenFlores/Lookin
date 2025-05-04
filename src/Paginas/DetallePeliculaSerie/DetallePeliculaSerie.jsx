@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import Subtitulo from '../../Componentes/Subtitulo/Subtitulo';
+import { useParams, useNavigate } from 'react-router-dom';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
-import GuardarFavorito from '../../Componentes/GuardarFavorito/GuardarFavorito';
 import Pie from '../../Componentes/Pie/Pie';
 import { getDetallePorId } from '../../Servicios/apiTMDB';
 import Cargando from '../../Componentes/Cargando/Cargando';
@@ -18,32 +16,34 @@ import SeccionSinopsis from '../../Componentes/SeccionSinopsis/SeccionSinopsis';
 
 const DetallePeliculaSerie = () => {
   const { id, tipo } = useParams();
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   const [activeSection, setActiveSection] = useState('sinopsis');
+
   const sections = ['sinopsis', 'info', 'galeria', 'reparto', 'trailer', 'ver', 'similares'];
   if (tipo === 'tv') sections.splice(6, 0, 'temporadas');
 
   useEffect(() => {
-    // Volver arriba del todo
     window.scrollTo({ top: 0, behavior: 'instant' });
-  
-    // Mostrar spinner
     setData(null);
-    setActiveSection('sinopsis'); // Forzar que empiece desde sinopsis
-  
+    setActiveSection('sinopsis');
+
     const obtenerDatos = async () => {
       const resultado = await getDetallePorId(id, tipo);
-      if (resultado) {
+
+      // 🔐 Validar que venga algo real y válido
+      if (resultado && resultado.id) {
         setData(resultado);
         setError(false);
       } else {
-        setError(true);
+        navigate('*', { replace: true });
       }
     };
+
     obtenerDatos();
-  }, [id, tipo]);
-  
+  }, [id, tipo, navigate]);
+
   useEffect(() => {
     const headerHeight = 185;
     const handleScroll = () => {
@@ -63,8 +63,6 @@ const DetallePeliculaSerie = () => {
 
   useEffect(() => {
     if (!data) return;
-  
-    // Esperamos brevemente para que todo se haya renderizado
     const timeout = setTimeout(() => {
       const headerHeight = 185;
       for (const section of sections) {
@@ -76,55 +74,37 @@ const DetallePeliculaSerie = () => {
           break;
         }
       }
-    }, 100); // Pequeño delay para asegurarnos que el DOM esté actualizado
-  
+    }, 100);
     return () => clearTimeout(timeout);
   }, [data]);
-  
+
   if (error) return <div className="text-white p-5">Error al cargar los datos.</div>;
   if (!data) return <Cargando />;
 
   return (
     <>
       <Cabecera />
-
       <MenuSecciones 
         sections={sections} 
         data={data} 
-        activeSection={activeSection} />
+        activeSection={activeSection} 
+      />
 
-      <div className="bg-neutral-100 m-5 rounded-lg border-2 border-gray-300 shadow-lg"> 
-          
+      <div className="bg-neutral-100 m-5 rounded-lg border-2 border-gray-300 shadow-lg">
         <div className="pt-[50px] px-8 md:px-35 bg-white-100 text-black space-y-8">
-          {/* Sinopsis */}
           <SeccionSinopsis data={data} />
-
-          {/* Información */}
           <SeccionInformacion data={data} />
-
-          {/* Galería de imágenes (solo si hay imágenes) */}
           <SeccionGaleriaImagenes posters={data.images?.posters} backdrops={data.images?.backdrops} />
-
-          {/* Reparto (solo si hay cast) */}
           <SeccionReparto reparto={data.credits?.cast} />
-
-          {/* Trailer (solo si hay al menos un video) */}
           {data.videos?.results?.length > 0 && (
             <SeccionTrailer videoKey={data.videos.results[0].key} />
           )}
-
-          {/* ¿Dónde verla? (solo si hay ofertas) */}
           <SeccionDondeVerla data={data} />
-
-          {/* Temporadas (solo si es una serie y hay temporadas) */}
           {tipo === 'tv' && <SeccionTemporadas data={data} id={id} />}
-
-          {/* Similares (sigue igual) */}
           <SeccionSimilares data={data} tipo={tipo} />
-
         </div>
       </div>
-      <Pie/>
+      <Pie />
     </>
   );
 };
