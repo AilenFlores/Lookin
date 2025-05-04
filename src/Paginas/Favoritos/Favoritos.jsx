@@ -16,7 +16,7 @@ const Favoritos = () => {
         console.error("Error al parsear favoritos:", e);
       }
     }
-  }, []);
+  }, [peliculas]);
   return (
     <div className="min-h-screen flex flex-col">
     <Cabecera /> 
