@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
@@ -20,6 +20,8 @@ const DetallePeliculaSerie = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   const [activeSection, setActiveSection] = useState('sinopsis');
+  const filtroGuardado = !!localStorage.getItem('plataforma_filtrada');
+
 
   const sections = ['sinopsis', 'info', 'galeria', 'reparto', 'trailer', 'ver', 'similares'];
   if (tipo === 'tv') sections.splice(6, 0, 'temporadas');
@@ -32,7 +34,6 @@ const DetallePeliculaSerie = () => {
     const obtenerDatos = async () => {
       const resultado = await getDetallePorId(id, tipo);
 
-      // 🔐 Validar que venga algo real y válido
       if (resultado && resultado.id) {
         setData(resultado);
         setError(false);

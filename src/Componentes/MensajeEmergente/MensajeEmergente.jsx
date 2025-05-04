@@ -1,4 +1,3 @@
-// Componentes/Toast/Toast.jsx
 import React, { useEffect, useState } from 'react';
 
 const MensajeEmergente = ({ mensaje, duracion = 3000, onClose }) => {

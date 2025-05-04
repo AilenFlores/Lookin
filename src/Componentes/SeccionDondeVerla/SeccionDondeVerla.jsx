@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import Toast from '../MensajeEmergente/MensajeEmergente';
 
-// Mapeo manual de nombres de plataformas a sus sitios oficiales
 const SeccionDondeVerla = ({ data }) => {
   const [toastMsg, setToastMsg] = useState('');
   const plataformas = data["watch/providers"]?.results?.AR?.flatrate || [];
+  const [plataformaFiltrada, setPlataformaFiltrada] = useState(null);
+
+  useEffect(() => {
+  const idGuardado = localStorage.getItem('plataforma_filtrada');
+
+  if (idGuardado) {
+    setPlataformaFiltrada(Number(idGuardado));
+    localStorage.removeItem('plataforma_filtrada');
+  }
+}, []);
+
+  const idsDisponibles = plataformas.map(p => p.provider_id);
+  const mostrarAviso = plataformaFiltrada && !idsDisponibles.includes(plataformaFiltrada);
 
   const providerUrls = {
     'Netflix': 'https://www.netflix.com/ar/',
@@ -30,7 +42,7 @@ const SeccionDondeVerla = ({ data }) => {
     'WOW Presents Plus': 'https://www.wowpresentsplus.com/',
     'BroadwayHD': 'https://www.broadwayhd.com/',
     'Filmzie': 'https://www.filmzie.com/',
-    'Dekkoo' : 'https://www.dekkoo.com/',
+    'Dekkoo': 'https://www.dekkoo.com/',
     'DocAlliance Films': 'https://www.dafilms.com/',
     'OnDemandKorea': 'https://www.ondemandkorea.com/',
     'Hoichoi': 'https://www.hoichoi.tv/',
@@ -58,16 +70,29 @@ const SeccionDondeVerla = ({ data }) => {
 
   const handleClick = (e, nombre) => {
     if (!providerUrls[nombre]) {
-      e.preventDefault(); // evitar redirección
+      e.preventDefault();
       setToastMsg(`No tenemos link oficial para ${nombre}`);
     }
   };
 
-  if (plataformas.length === 0) return null;
+  if (plataformas.length === 0 && !mostrarAviso) return null;
 
   return (
     <div id="ver" className="scroll-mt-[180px]">
       <Subtitulo texto="¿Dónde puedo verla?" className="font-semibold text-left text-4xl mb-5" />
+
+      {mostrarAviso && (
+  <div className="flex items-start gap-3 bg-yellow-100 border border-yellow-400 text-yellow-900 p-4 rounded-md mb-4">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-1 flex-shrink-0 text-yellow-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M4.93 4.93l14.14 14.14M12 2a10 10 0 100 20 10 10 0 000-20z" />
+    </svg>
+    <p className="text-sm">
+      <strong>Información posiblemente desactualizada:</strong> esta película aparecía como disponible en una plataforma, pero actualmente no figura. Esto puede deberse a que fue retirada recientemente.
+    </p>
+  </div>
+)}
+
+
       <div className="flex gap-4 flex-wrap">
         {plataformas.map(p => {
           const link = providerUrls[p.provider_name] || '#';
@@ -94,6 +119,6 @@ const SeccionDondeVerla = ({ data }) => {
       {toastMsg && <Toast mensaje={toastMsg} onClose={() => setToastMsg('')} />}
     </div>
   );
-  };
+};
 
 export default SeccionDondeVerla;

@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const MenuSecciones = ({ sections, data, activeSection }) => {
+  const [hayFiltroGuardado, setHayFiltroGuardado] = useState(false);
+
+  useEffect(() => {
+    const valor = localStorage.getItem('plataforma_filtrada');
+    if (valor && !isNaN(Number(valor))) {
+      setHayFiltroGuardado(true);
+    }
+  }, []);
+
   const labels = {
     sinopsis: 'Sinopsis',
     info: 'Información',
@@ -13,7 +22,10 @@ const MenuSecciones = ({ sections, data, activeSection }) => {
   };
 
   const mostrarSeccion = (section) => {
-    if (section === 'ver') return (data['watch/providers']?.results?.AR?.flatrate || []).length > 0;
+    if (section === 'ver') {
+      const plataformas = data['watch/providers']?.results?.AR?.flatrate || [];
+      return plataformas.length > 0 || hayFiltroGuardado;
+    }
     if (section === 'trailer') return (data.videos?.results || []).length > 0;
     if (section === 'galeria') {
       const allImages = [...(data.images?.posters || []), ...(data.images?.backdrops || [])];
@@ -27,12 +39,8 @@ const MenuSecciones = ({ sections, data, activeSection }) => {
   return (
     <div className="sticky top-[112px] left-0 w-full z-40 bg-white bg-opacity-80 backdrop-blur-sm shadow-sm border-b border-gray-200">
       <div className="relative">
-        {/* Efecto de difuminado izquierdo */}
         <div className="absolute left-0 top-0 h-full w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none sm:hidden" />
-        {/* Efecto de difuminado derecho */}
         <div className="absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none sm:hidden" />
-
-        {/* Lista de secciones */}
         <div
           className="
             flex overflow-x-auto gap-3 px-4 py-2 scroll-smooth snap-x snap-mandatory

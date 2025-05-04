@@ -39,6 +39,17 @@ const ContenidoLista = ({ tipo }) => {
   }, [tipo, pagina, filtros]);
 
   const manejarCambioFiltros = (nuevosFiltros) => {
+    if ('plataforma' in nuevosFiltros) {
+      if (nuevosFiltros.plataforma !== null) {
+        localStorage.setItem('plataforma_filtrada', String(nuevosFiltros.plataforma));
+      } else {
+        localStorage.removeItem('plataforma_filtrada');
+      }
+    }
+    
+    
+    
+
     setFiltros(prev => ({
       ...prev,
       ...nuevosFiltros
