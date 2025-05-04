@@ -26,29 +26,79 @@ export const getEstrenosEnCines = async () => {
     return [];
   }
 };
-/**Pide a la api el contenido, ya sea peliculas o series */
-export const getContenido = async (tipo, pagina) => {
-  try {
-    const filtrosExtra = tipo === "tv"
-      ? "&sort_by=popularity.desc&vote_average.gte=7&vote_count.gte=100"
-      : "&sort_by=popularity.desc";
 
-    const url = `https://api.themoviedb.org/3/discover/${tipo}?api_key=${API_KEY}&language=es&region=AR&page=${pagina}${filtrosExtra}`;
-    
+
+
+
+/**Contruye los parametros para la url */
+const construirParametros = (pagina, filtros, tipo) => {
+  const hoy = new Date().toISOString().split('T')[0];
+  const orden = filtros.orden || 'popularity.desc'; 
+  const params = new URLSearchParams({
+    api_key: API_KEY,
+    language: 'es',
+    region: 'AR',
+    page: pagina,
+    sort_by: orden,
+  });
+
+  if (filtros.plataforma) {
+    params.append('with_watch_providers', filtros.plataforma);
+    params.append('watch_region', 'AR');
+  }
+
+  if (tipo === 'tv') {
+    params.append('vote_average.gte', 7);
+    params.append('vote_count.gte', 100);
+    params.append('first_air_date.lte', hoy); 
+  } else {
+    params.append('release_date.lte', hoy); 
+  }
+
+  return params;
+};
+
+
+const construirURL = (tipo, pagina, filtros) => {
+  const params = construirParametros(pagina, filtros, tipo);
+  const url = `https://api.themoviedb.org/3/discover/${tipo}?${params.toString()}`;
+  return url;
+};
+
+
+export const getContenido = async (tipo, pagina, filtros = {}) => {
+  try {
+    const url = construirURL(tipo, pagina, filtros);
     const res = await fetch(url);
     const data = await res.json();
 
-    const contenidoConTipo = data.results.map(item => ({
+    if (!res.ok || !data.results) {
+      throw new Error(data.status_message || "Error al obtener datos");
+    }
+
+    return data.results.map(item => ({
       ...item,
       media_type: tipo
     }));
-
-    return contenidoConTipo;
   } catch (err) {
     console.error('Error en getContenido:', err);
     throw err;
   }
 };
+
+export const getPlataformas = async (tipo) => {
+  try {
+    const url = `https://api.themoviedb.org/3/watch/providers/${tipo}?api_key=${API_KEY}&language=es&watch_region=AR`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return data.results.filter(plataforma => plataforma.provider_id !== 0);
+  } catch (err) {
+    console.error('Error al obtener plataformas:', err);
+    return [];
+  }
+};
+
+
 
 /**Pide a la api el contenido, ya sea peliculas o series */
 export const getDetallePorId = async (id, tipo) => {
