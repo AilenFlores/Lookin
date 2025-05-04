@@ -9,7 +9,7 @@ const MenuSecciones = ({ sections, data, activeSection }) => {
     trailer: 'Trailer',
     ver: '¿Dónde verla?',
     temporadas: 'Temporadas',
-    similares: 'Similares'
+    similares: 'Similares',
   };
 
   const mostrarSeccion = (section) => {
@@ -25,26 +25,36 @@ const MenuSecciones = ({ sections, data, activeSection }) => {
   };
 
   return (
-    <div className="sticky top-[112px] left-0 w-full z-40 bg-white bg-opacity-80 backdrop-blur-sm shadow-sm overflow-x-auto border-b border-gray-200">
-      <div className="grid grid-flow-col auto-cols-fr gap-3 px-4 py-2">
-        {sections.filter(mostrarSeccion).map(section => (
-          <a
-            key={section}
-            href={`#${section}`}
-            className={`
-              text-center
-              text-sm font-semibold
-              px-6 py-2
-              transition
-              ${activeSection === section
-                ? 'bg-purple-600 text-white'
-                : 'text-gray-700 hover:text-purple-600 hover:bg-purple-100'}
-              rounded-full
-            `}
-          >
-            {labels[section]}
-          </a>
-        ))}
+    <div className="sticky top-[112px] left-0 w-full z-40 bg-white bg-opacity-80 backdrop-blur-sm shadow-sm border-b border-gray-200">
+      <div className="relative">
+        {/* Efecto de difuminado izquierdo */}
+        <div className="absolute left-0 top-0 h-full w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none sm:hidden" />
+        {/* Efecto de difuminado derecho */}
+        <div className="absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none sm:hidden" />
+
+        {/* Lista de secciones */}
+        <div
+          className="
+            flex overflow-x-auto gap-3 px-4 py-2 scroll-smooth snap-x snap-mandatory
+            sm:grid sm:grid-flow-col sm:auto-cols-fr sm:overflow-visible
+          "
+        >
+          {sections.filter(mostrarSeccion).map((section) => (
+            <a
+              key={section}
+              href={`#${section}`}
+              className={`
+                text-center text-sm font-semibold px-6 py-2
+                rounded-full snap-start transition whitespace-nowrap
+                ${activeSection === section
+                  ? 'bg-purple-600 text-white'
+                  : 'text-gray-700 hover:text-purple-600 hover:bg-purple-100'}
+              `}
+            >
+              {labels[section]}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
