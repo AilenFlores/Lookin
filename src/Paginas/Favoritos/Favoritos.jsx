@@ -5,18 +5,34 @@ import Lista from '../../Componentes/Lista/Lista';
 
 const Favoritos = () => {
   const [peliculas, setPeliculas] = useState([]);
-  console.log(peliculas.length)
   useEffect(() => {
-    const favs = localStorage.getItem('favoritos');
-    if (favs) {
-      try {
-        const favArray = JSON.parse(favs); 
-        setPeliculas(favArray);
-      } catch (e) {
-        console.error("Error al parsear favoritos:", e);
+    const cargarFavoritos = () => {
+      const favs = localStorage.getItem('favoritos');
+      if (favs) {
+        try {
+          const favArray = JSON.parse(favs); 
+          setPeliculas(favArray);
+        } catch (e) {
+          console.error("Error al parsear favoritos:", e);
+        }
+      } else {
+        setPeliculas([]);
       }
-    }
-  }, [peliculas]);
+    };
+  
+    cargarFavoritos();
+  
+    const handleUpdate = () => {
+      cargarFavoritos();
+    };
+  
+    window.addEventListener('favoritosActualizados', handleUpdate);
+  
+    return () => {
+      window.removeEventListener('favoritosActualizados', handleUpdate);
+    };
+  }, []);
+  
   return (
     <div className="min-h-screen flex flex-col">
     <Cabecera /> 
