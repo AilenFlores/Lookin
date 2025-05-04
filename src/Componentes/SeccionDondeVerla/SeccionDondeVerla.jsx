@@ -78,7 +78,7 @@ const SeccionDondeVerla = ({ data }) => {
   if (plataformas.length === 0 && !mostrarAviso) return null;
 
   return (
-    <div id="ver" className="scroll-mt-[180px]">
+    <div id="ver" className="scroll-mt-[140px]">
       <Subtitulo texto="¿Dónde puedo verla?" className="font-semibold text-left text-4xl mb-5" />
 
       {mostrarAviso && (

@@ -27,7 +27,7 @@ const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
   if (imagenes.length === 0) return null;
 
   return (
-    <div id="galeria" className="py-8 scroll-mt-[150px]">
+    <div id="galeria" className="py-8 scroll-mt-[110px]">
       <Subtitulo texto="Galería" className="text-4xl font-semibold mb-4 text-left" />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {imagenes.map((img, idx) => (

@@ -3,7 +3,7 @@ import Subtitulo from '../Subtitulo/Subtitulo';
 
 const Informacion = ({ data }) => {
   return (
-    <div id="info" className="scroll-mt-[180px] space-y-4 text-left">
+    <div id="info" className="scroll-mt-[140px] space-y-4 text-left">
       <Subtitulo texto="Información" className="font-semibold text-left text-4xl" />
 
       <div className="space-y-3">
