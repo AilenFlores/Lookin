@@ -60,12 +60,7 @@ Nerdflix es una aplicación web responsive desarrollada con React y Tailwind CSS
  
  npm install
  
- **5. Instalar SweetAlert2**
- Ejecutá el siguiente comando para instalar la libreria SweetAlert2:
- 
- npm install sweetalert2
- 
- **6. Ejecutar la aplicación en modo desarrollo**
+ **5. Ejecutar la aplicación en modo desarrollo**
  Una vez instaladas las dependencias, iniciá el proyecto con:
  
  npm run dev
