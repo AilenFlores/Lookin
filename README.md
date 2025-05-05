@@ -24,13 +24,16 @@ Nerdflix es una aplicación web responsive desarrollada con React y Tailwind CSS
 🌐 Opción de cambiar el idioma de la interfaz entre español e inglés.
 
 
-🛠️ Tecnologías utilizadas
-⚛️ React
-💨 Tailwind CSS
-⚡ Vite
-🎉 SweetAlert2
-🌍 API TMDB
-🧩 React Icons
+## 🛠️ Tecnologías utilizadas
+
+- ⚛️ **React**  
+- 💨 **Tailwind CSS**  
+- ⚡ **Vite**  
+- 🎉 **SweetAlert2**  
+- 🌍 **API de TMDB**  
+- 🧩 **React Icons**
+
+---
 
 ⚙️ Instrucciones de instalación
  
