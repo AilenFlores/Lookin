@@ -7,7 +7,7 @@ const ListadoConFiltros = ({ titulo, contenido, onFiltrar, tipo, cargarMas }) =>
   return (
     <div className="grid md:grid-cols-[250px_1fr] max-w-screen-xl w-full mx-auto py-3">
       <Filtro onFiltrar={onFiltrar} tipo={tipo} />
-      <div className="overflow-hidden ml-8">
+      <div className="overflow-hidden ml-8 mr-8">
         <Lista
           texto={titulo}
           peliculas={contenido}
