@@ -26,7 +26,7 @@ const SeccionSinopsis = ({ data }) => {
 
   return (
     <div
-      className="scroll-mt-[180px] flex flex-col md:flex-row gap-6 p-6 bg-purple-100 rounded-lg shadow"
+      className="scroll-mt-[180px] flex flex-col md:flex-row gap-6 p-6 bg-purple-200 rounded-lg shadow"
       id="sinopsis"
     >
       {/* Imagen y botón de favorito */}
@@ -43,7 +43,7 @@ const SeccionSinopsis = ({ data }) => {
           <img
             src={`https://image.tmdb.org/t/p/w300${data.poster_path}`}
             alt="Poster"
-            className="w-full object-cover rounded-lg outline-6 outline-white"
+            className="w-full object-cover rounded-lg outline-6 outline-purple-400"
             onLoad={() => setImagenCargando(false)}
           />
 

@@ -20,8 +20,8 @@ const Cabecera = () => {
           <div className="flex items-center space-x-6">
             <Titulo
               onClick={() => navigate(ROUTES.inicio)}
-              texto="NERDFLIX"
-              className="text-red-600 text-xl sm:text-2xl font-extrabold tracking-wider cursor-pointer"
+              texto="Lookin"
+              className="text-purple-800 text-xl sm:text-2xl font-extrabold tracking-wider cursor-pointer"
             />
             <nav className="flex space-x-4 text-gray-700 text-sm sm:text-base font-medium">
               <Enlace to="/peliculas">Películas</Enlace>

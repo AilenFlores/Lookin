@@ -82,7 +82,7 @@ const DetallePeliculaSerie = () => {
   if (!data) return <Cargando />;
 
   return (
-    <>
+    <div className="bg-gradient-to-b from-white via-purple-800 to-purple-800 min-h-screen ">
       <Cabecera />
       
         <MenuSecciones 
@@ -90,9 +90,9 @@ const DetallePeliculaSerie = () => {
           data={data} 
           activeSection={seccionActiva} 
         />
-<div className="bg-neutral-100 min-h-screen p-5 md:p-3">
+      <div className="min-h-screen p-5 md:p-9">
         <div className="bg-white m-5 rounded-lg border-2 border-gray-300 shadow-lg">
-          <div className="pt-[50px] px-8 md:px-35 bg-white-100 text-black space-y-8">
+          <div className="pt-[50px] p-8 md:px-15 bg-white-100 text-black space-y-8">
             <SeccionSinopsis data={data} />
             <SeccionInformacion data={data} />
             <SeccionGaleriaImagenes posters={data.images?.posters} backdrops={data.images?.backdrops} />
@@ -107,7 +107,7 @@ const DetallePeliculaSerie = () => {
         </div>
       </div>
       <Pie />
-    </>
+    </div>
   );
 };
 

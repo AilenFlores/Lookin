@@ -34,10 +34,10 @@ const Carrusel = ({ contenido, tipo, mediaType }) => {
 
   return (
     <div className="relative w-full flex justify-left p-5">
-      <div className="w-fit overflow-hidden border-2 border-gray-300 rounded-lg shadow-lg">
+      <div className="w-fit overflow-hidden border-5 border-purple-500 rounded-lg shadow-lg">
         <div
           ref={carruselRef}
-          className={`flex overflow-x-auto space-x-5 p-4 scroll-smooth snap-x snap-mandatory bg-gray-300 m-2 rounded-lg ${Style.scrollOculta}`}
+          className={`flex overflow-x-auto space-x-5  scroll-smooth snap-x snap-mandatory bg-neutral-100 m-2 rounded-lg ${Style.scrollOculta}`}
         >
           {contenido.map((item) => (
             <div key={item.id}>

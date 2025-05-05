@@ -16,9 +16,9 @@ const Tarjeta = ({ contenido, tipo, mediaType }) => {
         <img
           src={`https://image.tmdb.org/t/p/w185${contenido.profile_path}`}
           alt={contenido.name}
-          className="w-full h-28 object-cover rounded-md"
+          className="w-full h-28 object-cover rounded-md border-2 border-purple-500"
         />
-        <p className="text-xs mt-1">{contenido.name}</p>
+        <p className="text-xs mt-1 bg-purple-200 rounded-md">{contenido.name}</p>
       </div>
     );
   }

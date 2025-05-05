@@ -54,7 +54,7 @@ const ResultadosBusqueda = () => {
   return (
     <>
       <Cabecera />
-      <div className="bg-neutral-100 min-h-screen p-5 md:p-10">
+      <div className="bg-gradient-to-b from-white via-purple-800 to-purple-800 min-h-screen p-5 md:p-10">
         {cargando && resultados.length === 0 ? (
           <Cargando />
         ) : (

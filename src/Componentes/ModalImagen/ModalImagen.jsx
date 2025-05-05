@@ -16,11 +16,11 @@ const ModalImagen = ({ src, onClose, isLoading, setIsLoading }) => {
         onClick={onClose}
     >
       <div
-        className="relative max-w-[90%] max-h-[80vh] p-2 bg-white rounded-lg shadow-lg"
+        className="relative max-w-[90%] max-h-[80vh] p-2 bg-purple-400 rounded-lg shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         {isLoading && (
-          <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center z-10">
+          <div className="absolute inset-0 bg-purple-400 bg-opacity-90 flex items-center justify-center z-10">
             <Cargando />
           </div>
         )}
