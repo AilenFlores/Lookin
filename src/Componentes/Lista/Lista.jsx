@@ -2,9 +2,11 @@ import React from "react";
 import Boton from "../Boton/Boton";
 import Titulo from "../Titulo/Titulo";
 import Tarjeta from '../Tarjeta/Tarjeta';
+import { useTranslation } from 'react-i18next';
 import CartelAviso from "../CartelAviso/CartelAviso";
 
 const Lista = ({ peliculas, cargarMas, texto, mensajeCartel }) => {
+  const { t } = useTranslation("catalogo");
 
   return (
  <div className="bg-white shadow-md p-5 rounded-lg border-2 border-gray-300  sm:mr-0 mt-2">
@@ -28,7 +30,7 @@ const Lista = ({ peliculas, cargarMas, texto, mensajeCartel }) => {
 
   {cargarMas && peliculas.length >= 20 && ( 
     <div className="mt-4 flex justify-center">
-      <Boton texto="Mostrar Más" onClick={cargarMas} className="bg-black hover:bg-red-600 w-350" />
+      <Boton texto={t("mostrarMas.mostrarMas")} onClick={cargarMas} className="bg-black hover:bg-red-600 w-350" />
     </div>
   )}
 </div>

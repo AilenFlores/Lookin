@@ -1,0 +1,44 @@
+{
+    "detalle": 
+        {
+            "sinopsis": "Synopsis",
+            "info": "Information",
+            "galeria": "Gallery",
+            "reparto": "Cast",
+            "trailer": "Trailer",
+            "ver": "Where to watch?",
+            "temporada":"Season",
+            "similares": "Similar"
+        },
+    "dondeVerla": 
+        {
+            "dondePuedoVerla": "Where can I watch it?"
+        },
+    "infoDesactualizada": 
+        {
+            "infoDesactualizada1": "Possibly outdated information:",
+            "infoDesactualizada2": "this movie was previously listed on a platform, but is no longer available. It may have been recently removed."
+        },
+    "informacion": 
+        {
+            "informacion": "Information",
+            "director": "Director",
+            "genero": "Genre",
+            "idiomaOriginal": "Original language:",
+            "compañiasDeProduccion": "Production companies",
+            "presupuesto": "Budget",
+            "recaudacion": "Revenue",
+            "popularidad": "Popularity",
+            "nivelDeInteres": "Interest level based on views and recent activity.",
+            "noDisponible": "Not available"
+        },
+    "titulosSimilares": 
+        {
+            "titulosSimilares": "Similar titles"
+        }
+   
+
+    
+
+  }
+  

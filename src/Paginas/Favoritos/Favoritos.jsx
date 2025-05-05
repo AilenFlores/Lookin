@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
 import Lista from '../../Componentes/Lista/Lista';
+import { useTranslation } from 'react-i18next';
 
 const Favoritos = () => {
+      const { t } = useTranslation("favoritos");
+  
   const [peliculas, setPeliculas] = useState([]);
   useEffect(() => {
     const cargarFavoritos = () => {
@@ -38,11 +41,11 @@ const Favoritos = () => {
     <Cabecera /> 
     <div className="bg-gradient-to-b from-white via-purple-800 to-purple-800 min-h-screen p-5 md:p-10">
     <Lista
-  texto="Películas y series Favoritas"
+  texto={t("favoritos.titulo")}
   peliculas={peliculas}
   mensajeCartel={ <>
-      Aún no tienes favoritos guardados.<br />
-      Explorá películas y series y agregalas a tu lista para verlas más tarde.
+      {t("favoritos.mensajeCartel1")}<br />
+      {t("favoritos.mensajeCartel2")}
     </>
   }/>   
     </div> 

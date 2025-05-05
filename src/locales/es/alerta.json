@@ -1,0 +1,11 @@
+{
+    "alertaConfirmacion":
+        {
+            "titulo":"¿Estás seguro?",
+            "texto":"Esta película se eliminará de tus favoritos.",
+            "botonConfirmar":"Sí, eliminar",
+            "botonCancelar":"Cancelar",
+            "mensajeGuardado":"¡Guardado en favoritos!"
+        }
+}
+

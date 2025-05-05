@@ -1,0 +1,27 @@
+{
+    "catalogo":
+        {
+            "tituloCatalogoSeries": "CATÁLOGO COMPLETO DE SERIES",
+            "tituloCatalogoPeliculas": "CATÁLOGO COMPLETO DE PELICULAS"
+        },
+    "ordenamiento":
+            {
+                "popularidadDesc":"Popularidad descendente",
+                "popularidadAsc":"Popularidad ascendente",
+                "fechaEstrenoAsc":"Fecha de estreno ascendente",
+                "fechaEstrenoDesc":"Fecha de estreno descendente"
+            },
+    "ordenar":
+            {
+                "ordenarPor": "Ordenar por"
+            },
+    "dondeVer":
+            {
+                "dondeVer": "Donde ver"
+            },
+    "mostrarMas":
+            {
+                "mostrarMas": "Mostrar más",
+                "sinResultados": "No hay resultados."
+            }
+}

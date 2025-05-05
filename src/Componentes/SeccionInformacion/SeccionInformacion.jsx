@@ -1,21 +1,24 @@
 import React from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
+import { useTranslation } from 'react-i18next';
 
 const Informacion = ({ data }) => {
+    const { t } = useTranslation("detalle");
+  
   return (
     <div id="info" className="scroll-mt-[140px] space-y-4 text-left">
-      <Subtitulo texto="Información" className="font-semibold text-left text-4xl" />
+      <Subtitulo texto={t("informacion.informacion")} className="font-semibold text-left text-4xl" />
 
       <div className="space-y-3">
         <div>
-          <strong>Director:</strong>{' '}
+          <strong>{t("informacion.director")}:</strong>{' '}
           <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">
-            {data.created_by?.[0]?.name || 'No disponible'}
+            {data.created_by?.[0]?.name || t('informacion.noDisponible')}
           </span>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <strong>Género:</strong>
+          <strong>{t("informacion.genero")}:</strong>
           {data.genres?.length ? (
             data.genres.map(g => (
               <span key={g.id} className="bg-purple-200 px-3 py-1 rounded-full text-sm">
@@ -23,19 +26,19 @@ const Informacion = ({ data }) => {
               </span>
             ))
           ) : (
-            <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">No disponible</span>
+            <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">{t("informacion.noDisponible")}</span>
           )}
         </div>
 
         <div>
-          <strong>Idioma original:</strong>{' '}
+          <strong>{t("informacion.idiomaOriginal")}</strong>{' '}
           <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">
-            {data.original_language?.toUpperCase() || 'No disponible'}
+            {data.original_language?.toUpperCase() || t('informacion.noDisponible')}
           </span>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <strong>Compañías de producción:</strong>
+          <strong>{t("informacion.compañiasDeProduccion")}</strong>
           {data.production_companies?.length ? (
             data.production_companies.map(pc => (
               <span key={pc.id} className="bg-purple-200 px-3 py-1 rounded-full text-sm">
@@ -43,29 +46,29 @@ const Informacion = ({ data }) => {
               </span>
             ))
           ) : (
-            <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">No disponible</span>
+            <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">{t('informacion.noDisponible')}</span>
           )}
         </div>
 
         <div>
-          <strong>Presupuesto:</strong>{' '}
+          <strong>{t("informacion.presupuesto")}:</strong>{' '}
           <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">
-            {data.budget ? `$${data.budget.toLocaleString()}` : 'No disponible'}
+            {data.budget ? `$${data.budget.toLocaleString()}` : t('informacion.noDisponible')}
           </span>
         </div>
 
         <div>
-          <strong>Recaudación:</strong>{' '}
+          <strong>{t("informacion.recaudacion")}:</strong>{' '}
           <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">
-            {data.revenue ? `$${data.revenue.toLocaleString()}` : 'No disponible'}
+            {data.revenue ? `$${data.revenue.toLocaleString()}` : t('informacion.noDisponible')}
           </span>
         </div>
 
         <div className="flex items-center gap-2 relative group">
-          <strong>Popularidad:</strong>
+          <strong>{t("informacion.popularidad")}:</strong>
           <div className="flex items-center gap-1 relative">
             <span className="bg-purple-200 px-3 py-1 rounded-full text-sm">
-              🔥 {data.popularity?.toFixed(1) || 'No disponible'}
+              🔥 {data.popularity?.toFixed(1) || t('informacion.noDisponible')}
             </span>
             <span className="text-gray-600 text-xs cursor-pointer select-none relative" tabIndex={0}>
               ℹ️
@@ -74,7 +77,7 @@ const Informacion = ({ data }) => {
                 w-[220px] bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100
                 group-focus-within:opacity-100 transition-opacity z-50 text-center shadow-lg"
               >
-                Nivel de interés según visualizaciones y actividad reciente.
+                {t("informacion.nivelDeInteres")}
               </div>
             </span>
           </div>

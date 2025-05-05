@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const MenuSecciones = ({ sections, data, activeSection }) => {
   const [hayFiltroGuardado, setHayFiltroGuardado] = useState(false);
+      const { t } = useTranslation("detalle");
 
   useEffect(() => {
     const valor = localStorage.getItem('plataforma_filtrada');
@@ -12,13 +14,13 @@ const MenuSecciones = ({ sections, data, activeSection }) => {
 
   const labels = {
     sinopsis: 'Sinopsis',
-    info: 'Información',
-    galeria: 'Galería',
-    reparto: 'Reparto',
-    trailer: 'Trailer',
-    ver: '¿Dónde verla?',
-    temporadas: 'Temporadas',
-    similares: 'Similares',
+    info: t('detalle.info'),
+    galeria: t('detalle.galeria'),
+    reparto: t('detalle.reparto'),
+    trailer: t('detalle.trailer'),
+    ver: t('detalle.ver'),
+    temporadas: t('detalle.temporada'),
+    similares: t('detalle.similares'),
   };
 
   const mostrarSeccion = (section) => {

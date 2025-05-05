@@ -1,0 +1,9 @@
+{
+    "favoritos":
+        {
+            "mensaje": "Por el momento no tenés películas ni series guardadas en favoritos.",
+            "titulo": "Películas y series Favoritas",
+            "mensajeCartel1":"Aún no tienes favoritos guardados.",
+            "mensajeCartel2":"Explorá películas y series y agregalas a tu lista para verlas más tarde."
+        }
+}

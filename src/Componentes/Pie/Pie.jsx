@@ -1,17 +1,21 @@
 import React from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
+import { useTranslation } from 'react-i18next';
+
 
 const Pie = () => {
+    const { t } = useTranslation("pie");
+  
   return (
     <footer className="bg-black text-white py-8 mt-0 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm">
 
         <div className="mb-6 md:mb-0 text-center md:text-left">
           <Subtitulo texto="Nerdflix" className="text-3xl font-bold text-white mb-2" />
-          <Subtitulo texto="Tu universo de películas y series favoritas" className="text-gray-400 mb-3" />
-          <Subtitulo texto="Más de 10,000 títulos disponibles en HD y 4K, con nuevos lanzamientos cada semana." className="text-gray-500 mb-3" />
-          <Subtitulo texto="Únete a millones de usuarios en todo el mundo disfrutando de contenido exclusivo, desde clásicos hasta los estrenos más esperados." className="text-gray-500 mb-6" />
-          <Subtitulo texto="Este producto utiliza la API de TMDb bajo los términos de uso de su servicio, pero no está respaldado ni certificado por TMDb." className="text-gray-400 text-xs" />
+          <Subtitulo texto={t("pie.descripcionCorta")} className="text-gray-400 mb-3" />
+          <Subtitulo texto={t("pie.descripcionLarga1")} className="text-gray-500 mb-3" />
+          <Subtitulo texto={t("pie.descripcionLarga2")} className="text-gray-500 mb-6" />
+          <Subtitulo texto={t("pie.disclaimer")} className="text-gray-400 text-xs" />
         </div>
 
       <div className="mt-8 flex justify-center items-center">
@@ -20,7 +24,7 @@ const Pie = () => {
       </div>
 
       <div className="mt-8 border-t border-gray-700 pt-6 text-center text-xs text-gray-400">
-        <Subtitulo texto="Plataforma no oficial, basada en datos de TMDb" className="mb-2 text-gray-500" />     
+        <Subtitulo texto={t("pie.avisoLegal")} className="mb-2 text-gray-500" />     
       </div>
 
      

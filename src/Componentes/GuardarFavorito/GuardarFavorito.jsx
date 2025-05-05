@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import MensajeEmergente from '../MensajeEmergente/MensajeEmergente'; // Asegurate de que el path sea correcto
+import { useTranslation } from 'react-i18next';
 
 const GuardarFavorito = ({ pelicula }) => {
+    const { t } = useTranslation("alerta");
+  
   const [favorito, setFavorito] = useState(false);
   const [mostrarMensaje, setMostrarMensaje] = useState(false);
 
@@ -18,14 +21,14 @@ const GuardarFavorito = ({ pelicula }) => {
 
     if (favorito) {
       Swal.fire({
-        title: '¿Estás seguro?',
-        text: 'Esta película se eliminará de tus favoritos.',
+        title: t("alertaConfirmacion.titulo"),
+        text: t("alertaConfirmacion.texto"),
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar',
+        confirmButtonText: t("alertaConfirmacion.botonConfirmar"),
+        cancelButtonText: t("alertaConfirmacion.botonCancelar"),
       }).then((result) => {
         if (result.isConfirmed) {
           eliminarFavorito();
@@ -70,7 +73,7 @@ const GuardarFavorito = ({ pelicula }) => {
 
       {mostrarMensaje && (
         <MensajeEmergente
-          mensaje="¡Guardado en favoritos!"
+          mensaje={t("alertaConfirmacion.mensajeGuardado")}
           duracion={3000}
           onClose={() => setMostrarMensaje(false)}
         />

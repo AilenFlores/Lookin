@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { getPlataformas } from '../../Servicios/apiTMDB';
 import OrdenSelect from '../OrdenSelect/OrdenSelect';
 import PlataformaFiltro from '../PlataformaFiltro/PlataformaFiltro';
+import { useTranslation } from 'react-i18next';
 
 
 const Filtros = ({ onFiltrar, tipo }) => {
+  const { t } = useTranslation("catalogo");
   const [plataformas, setPlataforma] = useState([]);
   const [filtros, setFiltros] = useState(() => {
-    const plataformaGuardada = localStorage.getItem('plataforma_filtrada');
+  const plataformaGuardada = localStorage.getItem('plataforma_filtrada');
+ 
     return {
       orden: 'popularity.desc',
       plataforma: plataformaGuardada ? Number(plataformaGuardada) : null,
@@ -16,14 +19,14 @@ const Filtros = ({ onFiltrar, tipo }) => {
   
 
   const ordenes = [
-    { label: "Popularidad descendente", value: "popularity.desc" },
-    { label: "Popularidad ascendente", value: "popularity.asc" },
+    { label: t('ordenamiento.popularidadDesc'), value: "popularity.desc" },
+    { label: t("ordenamiento.popularidadAsc"), value: "popularity.asc" },
     {
-      label: "Fecha de estreno ascendente",
+      label: t("ordenamiento.fechaEstrenoAsc"),
       value: tipo === "tv" ? "first_air_date.asc" : "release_date.asc",
     },
     {
-      label: "Fecha de estreno descendente",
+      label: t("ordenamiento.fechaEstrenoDesc"),
       value: tipo === "tv" ? "first_air_date.desc" : "release_date.desc",
     },
   ];
