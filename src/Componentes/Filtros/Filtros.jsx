@@ -36,18 +36,18 @@ const Filtros = ({ onFiltrar, tipo }) => {
     cargarPlataformas();
   }, [tipo]);
 
-  useEffect(() => {
-    onFiltrar(filtros);
-  }, [filtros]);
-
   const handleOrdenChange = (value) => {
-    setFiltros(prev => ({ ...prev, orden: value }));
+    const nuevosFiltros = { ...filtros, orden: value };
+    setFiltros(nuevosFiltros); 
+    onFiltrar(nuevosFiltros); // ✅ llamar explícitamente 
   };
-
+  
   const handlePlataformaChange = (id) => {
-    setFiltros(prev => ({ ...prev, plataforma: id }));
+    const nuevosFiltros = { ...filtros, plataforma: id };
+    setFiltros(nuevosFiltros);
+    onFiltrar(nuevosFiltros); // ✅ llamar explícitamente
   };
-
+  
   return (
     <div className="w-[90%] max-w-xs md:w-68 bg-white shadow-md rounded-lg p-4 text-sm space-y-6 border-2 border-gray-300 max-h-fit mt-2 mx-auto md:mx-0">
       <OrdenSelect
