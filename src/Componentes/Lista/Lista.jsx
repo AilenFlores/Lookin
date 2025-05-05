@@ -2,6 +2,7 @@ import React from "react";
 import Boton from "../Boton/Boton";
 import Titulo from "../Titulo/Titulo";
 import Tarjeta from '../Tarjeta/Tarjeta';
+import CartelAviso from "../CartelAviso/CartelAviso";
 
 const Lista = ({ peliculas, cargarMas, texto }) => {
 
@@ -21,7 +22,7 @@ const Lista = ({ peliculas, cargarMas, texto }) => {
 
       ))
     ) : (
-      <p className="col-span-full text-center text-gray-500">No hay resultados.</p>
+      <CartelAviso mensaje="No se encontraron coincidencias para tu búsqueda." />
     )}
   </div>
 
