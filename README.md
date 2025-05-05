@@ -1,6 +1,5 @@
 # Proyecto React - Gestor Peliculas y Series "Nerdflix".
 
- -----------------------------------------------------------
 El proyecto está desplegado en Vercel: 
  -----------------------------------------------------------
 Nerdflix es una aplicación web responsive desarrollada con React y Tailwind CSS, enfocada en la exploración y gestión de películas y series. Utiliza la API de TMDB para mostrar información en tiempo real y una interfaz clara y amigable.
