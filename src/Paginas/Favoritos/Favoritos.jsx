@@ -37,7 +37,14 @@ const Favoritos = () => {
     <div>
     <Cabecera /> 
     <div className="bg-neutral-100 min-h-screen p-5 md:p-10">
-    <Lista texto="Películas y series Favoritas" peliculas={peliculas} />      
+    <Lista
+  texto="Películas y series Favoritas"
+  peliculas={peliculas}
+  mensajeCartel={ <>
+      Aún no tienes favoritos guardados.<br />
+      Explorá películas y series y agregalas a tu lista para verlas más tarde.
+    </>
+  }/>   
     </div> 
     <Pie />
   </div>

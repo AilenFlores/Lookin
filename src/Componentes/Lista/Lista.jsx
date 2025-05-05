@@ -7,7 +7,7 @@ import CartelAviso from "../CartelAviso/CartelAviso";
 const Lista = ({ peliculas, cargarMas, texto, mensajeCartel }) => {
 
   return (
- <div className="bg-white shadow-md p-5 rounded-lg border-2 border-gray-300 ml-7 mr-7 sm:mr-0 mt-2">
+ <div className="bg-white shadow-md p-5 rounded-lg border-2 border-gray-300  sm:mr-0 mt-2">
 <Titulo 
   texto={texto} 
   className="inline-block max-w-fit text-2xl md:text-3xl font-semibold text-neutral-700 bg-purple-200 backdrop-blur-md rounded-xl px-5 py-3 mt-6 mb-6 shadow-sm tracking-tight"
