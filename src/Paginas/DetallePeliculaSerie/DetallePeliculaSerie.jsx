@@ -19,17 +19,16 @@ const DetallePeliculaSerie = () => {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
-  const [activeSection, setActiveSection] = useState('sinopsis');
-  const filtroGuardado = !!localStorage.getItem('plataforma_filtrada');
+  const [seccionActiva, setSeccionActiva] = useState('sinopsis');
 
 
-  const sections = ['sinopsis', 'info', 'galeria', 'reparto', 'trailer', 'ver', 'similares'];
-  if (tipo === 'tv') sections.splice(6, 0, 'temporadas');
+  const secciones = ['sinopsis', 'info', 'galeria', 'reparto', 'trailer', 'ver', 'similares'];
+  if (tipo === 'tv') secciones.splice(6, 0, 'temporadas');
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     setData(null);
-    setActiveSection('sinopsis');
+    setSeccionActiva('sinopsis');
 
     const obtenerDatos = async () => {
       const resultado = await getDetallePorId(id, tipo);
@@ -48,30 +47,30 @@ const DetallePeliculaSerie = () => {
   useEffect(() => {
     const headerHeight = 185;
     const handleScroll = () => {
-      for (const section of sections) {
-        const el = document.getElementById(section);
+      for (const seccion of secciones) {
+        const el = document.getElementById(seccion);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
         if (rect.top <= headerHeight && rect.bottom >= headerHeight) {
-          setActiveSection(section);
+          setSeccionActiva(seccion);
           break;
         }
       }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sections]);
+  }, [secciones]);
 
   useEffect(() => {
     if (!data) return;
     const timeout = setTimeout(() => {
       const headerHeight = 185;
-      for (const section of sections) {
-        const el = document.getElementById(section);
+      for (const seccion of secciones) {
+        const el = document.getElementById(seccion);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
         if (rect.top <= headerHeight && rect.bottom >= headerHeight) {
-          setActiveSection(section);
+          setSeccionActiva(seccion);
           break;
         }
       }
@@ -86,9 +85,9 @@ const DetallePeliculaSerie = () => {
     <>
       <Cabecera />
       <MenuSecciones 
-        sections={sections} 
+        sections={secciones} 
         data={data} 
-        activeSection={activeSection} 
+        activeSection={seccionActiva} 
       />
 
       <div className="bg-neutral-100 m-5 rounded-lg border-2 border-gray-300 shadow-lg">

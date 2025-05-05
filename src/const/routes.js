@@ -4,5 +4,6 @@ export const ROUTES = {
     peliculas: "/peliculas",
     series: "/series",
     detalle: "/detalle/:id/:tipo",
+    buscar: "/buscar/:termino",
     pagina404: "*",
 };

@@ -7,6 +7,7 @@ import Favoritos from './Paginas/Favoritos/Favoritos';
 import Pagina404 from './Paginas/Pagina404/Pagina404';
 import DetallePeliculaSerie from './Paginas/DetallePeliculaSerie/DetallePeliculaSerie'; 
 import './App.css';
+import ResultadosBusqueda from './Paginas/ResultadosBusqueda/ResultadosBusqueda';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path={ROUTES.favoritos} element={<Favoritos />} />
           <Route path={ROUTES.peliculas} element={<ContenidoLista tipo="movie" />} />
           <Route path={ROUTES.series} element={<ContenidoLista tipo="tv" />} />
-
+          <Route path={ROUTES.buscar} element={<ResultadosBusqueda />} />
           {/* Ruta comodín al final para cualquier ruta inválida */}
           <Route path="*" element={<Pagina404 />} />
         </Routes>

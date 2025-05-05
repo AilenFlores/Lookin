@@ -17,7 +17,8 @@ const Lista = ({ peliculas, cargarMas, texto }) => {
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-2 justify-items-center">
     {peliculas.length > 0 ? (
       peliculas.map((pelicula) => (
-        <Tarjeta key={pelicula.id} contenido={pelicula} tipo="grande" />
+        <Tarjeta key={`${pelicula.media_type}-${pelicula.id}`} contenido={pelicula} tipo="grande" />
+
       ))
     ) : (
       <p className="col-span-full text-center text-gray-500">No hay resultados.</p>

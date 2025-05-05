@@ -136,3 +136,32 @@ export const getTemporada = async (tvId, seasonNumber) => {
     };
   }
 };
+
+export const buscarContenido = async (query, page = 1) => {
+  try {
+    const url = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=es&query=${encodeURIComponent(query)}&page=${page}&include_adult=false&region=AR`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!res.ok || !data.results) {
+      throw new Error(data.status_message || "Error al buscar contenido");
+    }
+
+    const resultados = data.results.map(item => ({
+      ...item,
+      media_type: item.media_type || 'movie'
+    }));
+
+    return {
+      resultados,
+      total_pages: data.total_pages
+    };
+  } catch (err) {
+    console.error('Error en buscarContenido:', err);
+    return {
+      resultados: [],
+      total_pages: 1
+    };
+  }
+};
+

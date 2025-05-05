@@ -4,7 +4,25 @@ import GuardarFavorito from '../GuardarFavorito/GuardarFavorito';
 import Cargando from '../Cargando/Cargando';
 
 const SeccionSinopsis = ({ data }) => {
-  const [isImgLoading, setIsImgLoading] = useState(true);
+  const [imagenCargando, setImagenCargando] = useState(true);
+
+  const contenidoDesdeData = {
+    id: data.id,
+    title: data.title,
+    name: data.name,
+    original_name: data.original_name || data.original_title || data.name || data.title,
+    poster_path: data.poster_path,
+    backdrop_path: data.backdrop_path,
+    overview: data.overview,
+    vote_average: data.vote_average,
+    vote_count: data.vote_count,
+    media_type: data.media_type || (data.first_air_date ? "tv" : "movie"),
+    first_air_date: data.first_air_date,
+    release_date: data.release_date,
+    genre_ids: data.genres?.map(g => g.id), // puede que no lo necesites
+    original_language: data.original_language,
+    origin_country: data.origin_country || data.production_countries?.map(c => c.iso_3166_1),
+  };  
 
   return (
     <div
@@ -16,7 +34,7 @@ const SeccionSinopsis = ({ data }) => {
         <div className="relative rounded-lg shadow-lg">
           
           {/* Spinner de carga */}
-          {isImgLoading && (
+          {imagenCargando && (
             <div className="absolute inset-0 bg-white bg-opacity-60 flex items-center justify-center z-20 rounded-lg">
               <Cargando fullScreen={false} />
             </div>
@@ -26,11 +44,11 @@ const SeccionSinopsis = ({ data }) => {
             src={`https://image.tmdb.org/t/p/w300${data.poster_path}`}
             alt="Poster"
             className="w-full object-cover rounded-lg outline-6 outline-white"
-            onLoad={() => setIsImgLoading(false)}
+            onLoad={() => setImagenCargando(false)}
           />
 
           <div className="absolute top-2 right-2 z-30">
-            <GuardarFavorito pelicula={data} />
+          <GuardarFavorito pelicula={contenidoDesdeData} />
           </div>
         </div>
       </div>

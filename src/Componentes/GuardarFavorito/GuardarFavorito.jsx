@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import MensajeEmergente from '../MensajeEmergente/MensajeEmergente'; // Asegurate de que el path sea correcto
 
 const GuardarFavorito = ({ pelicula }) => {
   const [favorito, setFavorito] = useState(false);
+  const [mostrarMensaje, setMostrarMensaje] = useState(false);
 
   useEffect(() => {
     const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
@@ -33,11 +35,12 @@ const GuardarFavorito = ({ pelicula }) => {
       agregarFavorito();
     }
   };
+
   const notificarCambioFavoritos = () => {
     const evento = new Event('favoritosActualizados');
     window.dispatchEvent(evento);
   };
-  
+
   const eliminarFavorito = () => {
     const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
     const nuevosFavoritos = favoritos.filter(fav => fav.id !== pelicula.id);
@@ -45,24 +48,34 @@ const GuardarFavorito = ({ pelicula }) => {
     setFavorito(false);
     notificarCambioFavoritos(); 
   };
-  
+
   const agregarFavorito = () => {
     const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
     const nuevosFavoritos = [...favoritos, pelicula];
     localStorage.setItem("favoritos", JSON.stringify(nuevosFavoritos));
     setFavorito(true);
     notificarCambioFavoritos();
+    setMostrarMensaje(true); // 👈 Mostrar toast al guardar
   };
-  
 
   return (
-    <button onClick={favoritoClick}>
-      {favorito ? (
-        <FaBookmark size={30} className="text-yellow-400" />
-      ) : (
-        <FaRegBookmark size={30} className="text-white hover:text-yellow-400" />
+    <>
+      <button onClick={favoritoClick}>
+        {favorito ? (
+          <FaBookmark size={30} className="text-yellow-400" />
+        ) : (
+          <FaRegBookmark size={30} className="text-white hover:text-yellow-400" />
+        )}
+      </button>
+
+      {mostrarMensaje && (
+        <MensajeEmergente
+          mensaje="¡Guardado en favoritos!"
+          duracion={3000}
+          onClose={() => setMostrarMensaje(false)}
+        />
       )}
-    </button>
+    </>
   );
 };
 
