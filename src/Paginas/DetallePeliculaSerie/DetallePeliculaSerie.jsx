@@ -84,24 +84,26 @@ const DetallePeliculaSerie = () => {
   return (
     <>
       <Cabecera />
-      <MenuSecciones 
-        sections={secciones} 
-        data={data} 
-        activeSection={seccionActiva} 
-      />
-
-      <div className="bg-neutral-100 m-5 rounded-lg border-2 border-gray-300 shadow-lg">
-        <div className="pt-[50px] px-8 md:px-35 bg-white-100 text-black space-y-8">
-          <SeccionSinopsis data={data} />
-          <SeccionInformacion data={data} />
-          <SeccionGaleriaImagenes posters={data.images?.posters} backdrops={data.images?.backdrops} />
-          <SeccionReparto reparto={data.credits?.cast} />
-          {data.videos?.results?.length > 0 && (
-            <SeccionTrailer videoKey={data.videos.results[0].key} />
-          )}
-          <SeccionDondeVerla data={data} />
-          {tipo === 'tv' && <SeccionTemporadas data={data} id={id} />}
-          <SeccionSimilares data={data} tipo={tipo} />
+      
+        <MenuSecciones 
+          sections={secciones} 
+          data={data} 
+          activeSection={seccionActiva} 
+        />
+<div className="bg-neutral-100 min-h-screen p-5 md:p-3">
+        <div className="bg-white m-5 rounded-lg border-2 border-gray-300 shadow-lg">
+          <div className="pt-[50px] px-8 md:px-35 bg-white-100 text-black space-y-8">
+            <SeccionSinopsis data={data} />
+            <SeccionInformacion data={data} />
+            <SeccionGaleriaImagenes posters={data.images?.posters} backdrops={data.images?.backdrops} />
+            <SeccionReparto reparto={data.credits?.cast} />
+            {data.videos?.results?.length > 0 && (
+              <SeccionTrailer videoKey={data.videos.results[0].key} />
+            )}
+            <SeccionDondeVerla data={data} />
+            {tipo === 'tv' && <SeccionTemporadas data={data} id={id} />}
+            <SeccionSimilares data={data} tipo={tipo} />
+          </div>
         </div>
       </div>
       <Pie />

@@ -4,7 +4,7 @@ import Titulo from "../Titulo/Titulo";
 import Tarjeta from '../Tarjeta/Tarjeta';
 import CartelAviso from "../CartelAviso/CartelAviso";
 
-const Lista = ({ peliculas, cargarMas, texto }) => {
+const Lista = ({ peliculas, cargarMas, texto, mensajeCartel }) => {
 
   return (
  <div className="bg-white shadow-md p-5 rounded-lg border-2 border-gray-300 ml-7 mr-7 sm:mr-0 mt-2">
@@ -22,7 +22,7 @@ const Lista = ({ peliculas, cargarMas, texto }) => {
 
       ))
     ) : (
-      <CartelAviso mensaje="No se encontraron coincidencias para tu búsqueda." />
+      <CartelAviso mensaje={mensajeCartel} />
     )}
   </div>
 

@@ -62,6 +62,7 @@ const ResultadosBusqueda = () => {
             peliculas={resultados}
             texto={`Resultados para: "${decodeURIComponent(termino)}"`}
             cargarMas={pagina < totalPaginas ? cargarMas : null}
+            mensajeCartel={resultados.length === 0 ? 'No se encontraron coincidencias para tu búsqueda.' : ''}
           />
         )}
       </div>

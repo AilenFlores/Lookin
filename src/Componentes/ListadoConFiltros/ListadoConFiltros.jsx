@@ -12,6 +12,7 @@ const ListadoConFiltros = ({ titulo, contenido, onFiltrar, tipo, cargarMas }) =>
           texto={titulo}
           peliculas={contenido}
           cargarMas={cargarMas}
+          mensajeCartel="No se encontraron resultados"
         />
       </div>
     </div>
