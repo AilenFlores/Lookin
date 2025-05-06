@@ -6,7 +6,7 @@ import Titulo from '../Titulo/Titulo';
 const Cargando = ({ fullScreen = true }) => {
     return (
       <div className={`flex flex-col justify-center items-center text-center space-y-4 ${fullScreen ? 'min-h-screen' : 'h-full w-full'}`}>
-        <AiOutlineLoading3Quarters className="animate-spin text-4xl text-red-600" />
+        <AiOutlineLoading3Quarters className="animate-spin text-4xl text-purple-800" />
         <Titulo texto="Cargando..." className="text-xl font-semibold" />
       </div>
     );

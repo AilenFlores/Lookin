@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
-import Toast from '../MensajeEmergente/MensajeEmergente';
+import MensajeEmergente from '../MensajeEmergente/MensajeEmergente';
+import ProvidersUrl from '../../const/ProvidersUrl';
 
 const SeccionDondeVerla = ({ data }) => {
-  const [toastMsg, setToastMsg] = useState('');
+  const [mensajeEmergente, setMensajeEmergente] = useState('');
   const plataformas = data["watch/providers"]?.results?.AR?.flatrate || [];
   const [plataformaFiltrada, setPlataformaFiltrada] = useState(null);
 
@@ -19,59 +20,12 @@ const SeccionDondeVerla = ({ data }) => {
   const idsDisponibles = plataformas.map(p => p.provider_id);
   const mostrarAviso = plataformaFiltrada && !idsDisponibles.includes(plataformaFiltrada);
 
-  const providerUrls = {
-    'Netflix': 'https://www.netflix.com/ar/',
-    'Amazon Prime Video': 'https://www.primevideo.com/',
-    'Disney Plus': 'https://www.disneyplus.com/es-ar',
-    'Star Plus': 'https://www.starplus.com/es-ar',
-    'Max': 'https://www.max.com/ar/es',
-    'Apple TV': 'https://tv.apple.com/ar',
-    'Apple TV+': 'https://tv.apple.com/ar',
-    'Paramount Plus': 'https://www.paramountplus.com/ar/',
-    'Claro video': 'https://www.clarovideo.com/ar/',
-    'MovistarTV': 'https://www.movistarplay.com.ar/',
-    'Google Play Movies': 'https://play.google.com/store/movies',
-    'YouTube': 'https://www.youtube.com/movies',
-    'MUBI': 'https://mubi.com/',
-    'Curiosity Stream': 'https://curiositystream.com/',
-    'VIX': 'https://www.vix.com/',
-    'DIRECTV GO': 'https://www.directvgo.com/',
-    'DOCSVILLE': 'https://www.docsville.com/',
-    'CINE': 'https://play.cine.ar/bienvenida/',
-    'Magellan TV': 'https://www.magellantv.com/',
-    'WOW Presents Plus': 'https://www.wowpresentsplus.com/',
-    'BroadwayHD': 'https://www.broadwayhd.com/',
-    'Filmzie': 'https://www.filmzie.com/',
-    'Dekkoo': 'https://www.dekkoo.com/',
-    'DocAlliance Films': 'https://www.dafilms.com/',
-    'OnDemandKorea': 'https://www.ondemandkorea.com/',
-    'Hoichoi': 'https://www.hoichoi.tv/',
-    'Pluto TV': 'https://pluto.tv/es/',
-    'Eventive': 'https://watch.eventive.org/',
-    'Cultpix': 'https://cultpix.com/',
-    'FilmBox+': 'https://filmbox.com/',
-    'Takflix': 'https://takflix.com/',
-    'Sun Nxt': 'https://www.sunnxt.com/',
-    'Runtime': 'https://www.runtime.tv',
-    'Crunchyroll': 'https://www.crunchyroll.com/es',
-    'Paramount Plus Apple TV Channel': 'https://www.paramountplus.com/es/',
-    'Shahid VIP': 'https://shahid.mbc.net/ar',
-    'Univer Video': 'https://www.univervideo.com/',
-    'Plex': 'https://www.plex.tv/',
-    'Adrenalina Pura Amazon channel': 'https://www.adrenalinapura.com/',
-    'Adrenalina Pura Apple TV channel': 'https://www.adrenalinapura.com/',
-    'Mercado Play': 'https://www.mercadolibre.com.ar/',
-    'TVCortos Amazon Channel': 'https://www.amazon.com/gp/video/storefront/ref=atv_dp_season_select?ie=UTF8&season=1&tag=tv-cortos-20',
-    'Jolt Film': 'https://www.jolttv.com/',
-    'FOUND TV': 'https://foundtv.com/',
-    'BroadwayHD': 'https://www.broadwayhd.com/',
-    'JustWatchTV': 'https://www.justwatch.com/ar/',
-  };
+  const providerUrls = ProvidersUrl;
 
-  const handleClick = (e, nombre) => {
+  const manejarClick = (e, nombre) => {
     if (!providerUrls[nombre]) {
       e.preventDefault();
-      setToastMsg(`No tenemos link oficial para ${nombre}`);
+      setMensajeEmergente(`No tenemos link oficial para ${nombre}`);
     }
   };
 
@@ -82,16 +36,15 @@ const SeccionDondeVerla = ({ data }) => {
       <Subtitulo texto="¿Dónde puedo verla?" className="font-semibold text-left text-4xl mb-5" />
 
       {mostrarAviso && (
-  <div className="flex items-start gap-3 bg-yellow-100 border border-yellow-400 text-yellow-900 p-4 rounded-md mb-4">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-1 flex-shrink-0 text-yellow-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M4.93 4.93l14.14 14.14M12 2a10 10 0 100 20 10 10 0 000-20z" />
-    </svg>
-    <p className="text-sm">
+        <div className="flex items-start gap-3 bg-yellow-100 border border-yellow-400 text-yellow-900 p-4 rounded-md mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-1 flex-shrink-0 text-yellow-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M4.93 4.93l14.14 14.14M12 2a10 10 0 100 20 10 10 0 000-20z" />
+      </svg>
+      <p className="text-sm">
       <strong>Información posiblemente desactualizada:</strong> esta película aparecía como disponible en una plataforma, pero actualmente no figura. Esto puede deberse a que fue retirada recientemente.
-    </p>
+      </p>
   </div>
 )}
-
 
       <div className="flex gap-4 flex-wrap">
         {plataformas.map(p => {
@@ -102,7 +55,7 @@ const SeccionDondeVerla = ({ data }) => {
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={e => handleClick(e, p.provider_name)}
+              onClick={e => manejarClick(e, p.provider_name)}
               className="flex flex-col items-center w-24 hover:scale-105 transition-transform duration-300"
             >
               <img
@@ -116,7 +69,7 @@ const SeccionDondeVerla = ({ data }) => {
         })}
       </div>
 
-      {toastMsg && <Toast mensaje={toastMsg} onClose={() => setToastMsg('')} />}
+      {mensajeEmergente && <MensajeEmergente mensaje={mensajeEmergente} onClose={() => setMensajeEmergente('')} />}
     </div>
   );
 };

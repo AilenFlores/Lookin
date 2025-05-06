@@ -5,7 +5,7 @@ import Carrusel from '../../Componentes/Carrusel/Carrusel';
 import Titulo from '../../Componentes/Titulo/Titulo';
 import { getTendencias, getEstrenosEnCines } from '../../Servicios/apiTMDB';
 import Cargando from '../../Componentes/Cargando/Cargando';
-import Logo from '../../Assets/Imgenes/Logo.png'; // Asegúrate de que la ruta sea correcta
+import Logo from '../../Componentes/Logo/Logo'; 
 
 const Inicio = () => {
   const [tendencias, setTendencias] = useState([]);
@@ -45,12 +45,13 @@ if (isLoading) {
       <Cabecera />
       {/* 🟣 Logo + Slogan */}
       
-        <img
-          src={logo}
-          alt="Logo de Lookin"
-          className="mx-auto h-[300px] md:h-[200px] my-0 mb-4 mt-20"
-        />
-        <h1 className="text-xl md:text-3xl font-bold text-gray-900 tracking-tight mb-20">
+      <Logo
+        alt="Logo de Lookin"
+        width={800}
+        className="mx-auto my-0 mb-4 mt-20"
+      />
+
+        <h1 className="text-xl md:text-3xl font-bold text-gray-900 tracking-tight mb-20 mt-8">
           Mirá distinto. Elegí libre. Disfrutá sin límites.
         </h1>
       
