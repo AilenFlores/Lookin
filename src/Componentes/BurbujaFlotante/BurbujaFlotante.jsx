@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Boton from '../Boton/Boton';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import { useNavigate } from 'react-router-dom';
-import { getDetallePorId } from '../../Servicios/apiTMDB'; // ajustá la ruta según tu estructura
+// import { getDetallePorId } from '../../Servicios/apiTMDB'; // ajustá la ruta según tu estructura
+import { useTMDB } from '../../Servicios/hooks/useTMDB';
+import { useTranslation } from 'react-i18next';
 
 
 function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }) {
@@ -10,22 +12,27 @@ function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }
   const [info, setInfo] = useState(null);
 
   const navigate = useNavigate();
+  const { getDetallePorId } = useTMDB();
+  const {t, i18n } = useTranslation("detalle");
 
   useEffect(() => {
     setInfo(null); // Limpiar cuando cambia la película o el tipo
   }, [pelicula.id, mediaType]);
 
-
+  useEffect(() => {
+    setInfo(null); // Limpiar al cambiar el idioma
+  }, [i18n.language]);
+  
   useEffect(() => {
     if (isHovered && !info) {
-      getDetallePorId(pelicula.id, mediaType).then(data => {
+      getDetallePorId(pelicula.id, mediaType,i18n.language).then(data => {
         setInfo({
           sinopsis: data.overview,
           genero: data.genres?.map(g => g.name).join(', '),
         });
       });
     }
-  }, [isHovered, info, pelicula.id, mediaType]);
+  }, [isHovered, info, pelicula.id, mediaType,i18n.language]);
   
 
   return (
@@ -45,14 +52,14 @@ function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }
           transition-all duration-200 pointer-events-auto`}>
             <Subtitulo texto={
               <>
-              <span className="font-bold text-xs">Género: </span>
-              <span className="text-xs">{info.genero || "No disponible"}</span>
+              <span className="font-bold text-xs">{t("informacion.genero")}: </span>
+              <span className="text-xs">{info.genero || t("informacion,noDisponible")}</span>
               </>}
               className="text-center"
             />
             <Subtitulo texto={
               <>
-              <span className="font-bold text-xs">Sinopsis: </span>
+              <span className="font-bold text-xs">{t("detalle.sinopsis")}: </span>
               <span className="text-xs">{info.sinopsis ? info.sinopsis.length > 150 ? info.sinopsis.slice(0, 150) + '...': info.sinopsis: 'No disponible'}</span>
               </>}
               className="text-center mt-2"

@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import GuardarFavorito from '../GuardarFavorito/GuardarFavorito';
 import Cargando from '../Cargando/Cargando';
+import { useTranslation } from 'react-i18next';
 
 const SeccionSinopsis = ({ data }) => {
   const [imagenCargando, setImagenCargando] = useState(true);
-
+  const {t } = useTranslation("varios");
   const contenidoDesdeData = {
     id: data.id,
     title: data.title,
@@ -64,7 +65,7 @@ const SeccionSinopsis = ({ data }) => {
             {Math.round(data.vote_average * 10)}%
           </span>
           <span className="border-l border-gray-300 pl-4">
-            {data.runtime ? `${data.runtime} min` : 'Duración no disponible'}
+            {data.runtime ? `${data.runtime} min` : t("sinopsis.duracion")}
           </span>
           <span className="border-l border-gray-300 pl-4">
             {data.release_date?.slice(0, 4) ||
@@ -73,7 +74,7 @@ const SeccionSinopsis = ({ data }) => {
           </span>
         </div>
         <p className="text-lg leading-relaxed text-gray-800 text-left">
-          {data.overview || 'Sin sinopsis disponible.'}
+          {data.overview || t("sinopsis.sinopsisNoDisponible")}
         </p>
       </div>
     </div>

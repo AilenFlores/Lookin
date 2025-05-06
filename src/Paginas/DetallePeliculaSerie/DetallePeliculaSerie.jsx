@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
-import { getDetallePorId } from '../../Servicios/apiTMDB';
+// import { getDetallePorId } from '../../Servicios/apiTMDB';
 import Cargando from '../../Componentes/Cargando/Cargando';
 import MenuSecciones from '../../Componentes/MenuSecciones/MenuSecciones';
 import SeccionInformacion from '../../Componentes/SeccionInformacion/SeccionInformacion';
@@ -13,10 +13,14 @@ import SeccionDondeVerla from '../../Componentes/SeccionDondeVerla/SeccionDondeV
 import SeccionTemporadas from '../../Componentes/SeccionTemporadas/SeccionTemporadas';
 import SeccionSimilares from '../../Componentes/SeccionSimilares/SeccionSimilares';
 import SeccionSinopsis from '../../Componentes/SeccionSinopsis/SeccionSinopsis';
+import { useTMDB } from '../../Servicios/hooks/useTMDB';
+import { useTranslation } from "react-i18next";
 
 const DetallePeliculaSerie = () => {
   const { id, tipo } = useParams();
   const navigate = useNavigate();
+  const { getDetallePorId } = useTMDB();
+  const { i18n } = useTranslation();
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   const [seccionActiva, setSeccionActiva] = useState('sinopsis');
@@ -31,7 +35,7 @@ const DetallePeliculaSerie = () => {
     setSeccionActiva('sinopsis');
 
     const obtenerDatos = async () => {
-      const resultado = await getDetallePorId(id, tipo);
+      const resultado = await getDetallePorId(id, tipo,i18n.language);
 
       if (resultado && resultado.id) {
         setData(resultado);
@@ -42,7 +46,7 @@ const DetallePeliculaSerie = () => {
     };
 
     obtenerDatos();
-  }, [id, tipo, navigate]);
+  }, [id, tipo, navigate,i18n.language]);
 
   useEffect(() => {
     const headerHeight = 185;

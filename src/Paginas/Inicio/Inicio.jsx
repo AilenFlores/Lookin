@@ -3,23 +3,25 @@ import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
 import Carrusel from '../../Componentes/Carrusel/Carrusel';
 import Titulo from '../../Componentes/Titulo/Titulo';
-import { getTendencias, getEstrenosEnCines } from '../../Servicios/apiTMDB';
+// import { getTendencias, getEstrenosEnCines } from '../../Servicios/apiTMDB';
 import Cargando from '../../Componentes/Cargando/Cargando';
 import Logo from '../../Componentes/Logo/Logo'; 
 import { useTranslation } from 'react-i18next';
+import { useTMDB } from '../../Servicios/hooks/useTMDB';
+
 const Inicio = () => {
   const [tendencias, setTendencias] = useState([]);
   const [populares, setPopulares] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { t } = useTranslation("inicio");
-
+  const { t, i18n } = useTranslation("inicio");
+  const { getTendencias, getEstrenosEnCines } = useTMDB();
   const logo = Logo; // Asegúrate de que la ruta sea correcta
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const datosTendencias = await getTendencias();
-        const datosEstrenos = await getEstrenosEnCines();
+        const datosTendencias = await getTendencias(i18n.language);
+        const datosEstrenos = await getEstrenosEnCines(i18n.language);
         setTendencias(datosTendencias);
         setPopulares(datosEstrenos);
         setIsLoading(false); 
@@ -32,7 +34,7 @@ const Inicio = () => {
     };
 
     fetchData();
-  }, []);
+  }, [getTendencias, getEstrenosEnCines,i18n.language]);
 
 
   

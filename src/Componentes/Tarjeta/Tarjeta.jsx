@@ -4,8 +4,10 @@ import Titulo from '../Titulo/Titulo';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import GuardarFavorito from '../GuardarFavorito/GuardarFavorito';
 import BurbujaFlotante from '../BurbujaFlotante/BurbujaFlotante';
+import { useTranslation } from 'react-i18next';
 
 const Tarjeta = ({ contenido, tipo, mediaType }) => {
+  const { t, i18n } = useTranslation("tarjeta");
   const media = mediaType || contenido.media_type;
 
   if (media === 'person') {
@@ -50,7 +52,7 @@ const Tarjeta = ({ contenido, tipo, mediaType }) => {
       />
       {tipo === "grande" && (
         <Subtitulo
-          texto={media === 'movie' ? 'Película' : 'Serie'}
+          texto={media === 'movie' ? t('tarjeta.pelicula') : t('tarjeta.serie')}
           className="text-center  text-purple-600 text-xs"
         />
       )}

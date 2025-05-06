@@ -1,11 +1,24 @@
 {
     "cargando":
-    {
-        "cargando":"Cargando"
-    },
+        {
+            "cargando":"Cargando"
+        },
     "listaFiltros":
+        {
+            "mensaje":"No se encontraron resultados"
+        },
+    "resultadoBusqueda":
+        {
+            "resultadoBusqueda": "No se encontraron coincidencias para tu búsqueda."
+        },
+    "sinopsis":
     {
-        "mensaje":"No se encontraron resultados"
+        "duracion":"Duración no disponible",
+        "sinopsisNoDisponible":"Sin sinopsis disponible."
     },
-    "resultadoBusqueda":"No se encontraron coincidencias para tu búsqueda."
+    "episodios":
+    {
+        "episodios": "Episodios",
+        "verEpisodios": "Ver Episodios"
+    }
 }

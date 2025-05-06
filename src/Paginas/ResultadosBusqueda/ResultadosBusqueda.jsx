@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { buscarContenido } from '../../Servicios/apiTMDB';
+// import { buscarContenido } from '../../Servicios/apiTMDB';
 import Lista from '../../Componentes/Lista/Lista';
 import Cargando from '../../Componentes/Cargando/Cargando';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
 import { useTranslation } from 'react-i18next';
-
+import { useTMDB } from '../../Servicios/hooks/useTMDB';
 const ResultadosBusqueda = () => {
-  const { t } = useTranslation("varios");
-  
+  const { t,i18n } = useTranslation("varios");
+  const { buscarContenido } = useTMDB();
   const { termino } = useParams();
   const [resultados, setResultados] = useState([]);
   const [pagina, setPagina] = useState(1);
@@ -27,7 +27,7 @@ const ResultadosBusqueda = () => {
   useEffect(() => {
     const obtenerResultados = async () => {
       setCargando(true);
-      const { resultados: nuevos, total_pages } = await buscarContenido(termino, pagina);
+      const { resultados: nuevos, total_pages } = await buscarContenido(termino, pagina,i18n.language);
 
       const soloPeliculasYSeries = nuevos.filter(
         item => item.media_type === 'movie' || item.media_type === 'tv'
@@ -46,7 +46,7 @@ const ResultadosBusqueda = () => {
     };
 
     obtenerResultados();
-  }, [termino, pagina]);
+  }, [termino, pagina,i18n.language]);
 
   const cargarMas = () => {
     if (pagina < totalPaginas) {
@@ -65,7 +65,7 @@ const ResultadosBusqueda = () => {
             peliculas={resultados}
             texto={`Resultados para: "${decodeURIComponent(termino)}"`}
             cargarMas={pagina < totalPaginas ? cargarMas : null}
-            mensajeCartel={resultados.length === 0 ? t("varios.resultadoBusqueda") : ''}
+            mensajeCartel={resultados.length === 0 ? t("resultadoBusqueda.resultadoBusqueda") : ''}
           />
         )}
       </div>

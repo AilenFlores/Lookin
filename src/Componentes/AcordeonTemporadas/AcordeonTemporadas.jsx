@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import { FaStar } from 'react-icons/fa';
-import { getTemporada } from '../../Servicios/apiTMDB';
+// import { getTemporada } from '../../Servicios/apiTMDB';
+import { useTMDB } from '../../Servicios/hooks/useTMDB';
+import { useTranslation } from "react-i18next";
 
 const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [episodes, setEpisodes] = useState(null);
   const [seasonRating, setSeasonRating] = useState(null);
   const [expanded, setExpanded] = useState({});
+  const { getTemporada } = useTMDB();
+  const { t, i18n } = useTranslation("varios");
 
   const toggleOpen = async () => {
     if (!isOpen && !episodes) {
-      const { episodes: episodios, rating } = await getTemporada(tvId, seasonNumber);
+      const { episodes: episodios, rating } = await getTemporada(tvId, seasonNumber,i18n.language);
       setEpisodes(episodios);
       setSeasonRating(rating);
     }
@@ -37,7 +41,9 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
           <div>
             <h3 className="font-semibold">{name}</h3>
             <p className="text-sm text-gray-600">
-              {episodes ? `${episodes.length} Episodios` : 'Ver episodios'}
+              {/* {episodes ? `${episodes.length} Episodios` : 'Ver episodios'} */}
+              {episodes ? `${episodes.length} ${t("episodios.episodios")}` : t("episodios.verEpisodios")}
+
             </p>
           </div>
         </div>

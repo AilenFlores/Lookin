@@ -7,5 +7,20 @@
     {
         "mensaje":"No results found"
     },
-    "resultadoBusqueda":"No matches were found for your search."
+    "resultadoBusqueda":
+    {
+        "resultadoBusqueda": "No matches were found for your search."
+    },
+    "sinopsis": 
+    {
+        "duracion": "Duration not available",
+        "sinopsisNoDisponible": "Synopsis not available."
+    },
+    "episodios": 
+    {
+        "episodios": "Episodes",
+        "verEpisodios": "View Episodes"
+    }
+
+
 }
