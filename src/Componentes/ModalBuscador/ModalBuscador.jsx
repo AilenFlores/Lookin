@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const ModalBuscador = ({ visible, onClose, ignoreRef }) => {
   const [termino, setTermino] = useState('');
   const navigate = useNavigate();
   const modalRef = useRef(null);
+  const {t } = useTranslation("varios");
 
   useEffect(() => {
     if (!visible) setTermino('');
@@ -61,7 +63,7 @@ const ModalBuscador = ({ visible, onClose, ignoreRef }) => {
             type="text"
             value={termino}
             onChange={(e) => setTermino(e.target.value)}
-            placeholder="Buscar películas o series..."
+            placeholder={t("buscador.mensajePlaceholder")}
             className="w-full border border-gray-300 rounded-md px-4 py-2 text-lg shadow-sm"
             autoFocus
           />

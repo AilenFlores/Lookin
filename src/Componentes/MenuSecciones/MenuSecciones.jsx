@@ -13,7 +13,7 @@ const MenuSecciones = ({ sections, data, activeSection }) => {
   }, []);
 
   const labels = {
-    sinopsis: 'Sinopsis',
+    sinopsis: t('detalle.sinopsis'),
     info: t('detalle.info'),
     galeria: t('detalle.galeria'),
     reparto: t('detalle.reparto'),

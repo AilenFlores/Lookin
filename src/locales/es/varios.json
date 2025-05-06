@@ -9,7 +9,8 @@
         },
     "resultadoBusqueda":
         {
-            "resultadoBusqueda": "No se encontraron coincidencias para tu búsqueda."
+            "resultadoBusqueda": "No se encontraron coincidencias para tu búsqueda.",
+            "resultadosPara":"Resultados para"
         },
     "sinopsis":
     {
@@ -20,5 +21,9 @@
     {
         "episodios": "Episodios",
         "verEpisodios": "Ver Episodios"
+    },
+    "buscador":
+    {
+        "mensajePlaceholder":"Buscar películas o series..."
     }
 }

@@ -63,7 +63,7 @@ const ResultadosBusqueda = () => {
         ) : (
           <Lista
             peliculas={resultados}
-            texto={`Resultados para: "${decodeURIComponent(termino)}"`}
+            texto={`${t('resultadoBusqueda.resultadosPara')}: "${decodeURIComponent(termino)}"`}
             cargarMas={pagina < totalPaginas ? cargarMas : null}
             mensajeCartel={resultados.length === 0 ? t("resultadoBusqueda.resultadoBusqueda") : ''}
           />

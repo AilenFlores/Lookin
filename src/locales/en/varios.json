@@ -9,7 +9,8 @@
     },
     "resultadoBusqueda":
     {
-        "resultadoBusqueda": "No matches were found for your search."
+        "resultadoBusqueda": "No matches were found for your search.",
+        "resultadosPara": "Results for"   
     },
     "sinopsis": 
     {
@@ -20,6 +21,10 @@
     {
         "episodios": "Episodes",
         "verEpisodios": "View Episodes"
+    },
+    "buscador":
+    {
+        "mensajePlaceholder":"Search for movies or TV shows..."
     }
 
 
