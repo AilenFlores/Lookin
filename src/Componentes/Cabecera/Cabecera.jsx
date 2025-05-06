@@ -1,29 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FaBookmark, FaSearch, FaBars } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../const/routes';
 import { useTranslation } from 'react-i18next';
-import Boton from '../Boton/Boton';
-import Enlace from '../Enlace/Enlace';
 import ModalBuscador from '../ModalBuscador/ModalBuscador';
-import Logo from '../Logo/Logo';
+import AccionesCabecera from '../AccionesCabecera/AccionesCabecera';
+import NavegacionPrincipal from '../NavegacionPrincipal/NavegacionPrincipal';
+import MenuDesplegable from '../MenuDesplegable/MenuDesplegable';
 
 const Cabecera = () => {
-  const navigate = useNavigate();
   const [mostrarBuscador, setMostrarBuscador] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
   const botonBusquedaRef = useRef(null);
   const menuRef = useRef(null);
   const hamburguesaRef = useRef(null);
   const { t, i18n } = useTranslation("cabecera");
-  // const { t } = useTranslation("cabecera");
+
   const toggleIdioma = () => {
     const nuevoIdioma = i18n.language === "es" ? "en" : "es";
     console.log(i18n.language)
     i18n.changeLanguage(nuevoIdioma);
   };
 
-  // Cierre automático del menú si se hace clic afuera
   useEffect(() => {
     const manejarClickFuera = (e) => {
       if (
@@ -44,67 +39,29 @@ const Cabecera = () => {
     };
   }, [menuAbierto]);
 
-  
   return (
     <>
       <header className="sticky top-0 z-[9999] bg-white shadow px-4 w-full h-20 flex items-center">
         <div className="flex justify-between items-center w-full relative">
-          {/* Izquierda: logo + hamburguesa */}
-          <div className="flex items-center space-x-4 sm:space-x-6">
-            <Logo
-              alt="Lookin Logo"
-              width={150}
-              className="w-28 sm:w-[150px] cursor-pointer"
-              onClick={() => navigate(ROUTES.inicio)}
-            />
+          <NavegacionPrincipal
+            t={t}
+            hamburguesaRef={hamburguesaRef}
+            setMenuAbierto={setMenuAbierto}
+          />
 
-            {/* Menú grande (visible desde sm+) */}
-            <nav className="hidden sm:flex space-x-4 items-center text-gray-700 text-sm sm:text-base font-medium">
-              <Enlace to="/peliculas">{t("cabecera.peliculas")}</Enlace>
-              <Enlace to="/series">{t("cabecera.series")}</Enlace>
-            </nav>
+          <AccionesCabecera
+            i18n={i18n}
+            toggleIdioma={toggleIdioma}
+            botonBusquedaRef={botonBusquedaRef}
+            clickBuscador={() => setMostrarBuscador(prev => !prev)}
+          />
 
-            {/* Ícono hamburguesa (solo mobile) */}
-            <button
-              ref={hamburguesaRef}
-              className="sm:hidden text-2xl text-gray-700 focus:outline-none"
-              onClick={() => setMenuAbierto(prev => !prev)}
-            >
-              <FaBars />
-            </button>
-          </div>
-
-          {/* Derecha: Bookmark, EN y lupa */}
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <FaBookmark
-              className="text-lg sm:text-2xl cursor-pointer m-0 hover:text-purple-800"
-              title="Favoritos"
-              onClick={() => navigate(ROUTES.favoritos)}
-            />
-            <Boton
-        // texto="EN"
-              texto={i18n.language === "es" ? "ES" : "EN"}
-              className="!bg-white !text-black !border !border-black hover:!bg-purple-800 !px-2 !py-1 sm:!px-3 sm:!py-2 text-xs sm:text-sm"
-              onClick={toggleIdioma}
-              />
-            <FaSearch
-              ref={botonBusquedaRef}
-              className="text-lg sm:text-4xl cursor-pointer hover:text-purple-800 rounded-full p-1"
-              onClick={() => setMostrarBuscador(prev => !prev)}
-            />
-          </div>
-
-          {/* Menú desplegable solo en mobile */}
           {menuAbierto && (
-            <div
-              ref={menuRef}
-              className="fixed top-20 left-0 right-0 bg-white shadow-lg border-t border-gray-200 sm:hidden z-[9999]"
-            >
-              <nav className="flex flex-col px-4 py-3 space-y-3 text-gray-700 font-medium text-base">
-                <Enlace to="/peliculas" onClick={() => setMenuAbierto(false)}>Películas</Enlace>
-                <Enlace to="/series" onClick={() => setMenuAbierto(false)}>Series</Enlace>
-              </nav>
-            </div>
+            <MenuDesplegable
+              menuRef={menuRef}
+              setMenuAbierto={setMenuAbierto}
+              t={t}
+            />
           )}
         </div>
       </header>
