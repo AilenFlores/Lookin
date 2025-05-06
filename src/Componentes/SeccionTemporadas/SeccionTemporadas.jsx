@@ -8,7 +8,7 @@ const SeccionTemporadas = ({ data, id }) => {
   return (
     <div id="temporadas" className="scroll-mt-[140px]">
       <Subtitulo texto="Temporadas" className="font-semibold text-left text-4xl mb-4" />
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4 ">
         {data.seasons.map(season => (
           <AcordeonTemporadas
             key={season.id}

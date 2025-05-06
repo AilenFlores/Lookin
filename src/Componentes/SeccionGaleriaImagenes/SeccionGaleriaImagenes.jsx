@@ -29,9 +29,9 @@ const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
   return (
     <div id="galeria" className="py-8 scroll-mt-[110px]">
       <Subtitulo texto="Galería" className="text-4xl font-semibold mb-4 text-left" />
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 ">
         {imagenes.map((img, idx) => (
-          <div key={idx} className="overflow-hidden rounded-lg">
+          <div key={idx} className="overflow-hidden rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
             <img
               src={`https://image.tmdb.org/t/p/w300${img.file_path}`}
               alt={`${img.type} ${idx + 1}`}

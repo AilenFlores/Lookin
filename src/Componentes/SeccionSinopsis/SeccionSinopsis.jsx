@@ -26,7 +26,7 @@ const SeccionSinopsis = ({ data }) => {
 
   return (
     <div
-      className="scroll-mt-[180px] flex flex-col md:flex-row gap-6 p-6 bg-purple-200 rounded-lg shadow"
+      className="scroll-mt-[180px] flex flex-col md:flex-row gap-6 p-6 bg-purple-200 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
       id="sinopsis"
     >
       {/* Imagen y botón de favorito */}
@@ -35,7 +35,7 @@ const SeccionSinopsis = ({ data }) => {
           
           {/* Spinner de carga */}
           {imagenCargando && (
-            <div className="absolute inset-0 bg-white bg-opacity-60 flex items-center justify-center z-20 rounded-lg">
+            <div className="absolute inset-0 bg-white bg-opacity-60 flex items-center justify-center z-20 rounded-lg ">
               <Cargando fullScreen={false} />
             </div>
           )}
@@ -43,7 +43,7 @@ const SeccionSinopsis = ({ data }) => {
           <img
             src={`https://image.tmdb.org/t/p/w300${data.poster_path}`}
             alt="Poster"
-            className="w-full object-cover rounded-lg outline-6 outline-purple-400"
+            className="w-full object-cover rounded-lg outline-6 outline-purple-400 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
             onLoad={() => setImagenCargando(false)}
           />
 

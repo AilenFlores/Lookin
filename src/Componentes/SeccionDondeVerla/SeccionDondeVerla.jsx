@@ -93,7 +93,7 @@ const SeccionDondeVerla = ({ data }) => {
 )}
 
 
-      <div className="flex gap-4 flex-wrap">
+      <div className="flex gap-4 flex-wrap ">
         {plataformas.map(p => {
           const link = providerUrls[p.provider_name] || '#';
           return (
@@ -108,7 +108,7 @@ const SeccionDondeVerla = ({ data }) => {
               <img
                 src={`https://image.tmdb.org/t/p/w92${p.logo_path}`}
                 alt={p.provider_name}
-                className="h-20 object-contain drop-shadow-md rounded-md"
+                className="h-20 object-contain drop-shadow-md shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-md"
               />
               <span className="text-sm text-gray-700 mt-1 text-center">{p.provider_name}</span>
             </a>
