@@ -5,8 +5,11 @@ import Lista from '../../Componentes/Lista/Lista';
 import Cargando from '../../Componentes/Cargando/Cargando';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
+import { useTranslation } from 'react-i18next';
 
 const ResultadosBusqueda = () => {
+  const { t } = useTranslation("varios");
+  
   const { termino } = useParams();
   const [resultados, setResultados] = useState([]);
   const [pagina, setPagina] = useState(1);
@@ -62,7 +65,7 @@ const ResultadosBusqueda = () => {
             peliculas={resultados}
             texto={`Resultados para: "${decodeURIComponent(termino)}"`}
             cargarMas={pagina < totalPaginas ? cargarMas : null}
-            mensajeCartel={resultados.length === 0 ? 'No se encontraron coincidencias para tu búsqueda.' : ''}
+            mensajeCartel={resultados.length === 0 ? t("varios.resultadoBusqueda") : ''}
           />
         )}
       </div>

@@ -8,7 +8,7 @@ const SeccionTrailer = ({ videoKey }) => {
     <div id="trailer" className="scroll-mt-[140px]">
       <Subtitulo texto="Trailer" className="font-semibold text-left text-4xl mb-2" />
       <div className="mx-auto w-full md:w-3/4 lg:w-5/2 max-w-4xl">
-        <div className="aspect-video rounded-lg overflow-hidden shadow">
+        <div className="aspect-video rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
           <iframe
             className="w-full h-full"
             src={`https://www.youtube.com/embed/${videoKey}`}

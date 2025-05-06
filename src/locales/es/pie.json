@@ -1,0 +1,11 @@
+{   
+    "pie":{
+        "nombre": "Nerdflix",
+        "descripcionCorta": "Tu universo de películas y series favoritas",
+        "descripcionLarga1": "Más de 10,000 títulos disponibles en HD y 4K, con nuevos lanzamientos cada semana.",
+        "descripcionLarga2": "Únete a millones de usuarios en todo el mundo disfrutando de contenido exclusivo, desde clásicos hasta los estrenos más esperados.",
+        "disclaimer": "Este producto utiliza la API de TMDb bajo los términos de uso de su servicio, pero no está respaldado ni certificado por TMDb.",
+        "avisoLegal": "Plataforma no oficial, basada en datos de TMDb"
+    }
+  }
+  

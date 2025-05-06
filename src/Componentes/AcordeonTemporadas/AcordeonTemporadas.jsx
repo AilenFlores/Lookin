@@ -17,14 +17,13 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
     }
     setIsOpen(open => !open);
   };
-  
 
   const toggleEpisode = id => {
     setExpanded(e => ({ ...e, [id]: !e[id] }));
   };
 
   return (
-    <div className="w-full bg-white rounded-md shadow overflow-hidden mb-4">
+    <div className="w-full bg-white rounded-md shadow overflow-hidden mb-4 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
       <button
         onClick={toggleOpen}
         className="w-full flex justify-between items-center p-2 hover:bg-gray-100"

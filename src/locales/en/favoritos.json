@@ -1,0 +1,10 @@
+{
+    "favoritos":
+        {
+            "mensaje": "You currently have no movies or series saved in your favorites.",
+            "titulo": "Favorite Movies and Series",
+            "mensajeCartel1": "You don't have any favorites saved yet.",
+            "mensajeCartel2": "Browse movies and series and add them to your list to watch later."
+        }
+    
+}

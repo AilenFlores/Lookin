@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import ModalImagen from '../ModalImagen/ModalImagen';
+import { useTranslation } from 'react-i18next';
 
 const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
+    const { t } = useTranslation("detalle");
   const imagenes = [
     ...posters.map(img => ({ ...img, type: 'poster' })),
     ...backdrops.map(img => ({ ...img, type: 'backdrop' }))
@@ -28,10 +30,10 @@ const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
 
   return (
     <div id="galeria" className="py-8 scroll-mt-[110px]">
-      <Subtitulo texto="Galería" className="text-4xl font-semibold mb-4 text-left" />
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <Subtitulo texto={t("detalle.galeria")} className="text-4xl font-semibold mb-4 text-left" />
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 ">
         {imagenes.map((img, idx) => (
-          <div key={idx} className="overflow-hidden rounded-lg">
+          <div key={idx} className="overflow-hidden rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
             <img
               src={`https://image.tmdb.org/t/p/w300${img.file_path}`}
               alt={`${img.type} ${idx + 1}`}

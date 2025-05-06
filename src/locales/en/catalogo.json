@@ -1,0 +1,28 @@
+{
+    "catalogo":
+        {
+            "tituloCatalogoSeries": "COMPLETE SERIES CATALOG",
+            "tituloCatalogoPeliculas": "COMPLETE FILM CATALOG"
+        },
+    "ordenamiento": 
+        {
+            "popularidadDesc": "Popularity descending",
+            "popularidadAsc": "Popularity ascending",
+            "fechaEstrenoAsc": "Release date ascending",
+            "fechaEstrenoDesc": "Release date descending"
+        },
+    "ordenar":
+        {
+            "ordenarPor": "Sort by"
+        },
+    "dondeVer":
+        {
+            "dondeVer": "Where to see"
+        },
+    "mostrarMas":
+        {
+            "mostrarMas": "Show more",
+            "sinResultados": "No results."
+
+        }
+}

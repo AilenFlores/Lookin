@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FaBookmark, FaSearch, FaBars } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../const/routes';
+import { useTranslation } from 'react-i18next';
 import Boton from '../Boton/Boton';
 import Enlace from '../Enlace/Enlace';
 import ModalBuscador from '../ModalBuscador/ModalBuscador';
@@ -14,6 +15,12 @@ const Cabecera = () => {
   const botonBusquedaRef = useRef(null);
   const menuRef = useRef(null);
   const hamburguesaRef = useRef(null);
+  const { t, i18n } = useTranslation("cabecera");
+  // const { t } = useTranslation("cabecera");
+  const toggleIdioma = () => {
+    const nuevoIdioma = i18n.language === "es" ? "en" : "es";
+    i18n.changeLanguage(nuevoIdioma);
+  };
 
   // Cierre automático del menú si se hace clic afuera
   useEffect(() => {
@@ -36,6 +43,7 @@ const Cabecera = () => {
     };
   }, [menuAbierto]);
 
+  
   return (
     <>
       <header className="sticky top-0 z-[9999] bg-white shadow px-4 w-full h-20 flex items-center">
@@ -51,8 +59,8 @@ const Cabecera = () => {
 
             {/* Menú grande (visible desde sm+) */}
             <nav className="hidden sm:flex space-x-4 items-center text-gray-700 text-sm sm:text-base font-medium">
-              <Enlace to="/peliculas">Películas</Enlace>
-              <Enlace to="/series">Series</Enlace>
+              <Enlace to="/peliculas">{t("cabecera.peliculas")}</Enlace>
+              <Enlace to="/series">{t("cabecera.series")}</Enlace>
             </nav>
 
             {/* Ícono hamburguesa (solo mobile) */}
@@ -73,10 +81,11 @@ const Cabecera = () => {
               onClick={() => navigate(ROUTES.favoritos)}
             />
             <Boton
-              texto="EN"
+        // texto="EN"
+              texto={i18n.language === "es" ? "ES" : "EN"}
               className="!bg-white !text-black !border !border-black hover:!bg-purple-800 !px-2 !py-1 sm:!px-3 sm:!py-2 text-xs sm:text-sm"
-              onClick={() => {}}
-            />
+              onClick={toggleIdioma}
+              />
             <FaSearch
               ref={botonBusquedaRef}
               className="text-lg sm:text-4xl cursor-pointer hover:text-purple-800 rounded-full p-1"

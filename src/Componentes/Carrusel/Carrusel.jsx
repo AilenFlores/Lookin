@@ -22,26 +22,24 @@ const Carrusel = ({ contenido, tipo, mediaType }) => {
   useEffect(() => {
     const manejarRedimensionamiento = () => {
       if (carruselRef.current) {
-        setMostrarBotones(carruselRef.current.scrollWidth > carruselRef.current.clientWidth); // Mostrar botones solo si el contenido es más ancho que el contenedor
+        setMostrarBotones(carruselRef.current.scrollWidth > carruselRef.current.clientWidth); 
       }
     };
     window.addEventListener('resize', manejarRedimensionamiento);
-    // Ejecutar también al cargar
     manejarRedimensionamiento();
   
     return () => window.removeEventListener('resize', manejarRedimensionamiento);
   }, [contenido]);
 
   return (
-    <div className="relative w-full flex justify-left p-5">
-      <div className="w-fit overflow-hidden border-5 border-purple-500 rounded-lg shadow-lg">
+    <div className="relative w-full flex justify-left  ">
+    <div className="w-fit overflow-hidden border-2 m-5 shadow-[0_4px_20px_rgba(0,0,0,0.5)] bg-purple-100 rounded-lg  border-purple-300"> 
         <div
           ref={carruselRef}
-          className={`flex overflow-x-auto space-x-5  scroll-smooth snap-x snap-mandatory bg-neutral-100 m-2 rounded-lg ${Style.scrollOculta}`}
+          className={`flex overflow-x-auto space-x-5  scroll-smooth snap-x snap-mandatoryb bg-purple-300 m-3 p-2 rounded-lg ${Style.scrollOculta}`}
         >
           {contenido.map((item) => (
             <div key={item.id}>
-              {/* le pasamos mediaType hacia Tarjeta */}
               <Tarjeta contenido={item} tipo={tipo} mediaType={mediaType} />
             </div>
           ))}

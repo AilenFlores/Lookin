@@ -1,0 +1,9 @@
+{
+    "alertaConfirmacion": {
+        "titulo": "Are you sure?",
+        "texto": "This movie will be removed from your favorites.",
+        "botonConfirmar": "Yes, remove",
+        "botonCancelar": "Cancel",
+        "mensajeGuardado": "Saved to favorites!"
+    }
+}
