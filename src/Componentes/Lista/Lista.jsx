@@ -9,15 +9,10 @@ const Lista = ({ peliculas, cargarMas, texto, mensajeCartel }) => {
   const { t } = useTranslation("catalogo");
 
   return (
- <div className="bg-white shadow-md p-5 rounded-lg border-2 border-gray-300  sm:mr-0 mt-2">
-<Titulo 
-  texto={texto} 
-  className="inline-block max-w-fit text-2xl md:text-3xl font-semibold text-neutral-700 bg-purple-200 backdrop-blur-md rounded-xl px-5 py-3 mt-6 mb-6 shadow-sm tracking-tight"
- />
+<div className="bg-white shadow-md p-5 rounded-lg border-2 border-gray-300  sm:mr-0 mt-2">
+  <Titulo texto={texto} className="inline-block text-2xl md:text-3xl font-semibold text-neutral-700 rounded-xl px-5 py-3 mt-6 mb-6  "/>
 
-
-
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-2 justify-items-center">
+  <div className="grid [grid-template-columns:repeat(auto-fit,_minmax(210px,_1fr))] gap-4 p-2 justify-items-center">
     {peliculas.length > 0 ? (
       peliculas.map((pelicula) => (
         <Tarjeta key={`${pelicula.media_type}-${pelicula.id}`} contenido={pelicula} tipo="grande" />

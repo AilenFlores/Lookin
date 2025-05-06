@@ -5,7 +5,7 @@ const OrdenSelect = ({ ordenes, valorSeleccionado, onChange }) => {
     const { t } = useTranslation("catalogo");
   
   return (
-    <div>
+    <div className="border-1 border-gray-300 rounded-lg p-4 mb-4">
       <label className="block text-gray-800 font-semibold mb-2">{t("ordenar.ordenarPor")}</label>
       <select
         onChange={(e) => onChange(e.target.value)}

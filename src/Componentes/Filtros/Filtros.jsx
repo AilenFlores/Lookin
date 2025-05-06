@@ -42,17 +42,17 @@ const Filtros = ({ onFiltrar, tipo }) => {
   const handleOrdenChange = (value) => {
     const nuevosFiltros = { ...filtros, orden: value };
     setFiltros(nuevosFiltros); 
-    onFiltrar(nuevosFiltros); // ✅ llamar explícitamente 
+    onFiltrar(nuevosFiltros); 
   };
   
   const handlePlataformaChange = (id) => {
     const nuevosFiltros = { ...filtros, plataforma: id };
     setFiltros(nuevosFiltros);
-    onFiltrar(nuevosFiltros); // ✅ llamar explícitamente
+    onFiltrar(nuevosFiltros); 
   };
   
   return (
-    <div className="w-[90%] max-w-xs md:w-68 bg-white shadow-md rounded-lg p-4 text-sm space-y-6 border-2 border-gray-300 max-h-fit mt-2 mx-auto md:mx-0">
+    <div className="md:w-63 bg-white shadow-md rounded-lg p-4 text-sm border-2 border-gray-300 max-h-fit mt-2">
       <OrdenSelect
         ordenes={ordenes}
         valorSeleccionado={filtros.orden}

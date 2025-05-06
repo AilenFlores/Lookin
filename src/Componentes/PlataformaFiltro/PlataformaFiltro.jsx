@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 const PlataformasFiltro = ({ plataformas, seleccionada, onSeleccionar }) => {
     const { t } = useTranslation("catalogo");
   return (
-    <div>
+    <div className="border-1 border-gray-300 rounded-lg mb-4">
       <label className="block text-gray-800 font-semibold mb-2">{t("dondeVer.dondeVer")}</label>
       <select
         onChange={(e) => onSeleccionar(Number(e.target.value))}
@@ -19,7 +19,7 @@ const PlataformasFiltro = ({ plataformas, seleccionada, onSeleccionar }) => {
         ))}
       </select>
 
-      <div className="hidden md:grid grid-cols-3 gap-2">
+      <div className="hidden md:grid grid-cols-3 gap-2"> 
         {plataformas.map((opcion) => (
           <button
             key={opcion.provider_id}
