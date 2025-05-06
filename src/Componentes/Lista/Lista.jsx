@@ -30,7 +30,7 @@ const Lista = ({ peliculas, cargarMas, texto, mensajeCartel }) => {
 
   {cargarMas && peliculas.length >= 20 && ( 
     <div className="mt-4 flex justify-center">
-      <Boton texto={t("mostrarMas.mostrarMas")} onClick={cargarMas} className="bg-black hover:bg-red-600 w-350" />
+      <Boton texto={t("mostrarMas.mostrarMas")} onClick={cargarMas} className="bg-black hover:bg-purple-900 w-350" />
     </div>
   )}
 </div>
