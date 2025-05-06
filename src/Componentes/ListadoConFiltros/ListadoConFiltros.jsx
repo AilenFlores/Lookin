@@ -9,18 +9,19 @@ const ListadoConFiltros = ({ titulo, contenido, onFiltrar, tipo, cargarMas }) =>
     const { t } = useTranslation("varios");
   
   return (
-   <div className="grid md:grid-cols-[250px_1fr] gap-8 max-w-screen-xl w-full mx-auto py-3 mt-8">
+<div className="mb-10 grid md:grid-cols-[235px_1fr] md:gap-5 mx-5 md:mx-10 md:mt-10 ">
+
   <Filtro onFiltrar={onFiltrar} tipo={tipo} />
-  <div className="w-full  overflow-hidden"> 
-  <Lista
-    texto={titulo}
-    peliculas={contenido}
-    cargarMas={cargarMas}
-    mensajeCartel={t("listaFiltros.mensaje")}
-  />
+  <div className="w-full overflow-hidden">
+    <Lista
+      texto={titulo}
+      peliculas={contenido}
+      cargarMas={cargarMas}
+      mensajeCartel={t("listaFiltros.mensaje")}
+    />
+  </div>
 </div>
 
-</div>
 
   );
 };
