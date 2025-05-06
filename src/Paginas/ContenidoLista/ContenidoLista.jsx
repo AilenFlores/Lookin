@@ -59,7 +59,7 @@ const ContenidoLista = ({ tipo }) => {
   if (isLoading && contenido.length === 0) return <Cargando />;
 
   return (
-    <div className="inicio bg-neutral-100">
+    <div className="inicio bg-gradient-to-b from-white via-purple-800 to-purple-800">
       <Cabecera />
       <ListadoConFiltros
         titulo={titulo}
