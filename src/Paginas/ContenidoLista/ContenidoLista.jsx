@@ -5,12 +5,16 @@ import Pie from '../../Componentes/Pie/Pie';
 import Cargando from '../../Componentes/Cargando/Cargando';
 import ListadoConFiltros from '../../Componentes/ListadoConFiltros/ListadoConFiltros';
 import { getContenido } from '../../Servicios/apiTMDB';
+import { useTranslation } from 'react-i18next';
+
 
 const ContenidoLista = ({ tipo }) => {
   const [contenido, setContenido] = useState([]);
   const [pagina, setPagina] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [filtros, setFiltros] = useState({ orden: 'popularity.desc', plataforma: null });
+  const { t } = useTranslation("catalogo");
+  
 
   useEffect(() => {
     setContenido([]);
@@ -50,7 +54,7 @@ const ContenidoLista = ({ tipo }) => {
   };
 
   const cargarMas = () => setPagina(prev => prev + 1);
-  const titulo = tipo === 'movie' ? 'CATÁLOGO COMPLETO DE PELICULAS' : 'CATÁLOGO COMPLETO DE SERIES';
+  const titulo = tipo === 'movie' ? t('catalogo.tituloCatalogoPeliculas') : t('catalogo.tituloCatalogoSeries');
 
   if (isLoading && contenido.length === 0) return <Cargando />;
 

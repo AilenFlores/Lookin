@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import Toast from '../MensajeEmergente/MensajeEmergente';
+import { useTranslation } from 'react-i18next';
 
 const SeccionDondeVerla = ({ data }) => {
+  const { t } = useTranslation("detalle");
+  
   const [toastMsg, setToastMsg] = useState('');
   const plataformas = data["watch/providers"]?.results?.AR?.flatrate || [];
   const [plataformaFiltrada, setPlataformaFiltrada] = useState(null);
@@ -79,7 +82,7 @@ const SeccionDondeVerla = ({ data }) => {
 
   return (
     <div id="ver" className="scroll-mt-[140px]">
-      <Subtitulo texto="¿Dónde puedo verla?" className="font-semibold text-left text-4xl mb-5" />
+      <Subtitulo texto={t("dondeVerla.dondePuedoVerla")} className="font-semibold text-left text-4xl mb-5" />
 
       {mostrarAviso && (
   <div className="flex items-start gap-3 bg-yellow-100 border border-yellow-400 text-yellow-900 p-4 rounded-md mb-4">
@@ -87,7 +90,7 @@ const SeccionDondeVerla = ({ data }) => {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M4.93 4.93l14.14 14.14M12 2a10 10 0 100 20 10 10 0 000-20z" />
     </svg>
     <p className="text-sm">
-      <strong>Información posiblemente desactualizada:</strong> esta película aparecía como disponible en una plataforma, pero actualmente no figura. Esto puede deberse a que fue retirada recientemente.
+      <strong>{t("infoDesactualizada.infoDesactualizada1")}</strong> {t("infoDesactualizada.infoDesactualizada2")}
     </p>
   </div>
 )}

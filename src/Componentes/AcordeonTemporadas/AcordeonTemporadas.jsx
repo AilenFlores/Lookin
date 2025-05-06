@@ -17,7 +17,6 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
     }
     setIsOpen(open => !open);
   };
-  
 
   const toggleEpisode = id => {
     setExpanded(e => ({ ...e, [id]: !e[id] }));
