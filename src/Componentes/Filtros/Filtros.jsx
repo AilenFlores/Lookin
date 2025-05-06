@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { getPlataformas } from '../../Servicios/apiTMDB';
+// import { getPlataformas } from '../../Servicios/apiTMDB';
 import OrdenSelect from '../OrdenSelect/OrdenSelect';
 import PlataformaFiltro from '../PlataformaFiltro/PlataformaFiltro';
 import { useTranslation } from 'react-i18next';
+import { useTMDB } from '../../Servicios/hooks/useTMDB';
 
 
 const Filtros = ({ onFiltrar, tipo }) => {
-  const { t } = useTranslation("catalogo");
+  const { i18n, t } = useTranslation("catalogo");
+  const { getPlataformas } = useTMDB();
   const [plataformas, setPlataforma] = useState([]);
   const [filtros, setFiltros] = useState(() => {
   const plataformaGuardada = localStorage.getItem('plataforma_filtrada');
@@ -33,11 +35,11 @@ const Filtros = ({ onFiltrar, tipo }) => {
 
   useEffect(() => {
     const cargarPlataformas = async () => {
-      const data = await getPlataformas(tipo);
+      const data = await getPlataformas(tipo,i18n.language);
       setPlataforma(data);
     };
     cargarPlataformas();
-  }, [tipo]);
+  }, [tipo,i18n.language]);
 
   const handleOrdenChange = (value) => {
     const nuevosFiltros = { ...filtros, orden: value };

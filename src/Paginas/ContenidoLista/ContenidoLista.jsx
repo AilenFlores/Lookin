@@ -4,8 +4,9 @@ import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
 import Cargando from '../../Componentes/Cargando/Cargando';
 import ListadoConFiltros from '../../Componentes/ListadoConFiltros/ListadoConFiltros';
-import { getContenido } from '../../Servicios/apiTMDB';
+// import { getContenido } from '../../Servicios/apiTMDB';
 import { useTranslation } from 'react-i18next';
+import { useTMDB } from '../../Servicios/hooks/useTMDB';
 
 
 const ContenidoLista = ({ tipo }) => {
@@ -13,8 +14,9 @@ const ContenidoLista = ({ tipo }) => {
   const [pagina, setPagina] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [filtros, setFiltros] = useState({ orden: 'popularity.desc', plataforma: null });
-  const { t } = useTranslation("catalogo");
-  
+  const { t, i18n } = useTranslation("catalogo");
+  const { getContenido } = useTMDB();
+
 
   useEffect(() => {
     setContenido([]);
@@ -26,7 +28,7 @@ const ContenidoLista = ({ tipo }) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const datos = await getContenido(tipo, pagina, filtros);
+        const datos = await getContenido(tipo, pagina, filtros,i18n.language);
         setContenido(prev => (pagina === 1 ? datos : [...prev, ...datos]));
       } catch (err) {
         console.error('Error al cargar los datos:', err);
@@ -35,7 +37,7 @@ const ContenidoLista = ({ tipo }) => {
       }
     };
     fetchData();
-  }, [tipo, pagina, filtros]);
+  }, [tipo, pagina, filtros,i18n.language]);
 
   const manejarCambioFiltros = (nuevosFiltros) => {
     if ('plataforma' in nuevosFiltros) {

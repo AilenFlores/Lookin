@@ -17,7 +17,9 @@ import detalleEN from "../locales/en/detalle.json";
 import variosEN from "../locales/en/varios.json";
 import variosES from "../locales/es/varios.json";
 import alertaES from "../locales/es/alerta.json";
-import alertaEN from "../locales/es/alerta.json";
+import alertaEN from "../locales/en/alerta.json";
+import tarjetaES from "../locales/es/tarjeta.json";
+import tarjetaEN from "../locales/en/tarjeta.json";
 // Idioma guardado o 'es' por defecto
 const savedLanguage = localStorage.getItem("language") || "es";
 
@@ -30,7 +32,8 @@ const resources = {
       favoritos: favoritosEN,
       detalle: detalleEN,
       varios: variosEN,
-      alerta: alertaEN
+      alerta: alertaEN,
+      tarjeta: tarjetaEN
     },
     es: {
       cabecera: cabeceraES,
@@ -40,7 +43,8 @@ const resources = {
       favoritos: favoritosES,
       detalle: detalleES,
       varios: variosES,
-      alerta: alertaES
+      alerta: alertaES,
+      tarjeta: tarjetaES
     },
   }; 
 
@@ -50,7 +54,7 @@ i18n
     resources,
     lng: savedLanguage,             
     fallbackLng: "es",
-    ns: ['cabecera', 'inicio', 'pie', 'catalogo','detalle','varios','alerta'],     
+    ns: ['cabecera', 'inicio', 'pie', 'catalogo','detalle','varios','alerta','tarjeta'],     
     defaultNS: 'inicio',                   
     interpolation: {
       escapeValue: false,

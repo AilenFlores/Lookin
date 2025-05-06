@@ -15,6 +15,7 @@ const Cabecera = () => {
 
   const toggleIdioma = () => {
     const nuevoIdioma = i18n.language === "es" ? "en" : "es";
+    console.log(i18n.language)
     i18n.changeLanguage(nuevoIdioma);
   };
 

@@ -1,8 +1,8 @@
 const API_KEY = 'f0bbdd09a3268c4fe8d469dc1db26b5c';
-
-export const getTendencias = async () => {
+let language = "es";
+export const getTendencias = async (language) => {
   try {
-    const url = `https://api.themoviedb.org/3/trending/all/day?language=es&api_key=${API_KEY}`;
+    const url = `https://api.themoviedb.org/3/trending/all/day?language=${language}&api_key=${API_KEY}`;
     const res = await fetch(url);
     const data = await res.json();
     return data.results; 
@@ -12,9 +12,9 @@ export const getTendencias = async () => {
   }
 };
 
-export const getEstrenosEnCines = async () => {
+export const getEstrenosEnCines = async (language) => {
   try {
-    const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&region=AR&language=es&page=1`;
+    const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&region=AR&language=${language}&page=1`;
     const res = await fetch(url);
     const data = await res.json();
     return data.results.map(pelicula => ({
@@ -31,12 +31,12 @@ export const getEstrenosEnCines = async () => {
 
 
 /**Contruye los parametros para la url */
-const construirParametros = (pagina, filtros, tipo) => {
+const construirParametros = (pagina, filtros, tipo,language) => {
   const hoy = new Date().toISOString().split('T')[0];
   const orden = filtros.orden || 'popularity.desc'; 
   const params = new URLSearchParams({
     api_key: API_KEY,
-    language: 'es',
+    language,
     region: 'AR',
     page: pagina,
     sort_by: orden,
@@ -59,16 +59,16 @@ const construirParametros = (pagina, filtros, tipo) => {
 };
 
 
-const construirURL = (tipo, pagina, filtros) => {
-  const params = construirParametros(pagina, filtros, tipo);
+const construirURL = (tipo, pagina, filtros,language) => {
+  const params = construirParametros(pagina, filtros, tipo,language);
   const url = `https://api.themoviedb.org/3/discover/${tipo}?${params.toString()}`;
   return url;
 };
 
 
-export const getContenido = async (tipo, pagina, filtros = {}) => {
+export const getContenido = async (tipo, pagina, filtros = {},language) => {
   try {
-    const url = construirURL(tipo, pagina, filtros);
+    const url = construirURL(tipo, pagina, filtros,language);
     const res = await fetch(url);
     const data = await res.json();
 
@@ -86,9 +86,9 @@ export const getContenido = async (tipo, pagina, filtros = {}) => {
   }
 };
 
-export const getPlataformas = async (tipo) => {
+export const getPlataformas = async (tipo,language) => {
   try {
-    const url = `https://api.themoviedb.org/3/watch/providers/${tipo}?api_key=${API_KEY}&language=es&watch_region=AR`;
+    const url = `https://api.themoviedb.org/3/watch/providers/${tipo}?api_key=${API_KEY}&language=${language}&watch_region=AR`;
     const res = await fetch(url);
     const data = await res.json();
     return data.results.filter(plataforma => plataforma.provider_id !== 0);
@@ -101,9 +101,9 @@ export const getPlataformas = async (tipo) => {
 
 
 /**Pide a la api el contenido, ya sea peliculas o series */
-export const getDetallePorId = async (id, tipo) => {
+export const getDetallePorId = async (id, tipo,language) => {
   try {
-    const url = `https://api.themoviedb.org/3/${tipo}/${id}?api_key=${API_KEY}&language=es&append_to_response=credits,videos,watch/providers,similar,images&watch_region=AR`;
+    const url = `https://api.themoviedb.org/3/${tipo}/${id}?api_key=${API_KEY}&language=${language}&append_to_response=credits,videos,watch/providers,similar,images&watch_region=AR`;
     const res = await fetch(url);
     if (!res.ok) throw new Error('No se pudo obtener el detalle');
     return await res.json();
@@ -114,9 +114,9 @@ export const getDetallePorId = async (id, tipo) => {
 };
 
 /**Pide a la api los episodios de una temporada de una serie */
-export const getTemporada = async (tvId, seasonNumber) => {
+export const getTemporada = async (tvId, seasonNumber,language) => {
   try {
-    const url = `https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}&language=es`;
+    const url = `https://api.themoviedb.org/3/tv/${tvId}/season/${seasonNumber}?api_key=${API_KEY}&language=${language}`;
     const res = await fetch(url);
     const data = await res.json();
 
@@ -137,9 +137,9 @@ export const getTemporada = async (tvId, seasonNumber) => {
   }
 };
 
-export const buscarContenido = async (query, page = 1) => {
+export const buscarContenido = async (query, page = 1,language) => {
   try {
-    const url = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=es&query=${encodeURIComponent(query)}&page=${page}&include_adult=false&region=AR`;
+    const url = `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=${language}&query=${encodeURIComponent(query)}&page=${page}&include_adult=false&region=AR`;
     const res = await fetch(url);
     const data = await res.json();
 
