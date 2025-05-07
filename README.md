@@ -1,8 +1,15 @@
-# Proyecto React - Gestor Peliculas y Series "Nerdflix".
+# Proyecto React - Gestor Peliculas y Series "Lookin".
 
-El proyecto está desplegado en Vercel: 
+ | Nombre                 | Legajo     |
+ |------------------------|------------|
+ | Jazmín Loureiro        | FAI-4228   |
+ | Nicolás Bucaray        | FAI-4255   |
+ | Ailen Flores Montes    | FAI-3547   |
+ 
  -----------------------------------------------------------
-Nerdflix es una aplicación web responsive desarrollada con React y Tailwind CSS, enfocada en la exploración y gestión de películas y series. Utiliza la API de TMDB para mostrar información en tiempo real y una interfaz clara y amigable.
+El proyecto está desplegado en Vercel: https://tp-react-2-beta.vercel.app/
+ -----------------------------------------------------------
+Lookin es una aplicación web responsive desarrollada con React y Tailwind CSS, enfocada en la exploración y gestión de películas y series. Utiliza la API de TMDB para mostrar información en tiempo real y una interfaz clara y amigable.
 
 🚀 Funcionalidades principales:
 
@@ -74,10 +81,10 @@ Nerdflix es una aplicación web responsive desarrollada con React y Tailwind CSS
  ![Listado de películas](./public/screenshots/inicio.png)
  
  **📝 Vista de detalle**
- ![Formulario](./public/screenshots/formulario.png)
+ ![Formulario](./public/screenshots/detalle.png)
  
  **🔍 Vista de catalogos y filtros**
- ![Detalle de película](./public/screenshots/detalle.png)
+ ![Detalle de película](./public/screenshots/lista.png)
  
  **⚠️ Alerta de confirmación con SweetAlert2**
  ![Alerta SweetAlert2](./public/screenshots/alerta.png)
