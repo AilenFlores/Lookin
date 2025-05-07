@@ -1,8 +1,8 @@
 import React from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import { useTranslation } from 'react-i18next';
-import InfoItem from '../infoItem/infoItem';
-import InfoList from '../infoLista/infoLista';
+import InfoItem from '../InfoItem/InfoItem';
+import InfoList from '../InfoLista/InfoLista';
 
 const Informacion = ({ data }) => {
   const { t } = useTranslation("detalle");
