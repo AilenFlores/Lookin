@@ -49,10 +49,8 @@ const ModalBuscador = ({ visible, onClose, ignoreRef }) => {
 
   return (
     <>
-      {/* Fondo gris detrás del buscador */}
       <div className="fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-[rgba(229,231,235,0.8)] z-[9997]" />
 
-      {/* Buscador pegado debajo del header */}
       <div className="fixed top-20 left-0 w-full z-[9998] bg-white border-b border-gray-200 shadow-md">
         <form
           onSubmit={manejarBusqueda}

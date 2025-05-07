@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './const/routes';
-
 import Inicio from './Paginas/Inicio/Inicio';
 import ContenidoLista from './Paginas/ContenidoLista/ContenidoLista';
 import Favoritos from './Paginas/Favoritos/Favoritos';
@@ -20,7 +19,6 @@ function App() {
           <Route path={ROUTES.peliculas} element={<ContenidoLista tipo="movie" />} />
           <Route path={ROUTES.series} element={<ContenidoLista tipo="tv" />} />
           <Route path={ROUTES.buscar} element={<ResultadosBusqueda />} />
-          {/* Ruta comodín al final para cualquier ruta inválida */}
           <Route path="*" element={<Pagina404 />} />
         </Routes>
       </div>

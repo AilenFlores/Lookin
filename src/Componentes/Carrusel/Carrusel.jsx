@@ -1,4 +1,3 @@
-// Carrusel.jsx
 import React, { useRef, useState, useEffect } from 'react';
 import Style from './Carrusel.module.css'; 
 import Flechas from '../Flechas/Flechas';

@@ -1,4 +1,3 @@
-// Tarjeta.jsx
 import React from 'react';
 import Titulo from '../Titulo/Titulo';
 import Subtitulo from '../Subtitulo/Subtitulo';

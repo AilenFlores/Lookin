@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import MensajeEmergente from '../MensajeEmergente/MensajeEmergente'; // Asegurate de que el path sea correcto
+import MensajeEmergente from '../MensajeEmergente/MensajeEmergente'; 
 import { useTranslation } from 'react-i18next';
 
 const GuardarFavorito = ({ pelicula }) => {
@@ -17,7 +17,7 @@ const GuardarFavorito = ({ pelicula }) => {
   }, [pelicula.id]); 
 
   const favoritoClick = (e) => {
-    e.stopPropagation(); // Evitar que se dispare el click del contenedor
+    e.stopPropagation(); 
 
     if (favorito) {
       Swal.fire({
@@ -58,7 +58,7 @@ const GuardarFavorito = ({ pelicula }) => {
     localStorage.setItem("favoritos", JSON.stringify(nuevosFavoritos));
     setFavorito(true);
     notificarCambioFavoritos();
-    setMostrarMensaje(true); // 👈 Mostrar toast al guardar
+    setMostrarMensaje(true); 
   };
 
   return (
@@ -70,7 +70,6 @@ const GuardarFavorito = ({ pelicula }) => {
           <FaRegBookmark size={30} className="text-white hover:text-yellow-400" />
         )}
       </button>
-
       {mostrarMensaje && (
         <MensajeEmergente
           mensaje={t("alertaConfirmacion.mensajeGuardado")}

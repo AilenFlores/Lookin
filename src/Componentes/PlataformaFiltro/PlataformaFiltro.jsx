@@ -11,7 +11,7 @@ const PlataformasFiltro = ({ plataformas, seleccionada, onSeleccionar }) => {
         className="block md:hidden w-full border border-gray-300 rounded px-3 py-2 text-sm"
         value={seleccionada || ''}
       >
-        <option value="">Todas las plataformas</option>
+        <option value="">{t("dondeVer.plataforma")}</option>
         {plataformas.map((opcion) => (
           <option key={opcion.provider_id} value={opcion.provider_id}>
             {opcion.provider_name}

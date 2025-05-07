@@ -1,10 +1,8 @@
-// ContenidoLista.jsx
 import React, { useState, useEffect } from 'react';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
 import Cargando from '../../Componentes/Cargando/Cargando';
 import ListadoConFiltros from '../../Componentes/ListadoConFiltros/ListadoConFiltros';
-// import { getContenido } from '../../Servicios/apiTMDB';
 import { useTranslation } from 'react-i18next';
 import { useTMDB } from '../../Servicios/hooks/useTMDB';
 
@@ -47,10 +45,6 @@ const ContenidoLista = ({ tipo }) => {
         localStorage.removeItem('plataforma_filtrada');
       }
     }
-    
-    
-    
-
     setFiltros(prev => ({ ...prev, ...nuevosFiltros }));
     setPagina(1);
   };

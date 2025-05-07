@@ -1,14 +1,12 @@
 import React from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import { useTranslation } from 'react-i18next';
-
 import { ROUTES } from '../../const/routes';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../Logo/Logo'; 
 
 const Pie = () => {
-    const { t } = useTranslation("pie");
-  
+  const { t } = useTranslation("pie");
   const navigate = useNavigate();
   return (
     <footer className="bg-black text-white py-8 mt-0 px-6">

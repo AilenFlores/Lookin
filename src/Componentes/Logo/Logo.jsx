@@ -1,5 +1,5 @@
 import React from 'react';
-import logoDefault from '../../Assets/Imagenes/Logo.png'; // <- Renombrado
+import logoDefault from '../../Assets/Imagenes/Logo.png'; 
 
 const Logo = ({
     src = logoDefault,

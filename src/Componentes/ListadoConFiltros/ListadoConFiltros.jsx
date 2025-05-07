@@ -1,4 +1,3 @@
-// ListadoConFiltros.jsx
 import React from 'react';
 import Lista from '../../Componentes/Lista/Lista';
 import Filtro from '../../Componentes/Filtros/Filtros';

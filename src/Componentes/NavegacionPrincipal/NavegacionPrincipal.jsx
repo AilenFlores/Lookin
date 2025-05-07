@@ -17,13 +17,11 @@ const NavegacionPrincipal = ({ t, hamburguesaRef, setMenuAbierto }) => {
                 onClick={() => navigate(ROUTES.inicio)}
             />
 
-            {/* Menú grande (visible desde sm+) */}
             <nav className="hidden sm:flex space-x-4 items-center text-gray-700 text-sm sm:text-base font-medium">
                 <Enlace to="/peliculas">{t("cabecera.peliculas")}</Enlace>
                 <Enlace to="/series">{t("cabecera.series")}</Enlace>
             </nav>
 
-            {/* Ícono hamburguesa (solo mobile) */}
             <button
                 ref={hamburguesaRef}
                 className="sm:hidden text-2xl text-gray-700 focus:outline-none"

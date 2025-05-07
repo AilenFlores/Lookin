@@ -17,7 +17,8 @@
             },
     "dondeVer":
             {
-                "dondeVer": "Donde ver"
+                "dondeVer": "Donde ver",
+                "plataforma":"Todas las plataformas"
             },
     "mostrarMas":
             {

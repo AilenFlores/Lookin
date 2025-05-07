@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-// import { getPlataformas } from '../../Servicios/apiTMDB';
 import OrdenSelect from '../OrdenSelect/OrdenSelect';
 import PlataformaFiltro from '../PlataformaFiltro/PlataformaFiltro';
 import { useTranslation } from 'react-i18next';
 import { useTMDB } from '../../Servicios/hooks/useTMDB';
-
 
 const Filtros = ({ onFiltrar, tipo }) => {
   const { i18n, t } = useTranslation("catalogo");

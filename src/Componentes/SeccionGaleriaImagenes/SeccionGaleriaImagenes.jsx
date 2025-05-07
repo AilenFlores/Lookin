@@ -47,7 +47,6 @@ const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
         ))}
       </div>
 
-      {/* Modal con imagen ampliada */}
       {modalImg && (
         <ModalImagen
           src={modalImg}

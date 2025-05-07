@@ -3,7 +3,6 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Titulo from '../Titulo/Titulo'; 
 import { useTranslation } from 'react-i18next';
 
-// Cargando.jsx
 const Cargando = ({ fullScreen = true }) => {
   const { t } = useTranslation("varios");
 

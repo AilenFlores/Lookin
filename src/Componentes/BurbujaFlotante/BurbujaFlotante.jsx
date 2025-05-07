@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Boton from '../Boton/Boton';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import { useNavigate } from 'react-router-dom';
-// import { getDetallePorId } from '../../Servicios/apiTMDB'; // ajustá la ruta según tu estructura
 import { useTMDB } from '../../Servicios/hooks/useTMDB';
 import { useTranslation } from 'react-i18next';
 
@@ -16,11 +15,11 @@ function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }
   const {t, i18n } = useTranslation("detalle");
 
   useEffect(() => {
-    setInfo(null); // Limpiar cuando cambia la película o el tipo
+    setInfo(null); 
   }, [pelicula.id, mediaType]);
 
   useEffect(() => {
-    setInfo(null); // Limpiar al cambiar el idioma
+    setInfo(null); 
   }, [i18n.language]);
   
   useEffect(() => {
@@ -53,14 +52,14 @@ function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }
             <Subtitulo texto={
               <>
               <span className="font-bold text-xs">{t("informacion.genero")}: </span>
-              <span className="text-xs">{info.genero || t("informacion,noDisponible")}</span>
+              <span className="text-xs">{info.genero || t("informacion.noDisponible")}</span>
               </>}
               className="text-center"
             />
             <Subtitulo texto={
               <>
               <span className="font-bold text-xs">{t("detalle.sinopsis")}: </span>
-              <span className="text-xs">{info.sinopsis ? info.sinopsis.length > 150 ? info.sinopsis.slice(0, 150) + '...': info.sinopsis: 'No disponible'}</span>
+              <span className="text-xs">{info.sinopsis ? info.sinopsis.length > 150 ? info.sinopsis.slice(0, 150) + '...': info.sinopsis: t("informacion.noDisponible")}</span>
               </>}
               className="text-center mt-2"
             />

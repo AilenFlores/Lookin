@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-// import { buscarContenido } from '../../Servicios/apiTMDB';
 import Lista from '../../Componentes/Lista/Lista';
 import Cargando from '../../Componentes/Cargando/Cargando';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
 import { useTranslation } from 'react-i18next';
 import { useTMDB } from '../../Servicios/hooks/useTMDB';
+
 const ResultadosBusqueda = () => {
   const { t,i18n } = useTranslation("varios");
   const { buscarContenido } = useTMDB();
@@ -15,7 +15,7 @@ const ResultadosBusqueda = () => {
   const [pagina, setPagina] = useState(1);
   const [totalPaginas, setTotalPaginas] = useState(1);
   const [cargando, setCargando] = useState(true);
-  const idsVistos = new Set(); // para evitar duplicados
+  const idsVistos = new Set(); 
 
   useEffect(() => {
     setResultados([]);
