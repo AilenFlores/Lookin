@@ -21,8 +21,8 @@ const AccionesCabecera = ({ i18n, toggleIdioma, botonBusquedaRef, clickBuscador 
             >
                 <img
                     src={i18n.language === "es"
-                        ? "https://flagcdn.com/ar.svg"
-                        : "https://flagcdn.com/us.svg"}
+                        ? "https://flagcdn.com/us.svg"
+                        : "https://flagcdn.com/ar.svg"}
                     alt="flag"
                     className="w-5 h-5 rounded-full object-cover mr-2"
                 />

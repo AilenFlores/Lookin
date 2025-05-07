@@ -3,6 +3,7 @@ import Subtitulo from '../Subtitulo/Subtitulo';
 import { FaStar } from 'react-icons/fa';
 import { useTMDB } from '../../Servicios/hooks/useTMDB';
 import { useTranslation } from "react-i18next";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,11 +74,12 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
                   )}
                   {ep.overview && (
                     <button
-                      onClick={() => toggleEpisode(ep.id)}
-                      className="text-gray-500 hover:text-gray-700 text-sm"
-                    >
-                      {expanded[ep.id] ? '▲' : '▼'}
-                    </button>
+                    onClick={() => toggleEpisode(ep.id)}
+                    className="text-gray-500 hover:text-gray-700 text-sm"
+                  >
+                    {expanded[ep.id] ? <FaChevronUp /> : <FaChevronDown />}
+                  </button>
+                  
                   )}
                 </div>
               </div>
