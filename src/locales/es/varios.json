@@ -29,5 +29,10 @@
     },
     "mensajeEmergente": {
         "sinLink": "No tenemos link oficial para {{plataforma}}"
+    },
+    "error404":{
+        "mensaje1":"Página no encontrada",
+        "mensaje2":"Lo sentimos, no pudimos encontrar lo que estás buscando.",
+        "volver":"Volver al inicio"
     }
 }
