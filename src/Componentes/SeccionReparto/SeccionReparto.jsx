@@ -10,7 +10,7 @@ const SeccionReparto = ({ reparto }) => {
 
   return (
     <div id="reparto" className="scroll-mt-[140px]">
-      <Subtitulo texto={t("detalle.reparto")} className="font-semibold text-left text-4xl mb-2" />
+      <Subtitulo texto={t("detalle.reparto")} className="text-3xl md:text-4xl font-semibold text-black pl-6 border-l-4 border-purple-600 mb-4 text-left" />
       <Carrusel
         contenido={reparto.slice(0, 10)}
         tipo="pequeno"

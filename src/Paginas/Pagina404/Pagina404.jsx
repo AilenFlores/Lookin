@@ -22,7 +22,15 @@ const Pagina404 = () => {
             <h1 className="text-6xl font-bold text-purple-600 mb-4">404</h1>
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2">{t("error404.mensaje1")}</h2>
             <p className="text-gray-600 mb-6">{t("error404.mensaje2")}</p>
-            <Boton texto={t("error404.volver")} onClick={() => navigate('/')} className="bg-black hover:bg-red-600" />
+            
+            <div className="mt- flex justify-center">
+              <Boton
+                texto={t("error404.volver")}
+                onClick={() => navigate('/')}
+                className="w-full max-w-xs sm:w-64 bg-black hover:bg-purple-900"
+              />
+            </div>
+
         </div>
       <Pie />
     </div>

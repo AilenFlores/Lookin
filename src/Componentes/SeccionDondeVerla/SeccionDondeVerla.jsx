@@ -36,7 +36,7 @@ const SeccionDondeVerla = ({ data }) => {
 
   return (
     <div id="ver" className="scroll-mt-[140px]">
-      <Subtitulo texto={t("dondeVerla.dondePuedoVerla")} className="font-semibold text-left text-4xl mb-5" />
+      <Subtitulo texto={t("dondeVerla.dondePuedoVerla")} className="text-3xl md:text-4xl font-semibold text-black pl-6 border-l-4 border-purple-600 mb-4 text-left" />
 
       {mostrarAviso && (
         <div className="flex items-start gap-3 bg-yellow-100 border border-yellow-400 text-yellow-900 p-4 rounded-md mb-4">

@@ -57,17 +57,17 @@ if (isLoading) {
         </h1>
       
       <div className="md:mx-14 mx-5 bg-white rounded-lg border-2 border-gray-300 shadow-lg p-5 md:p-10 mt-10 mb-10">
-        <div className="relative mb-10">
+        <div className="relative">
           <Titulo 
           texto={t("inicio.tendencias")}
-            className="text-base text-black sm:text-base md:text-2xl font-bold absolute top-4 left-4 "
+            className="text-3xl md:text-4xl font-extrabold text-white bg-gradient-to-r from-purple-800 via-black to-purple-800 px-6 py-4 rounded-lg text-center tracking-wide uppercase mb-1 shadow-[0_0_20px_rgba(0,0,0,0.8)] mt-10"
           />
         </div>
         <Carrusel contenido={tendencias} tipo={"grande"} />
-        <div className="relative mb-10">
+        <div className="relative">
           <Titulo 
           texto={t("inicio.estrenos")}
-            className="text-base text-black sm:text-base md:text-2xl font-bold  absolute top-4 left-4"
+            className="text-3xl md:text-4xl font-extrabold text-white bg-gradient-to-r from-purple-800 via-black to-purple-800 px-6 py-4 rounded-lg text-center tracking-wide uppercase mb-1 shadow-[0_0_20px_rgba(0,0,0,0.8)] mt-10"
           />
         </div>
         <Carrusel contenido={populares} tipo={"grande"} />

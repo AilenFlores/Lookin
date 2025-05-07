@@ -30,7 +30,7 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
       <button
         onClick={toggleOpen}
         className="w-full flex justify-between items-center p-2 hover:bg-gray-100"
-      >
+        >
         <div className="flex items-center gap-3">
           <img
             src={`https://image.tmdb.org/t/p/w185${posterPath}`}

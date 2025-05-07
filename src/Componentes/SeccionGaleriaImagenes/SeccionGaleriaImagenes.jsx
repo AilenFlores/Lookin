@@ -30,7 +30,7 @@ const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
 
   return (
     <div id="galeria" className="py-8 scroll-mt-[110px]">
-      <Subtitulo texto={t("detalle.galeria")} className="text-4xl font-semibold mb-4 text-left" />
+      <Subtitulo texto={t("detalle.galeria")} className="text-3xl md:text-4xl font-semibold text-black pl-6 border-l-4 border-purple-600 mb-4 text-left" />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 ">
         {imagenes.map((img, idx) => (
           <div key={idx} className="overflow-hidden rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.5)]">

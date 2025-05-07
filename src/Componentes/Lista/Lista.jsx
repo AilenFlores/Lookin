@@ -10,7 +10,10 @@ const Lista = ({ peliculas, cargarMas, texto, mensajeCartel }) => {
 
   return (
 <div className="bg-white shadow-md p-5 rounded-lg border-2 border-gray-300  sm:mr-0 mt-2">
-  <Titulo texto={texto} className="inline-block text-2xl md:text-3xl font-semibold text-neutral-700 rounded-xl px-5 py-3 mt-6 mb-6  "/>
+  <Titulo
+    texto={texto}
+    className="text-3xl md:text-4xl font-bold text-center text-purple-800 tracking-wide uppercase border-b-2 border-purple-200 pb-2 mb-8"
+  />
 
   <div className="grid [grid-template-columns:repeat(auto-fit,_minmax(210px,_1fr))] gap-4 p-2 justify-items-center">
     {peliculas.length > 0 ? (

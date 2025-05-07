@@ -9,7 +9,11 @@ const Informacion = ({ data }) => {
 
   return (
     <div id="info" className="scroll-mt-[140px] space-y-4 text-left">
-      <Subtitulo texto={t("informacion.informacion")} className="font-semibold text-left text-4xl" />
+      <Subtitulo
+        texto={t("informacion.informacion")}
+        className="text-3xl md:text-4xl font-semibold text-black pl-6 border-l-4 border-purple-600 mb-4"
+      />
+
 
       <div className="space-y-3">
 
