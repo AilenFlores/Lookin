@@ -38,6 +38,7 @@ Lookin es una aplicación web responsive desarrollada con React y Tailwind CSS, 
 - 🎉 **SweetAlert2**  
 - 🌍 **API de TMDB**  
 - 🧩 **React Icons**
+- 🌐  **React-i18next** 
 
 ---
 
