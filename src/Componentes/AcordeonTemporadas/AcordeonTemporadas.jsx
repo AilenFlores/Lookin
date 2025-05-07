@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Subtitulo from '../Subtitulo/Subtitulo';
 import { FaStar } from 'react-icons/fa';
-// import { getTemporada } from '../../Servicios/apiTMDB';
 import { useTMDB } from '../../Servicios/hooks/useTMDB';
 import { useTranslation } from "react-i18next";
 
@@ -15,7 +14,7 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
 
   const toggleOpen = async () => {
     if (!isOpen && !episodes) {
-      const { episodes: episodios, rating } = await getTemporada(tvId, seasonNumber,i18n.language);
+      const { episodes: episodios, rating } = await getTemporada(tvId, seasonNumber, i18n.language);
       setEpisodes(episodios);
       setSeasonRating(rating);
     }
@@ -41,9 +40,9 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
           <div>
             <h3 className="font-semibold">{name}</h3>
             <p className="text-sm text-gray-600">
-              {/* {episodes ? `${episodes.length} Episodios` : 'Ver episodios'} */}
-              {episodes ? `${episodes.length} ${t("episodios.episodios")}` : t("episodios.verEpisodios")}
-
+              {episodes
+                ? `${episodes.length} ${t("episodios.episodios")}`
+                : t("episodios.verEpisodios")}
             </p>
           </div>
         </div>
@@ -57,7 +56,7 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
       {isOpen && episodes && (
         <div className="p-4 space-y-4 bg-gray-50">
           <Subtitulo
-            texto={`Episodios Temporada ${seasonNumber}`}
+            texto={t("episodios.tituloTemporada", { number: seasonNumber })}
             className="text-xl mb-2"
           />
           {episodes.map(ep => (
@@ -75,9 +74,11 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
                   {ep.overview && (
                     <button
                       onClick={() => toggleEpisode(ep.id)}
-                      className="text-gray-500 hover:text-gray-700"
+                      className="text-gray-500 hover:text-gray-700 text-sm"
                     >
-                      {expanded[ep.id] ? '▲' : '▼'}
+                      {expanded[ep.id]
+                        ? t("episodios.mostrarMenos")
+                        : t("episodios.mostrarMas")}
                     </button>
                   )}
                 </div>

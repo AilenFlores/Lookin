@@ -20,10 +20,14 @@
     "episodios":
     {
         "episodios": "Episodios",
-        "verEpisodios": "Ver Episodios"
+        "verEpisodios": "Ver Episodios",
+        "tituloTemporada": "Episodios Temporada {{number}}"
     },
     "buscador":
     {
         "mensajePlaceholder":"Buscar películas o series..."
+    },
+    "mensajeEmergente": {
+        "sinLink": "No tenemos link oficial para {{plataforma}}"
     }
 }

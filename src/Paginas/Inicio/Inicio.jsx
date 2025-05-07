@@ -15,7 +15,6 @@ const Inicio = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { t, i18n } = useTranslation("inicio");
   const { getTendencias, getEstrenosEnCines } = useTMDB();
-  const logo = Logo; // Asegúrate de que la ruta sea correcta
 
   useEffect(() => {
     const fetchData = async () => {

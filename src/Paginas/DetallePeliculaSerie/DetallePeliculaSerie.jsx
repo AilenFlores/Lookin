@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Cabecera from '../../Componentes/Cabecera/Cabecera';
 import Pie from '../../Componentes/Pie/Pie';
-// import { getDetallePorId } from '../../Servicios/apiTMDB';
 import Cargando from '../../Componentes/Cargando/Cargando';
 import MenuSecciones from '../../Componentes/MenuSecciones/MenuSecciones';
 import SeccionInformacion from '../../Componentes/SeccionInformacion/SeccionInformacion';
@@ -15,6 +14,7 @@ import SeccionSimilares from '../../Componentes/SeccionSimilares/SeccionSimilare
 import SeccionSinopsis from '../../Componentes/SeccionSinopsis/SeccionSinopsis';
 import { useTMDB } from '../../Servicios/hooks/useTMDB';
 import { useTranslation } from "react-i18next";
+import { obtenerCertificacion, obtenerCertificacionSerie } from '../../const/Certificacion';
 
 const DetallePeliculaSerie = () => {
   const { id, tipo } = useParams();
@@ -25,7 +25,6 @@ const DetallePeliculaSerie = () => {
   const [error, setError] = useState(false);
   const [seccionActiva, setSeccionActiva] = useState('sinopsis');
 
-
   const secciones = ['sinopsis', 'info', 'galeria', 'reparto', 'trailer', 'ver', 'similares'];
   if (tipo === 'tv') secciones.splice(6, 0, 'temporadas');
 
@@ -35,10 +34,13 @@ const DetallePeliculaSerie = () => {
     setSeccionActiva('sinopsis');
 
     const obtenerDatos = async () => {
-      const resultado = await getDetallePorId(id, tipo,i18n.language);
+      const resultado = await getDetallePorId(id, tipo, i18n.language);
 
       if (resultado && resultado.id) {
-        setData(resultado);
+        const certificacion = tipo === 'movie'
+          ? obtenerCertificacion(resultado.release_dates)
+          : obtenerCertificacionSerie(resultado.content_ratings);
+        setData({ ...resultado, certificacion });
         setError(false);
       } else {
         navigate('*', { replace: true });
@@ -46,34 +48,34 @@ const DetallePeliculaSerie = () => {
     };
 
     obtenerDatos();
-  }, [id, tipo, navigate,i18n.language]);
+  }, [id, tipo, navigate, i18n.language]);
 
   useEffect(() => {
-    const headerHeight = 185;
-    const handleScroll = () => {
+    const alturaCabecera = 185;
+    const manejarScroll = () => {
       for (const seccion of secciones) {
         const el = document.getElementById(seccion);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
-        if (rect.top <= headerHeight && rect.bottom >= headerHeight) {
+        if (rect.top <= alturaCabecera && rect.bottom >= alturaCabecera) {
           setSeccionActiva(seccion);
           break;
         }
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', manejarScroll);
+    return () => window.removeEventListener('scroll', manejarScroll);
   }, [secciones]);
 
   useEffect(() => {
     if (!data) return;
     const timeout = setTimeout(() => {
-      const headerHeight = 185;
+      const alturaCabecera = 185;
       for (const seccion of secciones) {
         const el = document.getElementById(seccion);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
-        if (rect.top <= headerHeight && rect.bottom >= headerHeight) {
+        if (rect.top <= alturaCabecera && rect.bottom >= alturaCabecera) {
           setSeccionActiva(seccion);
           break;
         }
@@ -88,14 +90,13 @@ const DetallePeliculaSerie = () => {
   return (
     <div className="bg-gradient-to-b from-white via-purple-800 to-purple-800 min-h-screen ">
       <Cabecera />
-      
-        <MenuSecciones 
-          sections={secciones} 
-          data={data} 
-          activeSection={seccionActiva} 
-        />
+      <MenuSecciones 
+        sections={secciones} 
+        data={data} 
+        activeSection={seccionActiva} 
+      />
       <div className="min-h-screen p-5 md:p-9">
-        <div className="bg-white m-5 rounded-lg border-2 border-gray-300 shadow-lg">
+        <div className="bg-white m-0,5 rounded-lg border-2 border-gray-300 shadow-lg">
           <div className="pt-[50px] p-8 md:px-15 bg-white-100 text-black space-y-8">
             <SeccionSinopsis data={data} />
             <SeccionInformacion data={data} />

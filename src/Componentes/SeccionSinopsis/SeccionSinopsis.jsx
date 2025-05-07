@@ -3,6 +3,7 @@ import Subtitulo from '../Subtitulo/Subtitulo';
 import GuardarFavorito from '../GuardarFavorito/GuardarFavorito';
 import Cargando from '../Cargando/Cargando';
 import { useTranslation } from 'react-i18next';
+import InfoBasica from '../InfoBasica/InfoBasica';
 
 const SeccionSinopsis = ({ data }) => {
   const [imagenCargando, setImagenCargando] = useState(true);
@@ -30,11 +31,9 @@ const SeccionSinopsis = ({ data }) => {
       className="scroll-mt-[180px] flex flex-col md:flex-row gap-6 p-6 bg-purple-200 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
       id="sinopsis"
     >
-      {/* Imagen y botón de favorito */}
       <div className="w-full md:w-1/4 flex-shrink-0 mb-4 md:mb-0">
         <div className="relative rounded-lg shadow-lg">
           
-          {/* Spinner de carga */}
           {imagenCargando && (
             <div className="absolute inset-0 bg-white bg-opacity-60 flex items-center justify-center z-20 rounded-lg ">
               <Cargando fullScreen={false} />
@@ -54,25 +53,20 @@ const SeccionSinopsis = ({ data }) => {
         </div>
       </div>
 
-      {/* Texto de sinopsis */}
       <div className="flex-1 space-y-4">
         <Subtitulo
           texto={data.title || data.name}
           className="font-bold text-left text-2xl sm:text-3xl md:text-4xl pb-1"
         />
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 text-sm font-medium text-gray-800 text-left">
-          <div className="w-9">
-            <span className="w-9 h-9 rounded-full border-2 border-yellow-500 text-yellow-500 flex items-center justify-center">
-              {Math.round(data.vote_average * 10)}%
-            </span>
-          </div>
-          <span className="pl-[2px]">
-            {data.runtime ? `${data.runtime} min` : t("sinopsis.duracion")}
-          </span>
-          <span className="pl-[2px]">
-            {data.release_date?.slice(0, 4) || data.first_air_date?.slice(0, 4) || 'Año N/A'}
-          </span>
-        </div>
+
+        <InfoBasica
+          vote_average={data.vote_average}
+          runtime={data.runtime}
+          release_date={data.release_date}
+          first_air_date={data.first_air_date}
+          certificacion={data.certificacion}
+        />
+
         <p className="text-base sm:text-lg leading-relaxed text-gray-800 text-left px-1 sm:px-0">
           {data.overview || t("sinopsis.sinopsisNoDisponible")}
         </p>

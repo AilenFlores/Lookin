@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import ProvidersUrl from '../../const/ProvidersUrl';
 
 const SeccionDondeVerla = ({ data }) => {
-  const { t } = useTranslation("detalle");
+  const { t } = useTranslation(["detalle", "varios"]);
   
   const [mensajeEmergente, setMensajeEmergente] = useState('');
   const plataformas = data["watch/providers"]?.results?.AR?.flatrate || [];
@@ -28,7 +28,7 @@ const SeccionDondeVerla = ({ data }) => {
   const manejarClick = (e, nombre) => {
     if (!providerUrls[nombre]) {
       e.preventDefault();
-      setMensajeEmergente(`No tenemos link oficial para ${nombre}`);
+      setMensajeEmergente(t("mensajeEmergente.sinLink", { plataforma: nombre }));
     }
   };
 

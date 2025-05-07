@@ -98,12 +98,10 @@ export const getPlataformas = async (tipo,language) => {
   }
 };
 
-
-
 /**Pide a la api el contenido, ya sea peliculas o series */
-export const getDetallePorId = async (id, tipo,language) => {
+export const getDetallePorId = async (id, tipo, language) => {
   try {
-    const url = `https://api.themoviedb.org/3/${tipo}/${id}?api_key=${API_KEY}&language=${language}&append_to_response=credits,videos,watch/providers,similar,images&watch_region=AR`;
+    const url = `https://api.themoviedb.org/3/${tipo}/${id}?api_key=${API_KEY}&language=${language}&append_to_response=credits,videos,watch/providers,similar,images,release_dates,content_ratings&watch_region=AR`;
     const res = await fetch(url);
     if (!res.ok) throw new Error('No se pudo obtener el detalle');
     return await res.json();

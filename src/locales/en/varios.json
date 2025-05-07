@@ -20,12 +20,15 @@
     "episodios": 
     {
         "episodios": "Episodes",
-        "verEpisodios": "View Episodes"
+        "verEpisodios": "View Episodes",
+        "tituloTemporada": "Season {{number}} Episodes"
+
     },
     "buscador":
     {
         "mensajePlaceholder":"Search for movies or TV shows..."
+    },
+    "mensajeEmergente": {
+        "sinLink": "We do not have an official link for {{plataforma}}"
     }
-
-
 }

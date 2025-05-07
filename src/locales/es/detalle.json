@@ -6,13 +6,13 @@
             "galeria":"Galería",
             "reparto":"Reparto",
             "trailer":"Trailer",
-            "ver":"¿Dónde verla?",
-            "temporada":"Temporada",
+            "ver":"Dónde verla",
+            "temporada":"Temporadas",
             "similares": "Similares"
         },
     "dondeVerla":
         {
-            "dondePuedoVerla":"¿Dónde puedo verla?"
+            "dondePuedoVerla":"Dónde puedo verla"
         },
     "infoDesactualizada":
         {  
@@ -21,7 +21,7 @@
         },
     "informacion":
         {
-            "informacion":"Informacion",
+            "informacion":"Información",
             "director":"Director",
             "genero":"Género",
             "idiomaOriginal":"Idioma original:",
