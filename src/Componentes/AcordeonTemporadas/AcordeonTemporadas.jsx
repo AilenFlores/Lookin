@@ -76,9 +76,7 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
                       onClick={() => toggleEpisode(ep.id)}
                       className="text-gray-500 hover:text-gray-700 text-sm"
                     >
-                      {expanded[ep.id]
-                        ? t("episodios.mostrarMenos")
-                        : t("episodios.mostrarMas")}
+                      {expanded[ep.id] ? '▲' : '▼'}
                     </button>
                   )}
                 </div>
