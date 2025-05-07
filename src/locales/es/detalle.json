@@ -6,13 +6,13 @@
             "galeria":"Galería",
             "reparto":"Reparto",
             "trailer":"Trailer",
-            "ver":"Dónde verla",
+            "ver":"Plataformas",
             "temporada":"Temporadas",
             "similares": "Similares"
         },
     "dondeVerla":
         {
-            "dondePuedoVerla":"Dónde puedo verla"
+            "dondePuedoVerla":"Plataformas"
         },
     "infoDesactualizada":
         {  

@@ -6,13 +6,13 @@
             "galeria": "Gallery",
             "reparto": "Cast",
             "trailer": "Trailer",
-            "ver": "Where to watch?",
+            "ver": "Platforms",
             "temporada":"Seasons",
             "similares": "Similar"
         },
     "dondeVerla": 
         {
-            "dondePuedoVerla": "Where can I watch it?"
+            "dondePuedoVerla": "Platforms"
         },
     "infoDesactualizada": 
         {

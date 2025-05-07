@@ -8,20 +8,31 @@ const AccionesCabecera = ({ i18n, toggleIdioma, botonBusquedaRef, clickBuscador 
     const navigate = useNavigate();
 
     return (
-        <div className="flex items-center space-x-3 sm:space-x-4">
+        <div className="flex items-center gap-3 sm:gap-4">
             <FaBookmark
-                className="text-lg sm:text-2xl cursor-pointer m-0 hover:text-purple-800"
+                className="text-xl sm:text-2xl cursor-pointer hover:text-purple-800 transition-transform duration-300 hover:scale-110"
                 title="Favoritos"
                 onClick={() => navigate(ROUTES.favoritos)}
             />
-            <Boton
-                texto={i18n.language === "es" ? "ES" : "EN"}
-                className="!bg-white !text-black !border !border-black hover:!bg-purple-800 !px-2 !py-1 sm:!px-3 sm:!py-2 text-xs sm:text-sm"
+            
+            <button
                 onClick={toggleIdioma}
-            />
+                className="flex items-center bg-purple-800 text-white rounded-full px-3 py-1 text-sm font-semibold shadow hover:scale-105 transition-transform duration-300 cursor-pointer"
+            >
+                <img
+                    src={i18n.language === "es"
+                        ? "https://flagcdn.com/ar.svg"
+                        : "https://flagcdn.com/us.svg"}
+                    alt="flag"
+                    className="w-5 h-5 rounded-full object-cover mr-2"
+                />
+
+                {i18n.language === "es" ? "EN" : "ES"}
+            </button>
+
             <FaSearch
                 ref={botonBusquedaRef}
-                className="text-lg sm:text-4xl cursor-pointer hover:text-purple-800 rounded-full p-1"
+                className="text-xl sm:text-3xl cursor-pointer hover:text-purple-800 rounded-full p-1 transition-transform duration-300 hover:scale-110"
                 onClick={clickBuscador}
             />
         </div>
