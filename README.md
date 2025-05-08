@@ -80,18 +80,3 @@ Lookin es una aplicación web responsive desarrollada con React y Tailwind CSS, 
  npm run dev
  
  Esto va a iniciar un servidor local y te va a mostrar una URL (generalmente http://localhost:5173) para ver la app en el navegador.
- 
- 
- ## 📸 Capturas de Pantalla
- 
- **🎞️ Vista principal inicio**
- ![Listado de películas](./public/screenshots/inicio.png)
- 
- **📝 Vista de detalle**
- ![Formulario](./public/screenshots/detalle.png)
- 
- **🔍 Vista de catalogos y filtros**
- ![Detalle de película](./public/screenshots/lista.png)
- 
- **⚠️ Alerta de confirmación con SweetAlert2**
- ![Alerta SweetAlert2](./public/screenshots/alerta.png)
