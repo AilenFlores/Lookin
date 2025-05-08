@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Subtitulo = ({ texto, className = "" }) => {
+const Subtitulo = ({ texto, children, className = "" }) => {
     return (
         <p className={className}>
-            {texto}
+            {texto || children}
         </p>
     );
 };

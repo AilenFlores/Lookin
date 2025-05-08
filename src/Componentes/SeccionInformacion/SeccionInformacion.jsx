@@ -3,15 +3,16 @@ import Subtitulo from '../Subtitulo/Subtitulo';
 import { useTranslation } from 'react-i18next';
 import InfoItem from '../InfoItem/InfoItem';
 import InfoList from '../InfoLista/InfoLista';
+import Titulo from '../Titulo/Titulo';
 
 const Informacion = ({ data }) => {
   const { t } = useTranslation("detalle");
 
   return (
     <div id="info" className="scroll-mt-[140px] space-y-4 text-left">
-      <Subtitulo
+      <Titulo
         texto={t("informacion.informacion")}
-        className="text-3xl md:text-4xl font-semibold text-black pl-6 border-l-4 border-purple-600 mb-4"
+        className="text-3xl text-left md:text-4xl font-semibold text-black pl-6 border-l-4 border-purple-600 mb-4"
       />
       <div className="space-y-3">
         <InfoItem

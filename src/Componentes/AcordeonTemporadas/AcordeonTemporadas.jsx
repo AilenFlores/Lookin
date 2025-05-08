@@ -4,6 +4,7 @@ import { FaStar } from 'react-icons/fa';
 import { useTMDB } from '../../Servicios/hooks/useTMDB';
 import { useTranslation } from "react-i18next";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import Titulo from '../Titulo/Titulo';
 
 const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,12 +35,15 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
             className="w-16 h-20 object-cover rounded"
           />
           <div>
-          <Subtitulo texto={name} as="h3" className="font-semibold" />
-            <p className="text-sm text-gray-600">
-              {episodes
-                ? `${episodes.length} ${t("episodios.episodios")}`
-                : t("episodios.verEpisodios")}
-            </p>
+            <Titulo texto={name} className="font-semibold" />
+            <Subtitulo
+              texto={
+                episodes
+                  ? `${episodes.length} ${t("episodios.episodios")}`
+                  : t("episodios.verEpisodios")
+              }
+              className="text-sm text-gray-600"
+            />
           </div>
         </div>
         {seasonRating && (
@@ -77,9 +81,10 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
                 </div>
               </div>
               {expanded[ep.id] && ep.overview && (
-                <p className="mt-1 text-sm text-gray-700 text-left">
-                  {ep.overview}
-                </p>
+                <Subtitulo
+                texto={ep.overview}
+                className="mt-1 text-sm text-gray-700 text-left"
+              />              
               )}
             </div>
           ))}

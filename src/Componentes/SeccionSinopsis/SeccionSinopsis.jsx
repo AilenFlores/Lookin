@@ -4,6 +4,7 @@ import GuardarFavorito from '../GuardarFavorito/GuardarFavorito';
 import Cargando from '../Cargando/Cargando';
 import { useTranslation } from 'react-i18next';
 import InfoBasica from '../InfoBasica/InfoBasica';
+import Titulo from '../Titulo/Titulo';
 
 const SeccionSinopsis = ({ data }) => {
   const [imagenCargando, setImagenCargando] = useState(true);
@@ -50,7 +51,7 @@ const SeccionSinopsis = ({ data }) => {
         </div>
       </div>
       <div className="flex-1 space-y-4">
-        <Subtitulo
+        <Titulo
           texto={data.title || data.name}
           className="font-bold text-left text-2xl sm:text-3xl md:text-4xl pb-1"
         />
@@ -61,9 +62,9 @@ const SeccionSinopsis = ({ data }) => {
           first_air_date={data.first_air_date}
           certificacion={data.certificacion}
         />
-        <p className="text-base sm:text-lg leading-relaxed text-gray-800 text-left px-1 sm:px-0">
+        <Subtitulo className="text-base sm:text-lg leading-relaxed text-gray-800 text-left px-1 sm:px-0">
           {data.overview || t("sinopsis.sinopsisNoDisponible")}
-        </p>
+        </Subtitulo>
       </div>
     </div>
   );
