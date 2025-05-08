@@ -3,7 +3,6 @@ import Subtitulo from '../Subtitulo/Subtitulo';
 import AcordeonTemporadas from '../AcordeonTemporadas/AcordeonTemporadas';
 import { useTranslation } from "react-i18next";
 
-
 const SeccionTemporadas = ({ data, id }) => {
   if (!data.seasons?.length) return null;
   const { t } = useTranslation("detalle");

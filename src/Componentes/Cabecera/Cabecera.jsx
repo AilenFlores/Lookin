@@ -12,7 +12,6 @@ const Cabecera = () => {
   const menuRef = useRef(null);
   const hamburguesaRef = useRef(null);
   const { t, i18n } = useTranslation("cabecera");
-
   const toggleIdioma = () => {
     const nuevoIdioma = i18n.language === "es" ? "en" : "es";
     console.log(i18n.language)
@@ -48,14 +47,12 @@ const Cabecera = () => {
             hamburguesaRef={hamburguesaRef}
             setMenuAbierto={setMenuAbierto}
           />
-
           <AccionesCabecera
             i18n={i18n}
             toggleIdioma={toggleIdioma}
             botonBusquedaRef={botonBusquedaRef}
             clickBuscador={() => setMostrarBuscador(prev => !prev)}
           />
-
           {menuAbierto && (
             <MenuDesplegable
               menuRef={menuRef}
@@ -65,7 +62,6 @@ const Cabecera = () => {
           )}
         </div>
       </header>
-
       <ModalBuscador
         visible={mostrarBuscador}
         onClose={() => setMostrarBuscador(false)}

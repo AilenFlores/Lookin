@@ -4,12 +4,11 @@ import ModalImagen from '../ModalImagen/ModalImagen';
 import { useTranslation } from 'react-i18next';
 
 const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
-    const { t } = useTranslation("detalle");
+  const { t } = useTranslation("detalle");
   const imagenes = [
     ...posters.map(img => ({ ...img, type: 'poster' })),
     ...backdrops.map(img => ({ ...img, type: 'backdrop' }))
   ];
-
   const [modalImg, setModalImg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -46,7 +45,6 @@ const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
           </div>
         ))}
       </div>
-
       {modalImg && (
         <ModalImagen
           src={modalImg}

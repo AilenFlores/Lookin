@@ -4,7 +4,7 @@ import Carrusel from '../Carrusel/Carrusel';
 import { useTranslation } from 'react-i18next';
 
 const SeccionReparto = ({ reparto }) => {
-    const { t } = useTranslation("detalle");
+  const { t } = useTranslation("detalle");
   
   if (!reparto?.length) return null;
 

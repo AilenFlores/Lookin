@@ -7,7 +7,6 @@ import { ROUTES } from '../../const/routes';
 
 const NavegacionPrincipal = ({ t, hamburguesaRef, setMenuAbierto }) => {
     const navigate = useNavigate();
-
     return (
         <div className="flex items-center space-x-4 sm:space-x-6">
             <Logo
@@ -16,12 +15,10 @@ const NavegacionPrincipal = ({ t, hamburguesaRef, setMenuAbierto }) => {
                 className="w-28 sm:w-[150px] cursor-pointer"
                 onClick={() => navigate(ROUTES.inicio)}
             />
-
             <nav className="hidden sm:flex space-x-4 items-center text-gray-700 text-sm sm:text-base font-medium">
                 <Enlace to="/peliculas">{t("cabecera.peliculas")}</Enlace>
                 <Enlace to="/series">{t("cabecera.series")}</Enlace>
             </nav>
-
             <button
                 ref={hamburguesaRef}
                 className="sm:hidden text-2xl text-gray-700 focus:outline-none"

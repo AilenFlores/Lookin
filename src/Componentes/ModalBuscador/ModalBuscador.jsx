@@ -16,7 +16,7 @@ const ModalBuscador = ({ visible, onClose, ignoreRef }) => {
     const handleClickOutside = (e) => {
       const clickedOutsideModal = modalRef.current && !modalRef.current.contains(e.target);
       const clickedIgnored = ignoreRef?.current && ignoreRef.current.contains(e.target);
-
+      
       if (clickedOutsideModal && !clickedIgnored) {
         onClose();
       }
@@ -50,7 +50,6 @@ const ModalBuscador = ({ visible, onClose, ignoreRef }) => {
   return (
     <>
       <div className="fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-[rgba(229,231,235,0.8)] z-[9997]" />
-
       <div className="fixed top-20 left-0 w-full z-[9998] bg-white border-b border-gray-200 shadow-md">
         <form
           onSubmit={manejarBusqueda}

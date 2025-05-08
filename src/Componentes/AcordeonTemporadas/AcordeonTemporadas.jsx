@@ -12,7 +12,6 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
   const [expanded, setExpanded] = useState({});
   const { getTemporada } = useTMDB();
   const { t, i18n } = useTranslation("varios");
-
   const toggleOpen = async () => {
     if (!isOpen && !episodes) {
       const { episodes: episodios, rating } = await getTemporada(tvId, seasonNumber, i18n.language);
@@ -21,17 +20,13 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
     }
     setIsOpen(open => !open);
   };
-
   const toggleEpisode = id => {
     setExpanded(e => ({ ...e, [id]: !e[id] }));
   };
 
   return (
     <div className="w-full bg-white rounded-md overflow-hidden mb-4 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-      <button
-        onClick={toggleOpen}
-        className="w-full flex justify-between items-center p-2 hover:bg-gray-100"
-        >
+      <button onClick={toggleOpen} className="w-full flex justify-between items-center p-2 hover:bg-gray-100">
         <div className="flex items-center gap-3">
           <img
             src={`https://image.tmdb.org/t/p/w185${posterPath}`}
@@ -39,7 +34,7 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
             className="w-16 h-20 object-cover rounded"
           />
           <div>
-            <h3 className="font-semibold">{name}</h3>
+          <Subtitulo texto={name} as="h3" className="font-semibold" />
             <p className="text-sm text-gray-600">
               {episodes
                 ? `${episodes.length} ${t("episodios.episodios")}`
@@ -53,7 +48,6 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
           </span>
         )}
       </button>
-
       {isOpen && episodes && (
         <div className="p-4 space-y-4 bg-gray-50">
           <Subtitulo
@@ -76,10 +70,9 @@ const AcordeonTemporadas = ({ tvId, seasonNumber, posterPath, name }) => {
                     <button
                     onClick={() => toggleEpisode(ep.id)}
                     className="text-gray-500 hover:text-gray-700 text-sm"
-                  >
+                    >
                     {expanded[ep.id] ? <FaChevronUp /> : <FaChevronDown />}
                   </button>
-                  
                   )}
                 </div>
               </div>
