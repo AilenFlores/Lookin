@@ -1,5 +1,11 @@
 # Proyecto React - Gestor Peliculas y Series "Lookin".
 
+* Tecnicatura Universitaria en Desarrollo Web
+* Facultad de Informática
+* Universidad Nacional del Comahue
+* Programacion Web Avanzada
+
+
  | Nombre                 | Legajo     |
  |------------------------|------------|
  | Jazmín Loureiro        | FAI-4228   |
@@ -52,7 +58,7 @@ Lookin es una aplicación web responsive desarrollada con React y Tailwind CSS, 
  **2. Ingresar al directorio del proyecto**
  Luego ejecutá:
  
- cd TP-React-2
+ cd Lookin
  
  **3. Instalar Node.js (si no lo tenés)**
  Asegurate de tener instalado Node.js (recomendado: versión 16 o superior).
