@@ -21,13 +21,13 @@ const AccionesCabecera = ({ i18n, toggleIdioma, botonBusquedaRef, clickBuscador 
             <span className="flex items-center">
                 <img
                 src={i18n.language === "es"
-                    ? "https://flagcdn.com/us.svg"
-                    : "https://flagcdn.com/ar.svg"}
+                    ? "https://flagcdn.com/ar.svg"
+                    : "https://flagcdn.com/us.svg"}
                     alt="flag"
                     className="w-5 h-5 rounded-full object-cover mr-2"
-                />{i18n.language === "es" ? "EN" : "ES"}
+                />{i18n.language === "es" ? "ES" : "EN"}
             </span>}
-            className="bg-purple-800 text-white rounded-full !px-2 !py-1 text-sm font-semibold shadow hover:scale-105 transition-transform duration-300 cursor-pointer"
+            className="bg-purple-800 text-white rounded-full !px-5 py-1 text-sm font-semibold shadow hover:scale-105 transition-transform duration-300 cursor-pointer"
             />
 
             <FaSearch
