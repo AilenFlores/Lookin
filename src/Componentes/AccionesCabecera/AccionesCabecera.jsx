@@ -15,20 +15,20 @@ const AccionesCabecera = ({ i18n, toggleIdioma, botonBusquedaRef, clickBuscador 
                 onClick={() => navigate(ROUTES.favoritos)}
             />
             
-            <button
-                onClick={toggleIdioma}
-                className="flex items-center bg-purple-800 text-white rounded-full px-3 py-1 text-sm font-semibold shadow hover:scale-105 transition-transform duration-300 cursor-pointer"
-            >
+            <Boton
+            onClick={toggleIdioma}
+            texto={
+            <span className="flex items-center">
                 <img
-                    src={i18n.language === "es"
-                        ? "https://flagcdn.com/us.svg"
-                        : "https://flagcdn.com/ar.svg"}
+                src={i18n.language === "es"
+                    ? "https://flagcdn.com/us.svg"
+                    : "https://flagcdn.com/ar.svg"}
                     alt="flag"
                     className="w-5 h-5 rounded-full object-cover mr-2"
-                />
-
-                {i18n.language === "es" ? "EN" : "ES"}
-            </button>
+                />{i18n.language === "es" ? "EN" : "ES"}
+            </span>}
+            className="bg-purple-800 text-white rounded-full !px-2 !py-1 text-sm font-semibold shadow hover:scale-105 transition-transform duration-300 cursor-pointer"
+            />
 
             <FaSearch
                 ref={botonBusquedaRef}

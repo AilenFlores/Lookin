@@ -6,7 +6,6 @@ import ListadoConFiltros from '../../Componentes/ListadoConFiltros/ListadoConFil
 import { useTranslation } from 'react-i18next';
 import { useTMDB } from '../../Servicios/hooks/useTMDB';
 
-
 const ContenidoLista = ({ tipo }) => {
   const [contenido, setContenido] = useState([]);
   const [pagina, setPagina] = useState(1);
@@ -14,7 +13,6 @@ const ContenidoLista = ({ tipo }) => {
   const [filtros, setFiltros] = useState({ orden: 'popularity.desc', plataforma: null });
   const { t, i18n } = useTranslation("catalogo");
   const { getContenido } = useTMDB();
-
 
   useEffect(() => {
     setContenido([]);
@@ -39,11 +37,9 @@ const ContenidoLista = ({ tipo }) => {
 
   const manejarCambioFiltros = (nuevosFiltros) => {
     if ('plataforma' in nuevosFiltros) {
-      if (nuevosFiltros.plataforma !== null) {
-        localStorage.setItem('plataforma_filtrada', String(nuevosFiltros.plataforma));
-      } else {
-        localStorage.removeItem('plataforma_filtrada');
-      }
+      nuevosFiltros.plataforma !== null
+      ? localStorage.setItem('plataforma_filtrada', String(nuevosFiltros.plataforma))
+      : localStorage.removeItem('plataforma_filtrada');    
     }
     setFiltros(prev => ({ ...prev, ...nuevosFiltros }));
     setPagina(1);
@@ -53,7 +49,6 @@ const ContenidoLista = ({ tipo }) => {
   const titulo = tipo === 'movie' ? t('catalogo.tituloCatalogoPeliculas') : t('catalogo.tituloCatalogoSeries');
 
   if (isLoading && contenido.length === 0) return <Cargando />;
-
   return (
     <div className="inicio bg-gradient-to-b from-white via-purple-800 to-purple-800">
       <Cabecera />

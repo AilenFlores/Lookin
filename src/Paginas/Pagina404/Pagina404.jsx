@@ -27,7 +27,7 @@ const Pagina404 = () => {
               <Boton
                 texto={t("error404.volver")}
                 onClick={() => navigate('/')}
-                className="w-full max-w-xs sm:w-64 bg-black hover:bg-purple-900"
+                className="w-full max-w-xs sm:w-64"
               />
             </div>
 

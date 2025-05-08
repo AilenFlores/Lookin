@@ -9,7 +9,7 @@ const Carrusel = ({ contenido, tipo, mediaType }) => {
   const size = tipo === 'grande' ? 20 : 10;
 
   const Desplazar = (direccion) => {
-    const cantidadDesplazamiento = 300;
+    const cantidadDesplazamiento = 240;
     if (carruselRef.current) {
       carruselRef.current.scrollBy({
         left: direccion === 'derecha' ? cantidadDesplazamiento : -cantidadDesplazamiento,
@@ -33,8 +33,7 @@ const Carrusel = ({ contenido, tipo, mediaType }) => {
   return (
     <div className="relative w-full flex justify-left  ">
     <div className="w-fit overflow-hidden border-2 m-5 shadow-[0_4px_20px_rgba(0,0,0,0.5)] bg-purple-100 rounded-lg  border-purple-300"> 
-        <div
-          ref={carruselRef}
+        <div ref={carruselRef}
           className={`flex overflow-x-auto space-x-5  scroll-smooth snap-x snap-mandatoryb bg-purple-300 m-3 p-2 rounded-lg ${Style.scrollOculta}`}
         >
           {contenido.map((item) => (

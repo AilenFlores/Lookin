@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 const Cargando = ({ fullScreen = true }) => {
   const { t } = useTranslation("varios");
-
     return (
       <div className={`flex flex-col justify-center items-center text-center space-y-4 ${fullScreen ? 'min-h-screen' : 'h-full w-full'}`}>
         <AiOutlineLoading3Quarters className="animate-spin text-4xl text-purple-800" />

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import Enlace from '../Enlace/Enlace';
 import { ROUTES } from '../../const/routes';
+import Boton from '../Boton/Boton';
 
 const NavegacionPrincipal = ({ t, hamburguesaRef, setMenuAbierto }) => {
     const navigate = useNavigate();
@@ -22,13 +23,12 @@ const NavegacionPrincipal = ({ t, hamburguesaRef, setMenuAbierto }) => {
                 <Enlace to="/series">{t("cabecera.series")}</Enlace>
             </nav>
 
-            <button
-                ref={hamburguesaRef}
-                className="sm:hidden text-2xl text-gray-700 focus:outline-none"
-                onClick={() => setMenuAbierto(prev => !prev)}
-            >
-            <FaBars />
-            </button>
+            <Boton
+            ref={hamburguesaRef}
+            texto={<FaBars />}
+            onClick={() => setMenuAbierto(prev => !prev)}
+            className="sm:hidden text-2xl !m-0 !px-0 !text-gray-700 focus:outline-none bg-transparent shadow-none hover:text-purple-700"
+            />
         </div>
     );
 };

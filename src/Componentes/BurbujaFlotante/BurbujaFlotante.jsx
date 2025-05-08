@@ -5,23 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import { useTMDB } from '../../Servicios/hooks/useTMDB';
 import { useTranslation } from 'react-i18next';
 
-
 function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }) {
   const [isHovered, setIsHovered] = useState(false);
   const [info, setInfo] = useState(null);
-
   const navigate = useNavigate();
   const { getDetallePorId } = useTMDB();
   const {t, i18n } = useTranslation("detalle");
 
   useEffect(() => {
     setInfo(null); 
-  }, [pelicula.id, mediaType]);
+  }, [pelicula.id, mediaType, i18n.language]);
 
-  useEffect(() => {
-    setInfo(null); 
-  }, [i18n.language]);
-  
   useEffect(() => {
     if (isHovered && !info) {
       getDetallePorId(pelicula.id, mediaType,i18n.language).then(data => {
@@ -31,17 +25,11 @@ function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }
         });
       });
     }
-  }, [isHovered, info, pelicula.id, mediaType,i18n.language]);
+  }, [isHovered, info, pelicula.id, mediaType, i18n.language]);
   
-
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       {children}
-
       {isHovered && info && (
         <div
         className={`
@@ -63,12 +51,10 @@ function BurbujaFlotante({ pelicula, mediaType = pelicula.media_type, children }
               </>}
               className="text-center mt-2"
             />
-
         <div className="flex justify-center">
-          <Boton texto="+ Info" onClick={() => navigate(`/detalle/${pelicula.id}/${mediaType}`)} className="bg-black hover:bg-purple-900" />
+          <Boton texto="+ Info" onClick={() => navigate(`/detalle/${pelicula.id}/${mediaType}`)} />
         </div>
       </div>
-      
       )}
     </div>
   );

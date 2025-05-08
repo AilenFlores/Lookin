@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next';
 
 const PlataformasFiltro = ({ plataformas, seleccionada, onSeleccionar }) => {
     const { t } = useTranslation("catalogo");
+    
   return (
     <div className="border-1 border-gray-300 rounded-lg mb-4">
-      <label className="block text-gray-800 font-semibold mb-2">{t("dondeVer.dondeVer")}</label>
+      <label className="block text-gray-800 font-semibold mb-2 mt-2 border-b-1 border-purple-200">{t("dondeVer.dondeVer")}</label>
       <select
         onChange={(e) => onSeleccionar(Number(e.target.value))}
         className="block md:hidden w-full border border-gray-300 rounded px-3 py-2 text-sm"
