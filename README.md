@@ -13,7 +13,7 @@
  | Ailen Flores Montes    | FAI-3547   |
  
  -----------------------------------------------------------
-El proyecto está desplegado en Vercel: https://tp-react-2-beta.vercel.app/
+El proyecto está desplegado en Vercel: https://lookin-alpha.vercel.app/
  -----------------------------------------------------------
 Lookin es una aplicación web responsive desarrollada con React y Tailwind CSS, enfocada en la exploración y gestión de películas y series. Utiliza la API de TMDB para mostrar información en tiempo real y una interfaz clara y amigable.
 
@@ -53,7 +53,7 @@ Lookin es una aplicación web responsive desarrollada con React y Tailwind CSS, 
  **1. Clonar el repositorio**
  Abrí una terminal y ejecutá:
  
- git clone https://github.com/AilenFlores/TP-React-2.git
+ git clone https://github.com/AilenFlores/Lookin.git
  
  **2. Ingresar al directorio del proyecto**
  Luego ejecutá:
