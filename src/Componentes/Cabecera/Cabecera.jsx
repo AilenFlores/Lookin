@@ -12,7 +12,6 @@ const Cabecera = () => {
   const menuRef = useRef(null);
   const hamburguesaRef = useRef(null);
   const { t, i18n } = useTranslation("cabecera");
-
   const toggleIdioma = () => {
     const nuevoIdioma = i18n.language === "es" ? "en" : "es";
     i18n.changeLanguage(nuevoIdioma);

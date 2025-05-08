@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import Subtitulo from '../Subtitulo/Subtitulo';
+import Titulo from '../Titulo/Titulo';
 import ModalImagen from '../ModalImagen/ModalImagen';
 import { useTranslation } from 'react-i18next';
 
 const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
-    const { t } = useTranslation("detalle");
+  const { t } = useTranslation("detalle");
   const imagenes = [
     ...posters.map(img => ({ ...img, type: 'poster' })),
     ...backdrops.map(img => ({ ...img, type: 'backdrop' }))
   ];
-
   const [modalImg, setModalImg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,7 +29,10 @@ const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
 
   return (
     <div id="galeria" className="py-8 scroll-mt-[110px]">
-      <Subtitulo texto={t("detalle.galeria")} className="text-3xl md:text-4xl font-semibold text-black pl-6 border-l-4 border-purple-600 mb-4 text-left" />
+      <Titulo
+        texto={t("detalle.galeria")}
+        className="text-3xl md:text-4xl font-semibold text-black pl-6 border-l-4 border-purple-600 mb-4 text-left"
+      />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 ">
         {imagenes.map((img, idx) => (
           <div key={idx} className="overflow-hidden rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
@@ -46,7 +48,6 @@ const SeccionGaleriaImagenes = ({ posters = [], backdrops = [] }) => {
           </div>
         ))}
       </div>
-
       {modalImg && (
         <ModalImagen
           src={modalImg}

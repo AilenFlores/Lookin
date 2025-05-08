@@ -3,50 +3,42 @@ import Subtitulo from '../Subtitulo/Subtitulo';
 import { useTranslation } from 'react-i18next';
 import InfoItem from '../InfoItem/InfoItem';
 import InfoList from '../InfoLista/InfoLista';
+import Titulo from '../Titulo/Titulo';
 
 const Informacion = ({ data }) => {
   const { t } = useTranslation("detalle");
 
   return (
     <div id="info" className="scroll-mt-[140px] space-y-4 text-left">
-      <Subtitulo
+      <Titulo
         texto={t("informacion.informacion")}
-        className="text-3xl md:text-4xl font-semibold text-black pl-6 border-l-4 border-purple-600 mb-4"
+        className="text-3xl text-left md:text-4xl font-semibold text-black pl-6 border-l-4 border-purple-600 mb-4"
       />
-
-
       <div className="space-y-3">
-
         <InfoItem
           label={`${t("informacion.director")}:`}
           value={data.created_by?.[0]?.name || t('informacion.noDisponible')}
         />
-
         <InfoList
           label={`${t("informacion.genero")}:`}
           items={data.genres}
         />
-
         <InfoItem
           label={`${t("informacion.idiomaOriginal")}`}
           value={data.original_language?.toUpperCase() || t('informacion.noDisponible')}
         />
-
         <InfoList
           label={`${t("informacion.compañiasDeProduccion")}:`}
           items={data.production_companies}
         />
-
         <InfoItem
           label={`${t("informacion.presupuesto")}:`}
           value={data.budget ? `$${data.budget.toLocaleString()}` : t('informacion.noDisponible')}
         />
-
         <InfoItem
           label={`${t("informacion.recaudacion")}:`}
           value={data.revenue ? `$${data.revenue.toLocaleString()}` : t('informacion.noDisponible')}
         />
-
         <div className="flex items-center gap-2 relative group">
           <Subtitulo texto={`${t("informacion.popularidad")}:`} className="font-bold" />
           <div className="flex items-center gap-1 relative">
@@ -62,7 +54,6 @@ const Informacion = ({ data }) => {
             </span>
           </div>
         </div>
-
       </div>
     </div>
   );
